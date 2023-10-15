@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                                         finish();
 
                                     }else {
-                                     txtviewerror.setText(message);
-                                     txtviewerror.setVisibility(View.VISIBLE);
+                                        txtviewerror.setText(message);
+                                        txtviewerror.setVisibility(View.VISIBLE);
                                     }
                                 } catch (JSONException e) {
                                     throw new RuntimeException(e);

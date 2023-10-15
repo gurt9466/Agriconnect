@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,21 +25,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-  EditText edttxtemail;
-    EditText edttxtfname;
-    EditText edttxtpassword ;
-  Button cregister;
-  String fname,email,password;
-  TextView txtviewerror;
-  ProgressBar progressBar;
+    EditText edttxtusername,edttxtlname,edttxtdob,edttxtaddressstreet,edttxtaddresscity,edttxtaddressregion,edttxtcontactnumber,edttxtemail,edttxtfname,edttxtpassword;
+    RadioGroup gender;
+
+    Button cregister;
+    String username,password,name_last,name_first,dob,email,address_street,address_city,address_region,contactnumber;
+    TextView txtviewerror;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        edttxtemail = findViewById(R.id.edtcemail);
-        edttxtfname = findViewById(R.id.edtcfname);
+
+        edttxtusername =findViewById(R.id.edtcusername);
         edttxtpassword = findViewById(R.id.edtcpasswd);
+        edttxtlname = findViewById(R.id.edtclname);
+        edttxtfname = findViewById(R.id.edtcfname);
+        gender = findViewById(R.id.gender);
+        edttxtdob = findViewById(R.id.cdob);
+        edttxtemail = findViewById(R.id.edtcemail);
+        edttxtaddressstreet = findViewById(R.id.edtcaddressstreet);
+        edttxtaddresscity = findViewById(R.id.edtcaddresscity);
+        edttxtaddressregion = findViewById(R.id.edtcaddressregion);
+        edttxtcontactnumber =findViewById(R.id.edtccnumber);
+
         cregister = findViewById(R.id.Cregisterbtn);
         txtviewerror = findViewById(R.id.error);
         progressBar = findViewById(R.id.loading);
@@ -48,9 +60,18 @@ public class RegisterActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 txtviewerror.setVisibility(View.GONE);
 
-                fname = String.valueOf(edttxtfname.getText());
+                username = String.valueOf(edttxtusername.getText());
+                name_last = String.valueOf(edttxtlname.getText());
+                name_first = String.valueOf(edttxtfname.getText());
+                dob = String.valueOf(edttxtdob.getText());
+                address_street = String.valueOf(edttxtaddressstreet.getText());
+                address_city = String.valueOf(edttxtaddresscity.getText());
+                address_region = String.valueOf(edttxtaddressregion.getText());
+                contactnumber = String.valueOf(edttxtcontactnumber.getText());
                 email = String.valueOf(edttxtemail.getText());
                 password = String.valueOf(edttxtpassword.getText());
+                RadioButton checkedBtn = findViewById(gender.getCheckedRadioButtonId());
+                String gender = checkedBtn.getText().toString();
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -67,8 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }
-                                    else{txtviewerror.setText(response);
-                                        txtviewerror.setVisibility(View.VISIBLE);
+                                else{txtviewerror.setText(response);
+                                    txtviewerror.setVisibility(View.VISIBLE);
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -81,7 +102,15 @@ public class RegisterActivity extends AppCompatActivity {
                 }){
                     protected Map<String, String> getParams(){
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("name",fname);
+                        paramV.put("username",username);
+                        paramV.put("name_last",name_last);
+                        paramV.put("name_first",name_first);
+                        paramV.put("gender",gender);
+                        paramV.put("dob",dob);
+                        paramV.put("address_street",address_street);
+                        paramV.put("address_city",address_city);
+                        paramV.put("address_region",address_region);
+                        paramV.put("contact_number",contactnumber);
                         paramV.put("email",email);
                         paramV.put("password",password);
                         return paramV;
