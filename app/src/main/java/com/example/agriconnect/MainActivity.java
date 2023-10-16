@@ -27,9 +27,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TextView register;
-    EditText edtusername,edtpassword,edtemail;
+    EditText edtusername,edtpassword;
     Button login;
-    String fname,email,password,apiKey;
+    String name_first,username,password,apiKey;
     TextView txtviewerror;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
@@ -40,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //edtusername = findViewById(R.id.editTextlUsername);
-        edtemail = findViewById(R.id.editTextlUsername);
+        edtusername = findViewById(R.id.editTextlUsername);
         edtpassword = findViewById(R.id.editTextlPassword);
+
         txtviewerror = findViewById(R.id.error);
         progressBar = findViewById(R.id.loading);
         login = findViewById(R.id.loginbutton);
         register = findViewById(R.id.textViewclickhere);
+
         sharedPreferences = getSharedPreferences("Agriconnect",MODE_PRIVATE);
 
         if(sharedPreferences.getString("logged","false").equals("true")){
@@ -62,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 txtviewerror.setVisibility(View.GONE);
-                email = String.valueOf(edtemail.getText());
-                //fname = String.valueOf(edtusername.getText());
+
+                username = String.valueOf(edtusername.getText());
                 password = String.valueOf(edtpassword.getText());
 
 
@@ -79,15 +80,16 @@ public class MainActivity extends AppCompatActivity {
                                     String status = jsonObject.getString("status");
                                     String message = jsonObject.getString("message");
                                     if(status.equals("success")){
-                                        fname = jsonObject.getString("name");
-                                        email = jsonObject.getString("email");
+                                        name_first = jsonObject.getString("name_first");
+                                        username = jsonObject.getString("username");
                                         apiKey = jsonObject.getString("apiKey");
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("logged","true");
-                                        editor.putString("name",fname);
-                                        editor.putString("email",email);
+                                        editor.putString("name_first",name_first);
+                                        editor.putString("username",username);
                                         editor.putString("apiKey",apiKey);
                                         editor.apply();
+
                                         Intent intent = new Intent(getApplicationContext(),home.class);
                                         startActivity(intent);
                                         finish();
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 }){
                     protected Map<String, String> getParams(){
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("email",email);
+                        paramV.put("username",username);
                         paramV.put("password",password);
                         return paramV;
                     }
