@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class home extends AppCompatActivity {
-    TextView txtname, txtemail, txtviewfetchreslt;
-    Button btnlogout, btnfetch;
+    TextView txtfname, txtviewfetchreslt;
+    Button btnrequest;
+    ImageView btnlogout;
+
     SharedPreferences sharedPreferences;
 
 
@@ -33,12 +36,12 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        txtname = findViewById(R.id.txtviewname);
-        txtemail = findViewById(R.id.txtviewemail);
+        btnrequest =findViewById(R.id.requestproduct);
+        txtfname = findViewById(R.id.txtviewfname);
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
-        btnlogout = findViewById(R.id.loguot);
-        btnfetch = findViewById(R.id.fetch);
+        btnlogout = findViewById(R.id.logout);
         txtviewfetchreslt = findViewById(R.id.ftechresult);
+
 
         if (sharedPreferences.getString("logged", "false").equals("false")) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -46,8 +49,7 @@ public class home extends AppCompatActivity {
             finish();
 
         }
-        txtname.setText(sharedPreferences.getString("name",""));
-        txtemail.setText(sharedPreferences.getString("email",""));
+        txtfname.setText(sharedPreferences.getString("name_first",""));
 
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +64,7 @@ public class home extends AppCompatActivity {
                                 if (response.equals("success")) {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("logged", "");
-                                    editor.putString("name", "");
-                                    editor.putString("email", "");
+                                    editor.putString("username", "");
                                     editor.putString("apiKey", "");
                                     editor.apply();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -82,7 +83,7 @@ public class home extends AppCompatActivity {
                 }) {
                     protected Map<String, String> getParams() {
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("email", sharedPreferences.getString("email",""));
+                        paramV.put("username", sharedPreferences.getString("username",""));
                         paramV.put("apiKey", sharedPreferences.getString("apiKey",""));
                         return paramV;
                     }
@@ -91,5 +92,16 @@ public class home extends AppCompatActivity {
 
             }
         });
+
+        btnrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(home.this, requestActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 }
