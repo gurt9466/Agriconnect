@@ -27,7 +27,7 @@ public class requestActivity extends AppCompatActivity {
     TextView txtviewerror2;
     Button btnpost;
     SharedPreferences sharedPreferences;
-    String requestproductname, requestprice, requestproductdate,requestconsumer_id;
+    String requestproductname, requestprice, requestproductdate,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,18 @@ public class requestActivity extends AppCompatActivity {
         rpdate = findViewById(R.id.edtrequestdateexpected);
         btnpost = findViewById(R.id.Rpostbtn);
 
+        sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
+
         txtviewerror2 = findViewById(R.id.error2);
+
+
+        if (sharedPreferences.getString("logged", "false").equals("false")) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+        username = (sharedPreferences.getString("username",""));
 
         btnpost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +86,7 @@ public class requestActivity extends AppCompatActivity {
                 }){
                     protected Map<String, String> getParams(){
                         Map<String, String> paramV = new HashMap<>();
+                        paramV.put("username",username);
                         paramV.put("request_product_name",requestproductname);
                         paramV.put("request_product_price",requestprice);
                         paramV.put("request_product_date",requestproductdate);
