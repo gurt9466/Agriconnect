@@ -6,4 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".purchaseActivity">
 
+    <ListView
+        android:id="@+id/acpurchaselistview"
+        android:layout_width="374dp"
+        android:layout_height="713dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonseach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="18dp"
+        android:text="Search"
+        app:layout_constraintBottom_toTopOf="@+id/acpurchaselistview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
