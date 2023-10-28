@@ -8,13 +8,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,21 +30,22 @@ import org.json.JSONObject;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 public class edtrequest extends AppCompatActivity {
     // Product Name, Estimated Price, Date Expected
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/selectUsername.php";
-    //private static String urlHostDelete = "http://192.168.1.9/veggi/delete.php";
+    private static String urlHost = "http://192.168.1.4/Agriconnect/php/selectUsername.php";
+    //private static String urlHostDelete = "http://192.168.1.4/veggi/delete.php";
 
-    //private static String urlUserName = "http://192.168.1.9/veggi/delete.php";
+    //private static String urlUserName = "http://192.168.1.4/veggi/delete.php";
+    private static String urlRequestProductName = "http://192.168.1.4/Agriconnect/php/selectRequestproductname.php";
+    private static String urlRequestproductqty = "http://192.168.1.4/Agriconnect/php/selectRequestproductqty.php";
+    private static String urlRequestproductdate = "http://192.168.1.4/Agriconnect/php/selectRequestproductdate.php";
 
-    private static String urlRequestProductName = "http://192.168.1.9/Agriconnect/php/selectRequestproductname.php";
-    private static String urlRequestproductqty = "http://192.168.1.9/Agriconnect/php/selectRequestproductqty.php";
-    private static String urlRequestproductdate = "http://192.168.1.9/Agriconnect/php/selectRequestproductdate.php";
-
-    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/selectid.php";
+    private static String urlHostID = "http://192.168.1.4/Agriconnect/php/selectid.php";
+    SharedPreferences sharedPreferences;
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -60,6 +66,8 @@ public class edtrequest extends AppCompatActivity {
     ArrayList <String> list_redate;
     ArrayList <String> list_ID;
 
+    ImageView backimgbtn;
+
     String cltemSelected_username,cItemSelected_ID, cltemSelected_requestedproduct, cltemSelected_requestedproductqty, cltemSelected_requestedproductdate;
     Context context = this;
     private String rusername, rproduct, rqty, rdate,aydi;
@@ -73,19 +81,35 @@ public class edtrequest extends AppCompatActivity {
         edtitemcode = (EditText) findViewById(R.id.edtitemcode);
         listView = (ListView) findViewById(R.id.listview);
         textView = (TextView) findViewById(R.id.textView4);
+        backimgbtn = findViewById(R.id.logout2);
 
         txtDefaultUsername = (TextView) findViewById(R.id.txt_username);
         txtDefaultRequestProduct = (TextView) findViewById(R.id.txt_requestproduct);
         txtDefaultRequestqty = (TextView) findViewById(R.id.txt_requestqty);
         txtDefaultdate = (TextView) findViewById(R.id.txt_requestdate);
         txtDefault_ID = (TextView) findViewById(R.id.txt_ID);
+        sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
         txtDefaultUsername.setVisibility(View.GONE);
         txtDefaultRequestProduct.setVisibility(View.GONE);
         txtDefaultRequestqty.setVisibility(View.GONE);
         txtDefaultdate.setVisibility(View.GONE);
         txtDefault_ID.setVisibility(View.GONE);
+
+        backimgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(edtrequest.this,requestActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         Toast.makeText(edtrequest.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
+
+
+
 
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +176,7 @@ public class edtrequest extends AppCompatActivity {
         });
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
+
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
@@ -175,8 +200,7 @@ public class edtrequest extends AppCompatActivity {
             int nSuccess;
             try {
                 ContentValues cv = new ContentValues();
-
-                cPostSQL = cItemcode;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHost, "POST", cv);
@@ -216,8 +240,9 @@ public class edtrequest extends AppCompatActivity {
                 adapter_username = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_username);
 
-                listView.setAdapter(adapter_username);
-                textView.setText(listView.getAdapter().getCount() + " " +"record(s) found.");
+
+
+
 
 
             } else {
@@ -253,7 +278,7 @@ public class edtrequest extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cPostSQL = cItemcode;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlRequestProductName, "POST", cv);
@@ -294,6 +319,10 @@ public class edtrequest extends AppCompatActivity {
                 adapter_requestedproduct = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_rpname);
 
+
+
+
+
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -326,7 +355,7 @@ public class edtrequest extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cPostSQL = cItemcode;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlRequestproductqty, "POST", cv);
@@ -366,6 +395,9 @@ public class edtrequest extends AppCompatActivity {
                 list_rprice = new ArrayList<String>(Arrays.asList(rrprices));
                 adapter_requestedproductqty = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_rprice);
+
+                listView.setAdapter(adapter_requestedproduct);
+                textView.setText(listView.getAdapter().getCount() + " " +"record(s) found.");
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -399,7 +431,7 @@ public class edtrequest extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cPostSQL = cItemcode;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlRequestproductdate, "POST", cv);
@@ -476,7 +508,7 @@ public class edtrequest extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cPostSQL = cItemcode;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHostID, "POST", cv);
@@ -529,3 +561,6 @@ public class edtrequest extends AppCompatActivity {
         }
     }
 }
+
+
+

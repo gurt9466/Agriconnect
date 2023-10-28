@@ -39,8 +39,9 @@ public class home extends AppCompatActivity {
         btnrequest =findViewById(R.id.requestproduct);
         txtfname = findViewById(R.id.txtviewfname);
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
-        btnlogout = findViewById(R.id.logout);
+        btnlogout = findViewById(R.id.logout13);
         txtviewfetchreslt = findViewById(R.id.ftechresult);
+
 
 
         if (sharedPreferences.getString("logged", "false").equals("false")) {
@@ -55,7 +56,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.9/agriconnect/php/logout.php"; //host ip and phpfile
+                String url = "http://192.168.1.4/agriconnect/php/logout.php"; //host ip and phpfile
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
@@ -96,7 +97,7 @@ public class home extends AppCompatActivity {
         btnrequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(home.this, edtrequest.class);
+                Intent intent =new Intent(home.this, requestActivity.class);
                 startActivity(intent);
                 finish();
             }

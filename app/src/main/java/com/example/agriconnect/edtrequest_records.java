@@ -33,7 +33,7 @@ public class edtrequest_records extends AppCompatActivity {
 
     private static TextView tv_civ;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.9/agriconnect/php/UpdateQty.php";
+    private static String urlHost = "http://192.168.1.4/agriconnect/php/UpdateQty.php";
 
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -108,6 +108,10 @@ public class edtrequest_records extends AppCompatActivity {
 
 
                 new uploadDataToURL().execute();
+
+                Intent intent = new Intent(edtrequest_records.this,edtrequest.class);
+                startActivity(intent);
+                finish();
             }
         });
 

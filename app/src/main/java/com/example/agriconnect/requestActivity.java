@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class requestActivity extends AppCompatActivity {
     TextView txtviewerror2;
     Button btnpost;
     SharedPreferences sharedPreferences;
+    ImageView imgeditpost, backimg;
     String requestproductname, requestprice, requestproductdate,username;
 
     @Override
@@ -37,6 +39,8 @@ public class requestActivity extends AppCompatActivity {
         rpprice = findViewById(R.id.edtestimateprice);
         rpdate = findViewById(R.id.edtrequestdateexpected);
         btnpost = findViewById(R.id.Rpostbtn);
+        imgeditpost =findViewById(R.id.reditpostimg);
+        backimg = findViewById(R.id.logout2);
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
@@ -51,6 +55,42 @@ public class requestActivity extends AppCompatActivity {
         }
         username = (sharedPreferences.getString("username",""));
 
+
+        imgeditpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(requestActivity.this,edtrequest.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        backimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(requestActivity.this,home.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+
+
+        imgeditpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(requestActivity.this,edtrequest.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
         btnpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +100,7 @@ public class requestActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.9/agriconnect/php/request_product.php"; //host ip and phpfile
+                String url = "http://192.168.1.4/agriconnect/php/request_product.php"; //host ip and phpfile
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -69,13 +109,13 @@ public class requestActivity extends AppCompatActivity {
 
                                 if(response.equals("success")){
                                     Toast.makeText(getApplicationContext(),"Registration Successful!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),home.class);
-                                    startActivity(intent);
-                                    finish();
                                 }
                                 else{txtviewerror2.setText(response);
                                     txtviewerror2.setVisibility(View.VISIBLE);
                                 }
+                                Intent intent = new Intent(getApplicationContext(),home.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }, new Response.ErrorListener() {
                     @Override
