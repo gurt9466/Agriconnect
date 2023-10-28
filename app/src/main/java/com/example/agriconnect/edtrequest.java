@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -241,10 +242,6 @@ public class edtrequest extends AppCompatActivity {
                         android.R.layout.simple_list_item_1,list_username);
 
 
-
-
-
-
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -319,10 +316,6 @@ public class edtrequest extends AppCompatActivity {
                 adapter_requestedproduct = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_rpname);
 
-
-
-
-
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -396,8 +389,7 @@ public class edtrequest extends AppCompatActivity {
                 adapter_requestedproductqty = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_rprice);
 
-                listView.setAdapter(adapter_requestedproduct);
-                textView.setText(listView.getAdapter().getCount() + " " +"record(s) found.");
+
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -549,6 +541,10 @@ public class edtrequest extends AppCompatActivity {
                 adapter_ID = new ArrayAdapter<String>(edtrequest.this,
                         android.R.layout.simple_list_item_1,list_ID);
 
+                //listView.setAdapter(adapter_requestedproductdate);
+                //textView.setText(listView.getAdapter().getCount() + " " +"record(s) found.");
+                 CustomListAdapter customAdapter = new CustomListAdapter(edtrequest.this, list_username, list_rpname, list_rprice, list_redate);
+                 listView.setAdapter(customAdapter);
                 //listView.setAdapter(adapter_gender);
 
 
@@ -558,6 +554,55 @@ public class edtrequest extends AppCompatActivity {
                 alert.setTitle("Error");
                 alert.show();
             }
+        }
+    }
+
+    private class CustomListAdapter extends BaseAdapter {
+        private Context context;
+        private ArrayList<String> usernames;
+        private ArrayList<String> requestedProducts;
+        private ArrayList<String> requestedProductQtys;
+        private ArrayList<String> requestedProductDates;
+
+        public CustomListAdapter(Context context, ArrayList<String> usernames, ArrayList<String> requestedProducts, ArrayList<String> requestedProductQtys, ArrayList<String> requestedProductDates) {
+            this.context = context;
+            this.usernames = usernames;
+            this.requestedProducts = requestedProducts;
+            this.requestedProductQtys = requestedProductQtys;
+            this.requestedProductDates = requestedProductDates;
+        }
+
+        @Override
+        public int getCount() {
+            return usernames.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View listViewItem = inflater.inflate(R.layout.custom_list_item, null);
+
+            TextView usernameTextView = listViewItem.findViewById(R.id.usernameTextView);
+            TextView requestedProductTextView = listViewItem.findViewById(R.id.requestedProductTextView);
+            TextView requestedProductQtyTextView = listViewItem.findViewById(R.id.requestedProductQtyTextView);
+            TextView requestedProductDateTextView = listViewItem.findViewById(R.id.requestedProductDateTextView);
+
+            usernameTextView.setText(usernames.get(position));
+            requestedProductTextView.setText(requestedProducts.get(position));
+            requestedProductQtyTextView.setText(requestedProductQtys.get(position));
+            requestedProductDateTextView.setText(requestedProductDates.get(position));
+
+            return listViewItem;
         }
     }
 }
