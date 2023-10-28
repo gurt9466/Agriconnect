@@ -38,7 +38,7 @@ public class edtrequest extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
 
     private static String urlHost = "http://192.168.1.4/Agriconnect/php/selectUsername.php";
-    //private static String urlHostDelete = "http://192.168.1.4/veggi/delete.php";
+    private static String urlHostDelete = "http://192.168.1.4/Agriconnect/php/delete.php";
 
     //private static String urlUserName = "http://192.168.1.4/veggi/delete.php";
     private static String urlRequestProductName = "http://192.168.1.4/Agriconnect/php/selectRequestproductname.php";
@@ -137,8 +137,9 @@ public class edtrequest extends AppCompatActivity {
 
                 androidx.appcompat.app.AlertDialog.Builder alert_confirm =
                         new androidx.appcompat.app.AlertDialog.Builder(context);
-                alert_confirm.setMessage("Do you want to edit your purchases ");
-                alert_confirm.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                alert_confirm.setMessage("If you want to edit your request, click 'edit.' Otherwise, to delete, click 'delete'.");
+
+                alert_confirm.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         txtDefaultUsername.setText(cltemSelected_username);
@@ -165,10 +166,13 @@ public class edtrequest extends AppCompatActivity {
                     }
                 });
 
-                alert_confirm.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                alert_confirm.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+
+                        txtDefault_ID.setText(cItemSelected_ID);
+                        aydi = txtDefault_ID.getText().toString().trim();
+                        new delete().execute();
                     }
                 });
                 alert_confirm.show();
@@ -549,6 +553,71 @@ public class edtrequest extends AppCompatActivity {
 
 
 
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+    private class delete extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
+
+        public delete() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = cItemSelected_ID;
+                cv.put("id", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlHostDelete, "POST", cv);
+                if (json != null) {
+                    nSuccess =json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String del) {
+            super.onPostExecute(del);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtrequest.this);
+            if (aydi != null) {
+                if (isEmpty.equals("") && !del.equals("HTTPSERVER_ERROR")) { }
+                Toast.makeText(edtrequest.this, "Data Deleted", Toast.LENGTH_SHORT).show();
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
