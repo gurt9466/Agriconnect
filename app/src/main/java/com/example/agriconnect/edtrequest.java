@@ -63,7 +63,7 @@ public class edtrequest extends AppCompatActivity {
 
     ArrayList <String> list_username;
     ArrayList <String> list_rpname;
-    ArrayList <String> list_rprice;
+    ArrayList <String> list_rqty;
     ArrayList <String> list_redate;
     ArrayList <String> list_ID;
 
@@ -120,7 +120,7 @@ public class edtrequest extends AppCompatActivity {
                 cItemcode = edtitemcode.getText().toString();
                 new uploadDataToURL().execute();
                 new RPRODUCT().execute();
-                new RPRICE().execute();
+               new RQTY().execute();
                 new RPDATE().execute();
                 new id().execute();
             }
@@ -323,12 +323,12 @@ public class edtrequest extends AppCompatActivity {
             }
         }
     }
-    private class RPRICE extends AsyncTask<String, String, String> {
+    private class RQTY extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
-        public RPRICE() {
+        public RQTY() {
         }
 
         @Override
@@ -372,22 +372,22 @@ public class edtrequest extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String RPPRICE) {
-            super.onPostExecute(RPPRICE);
+        protected void onPostExecute(String rcqty) {
+            super.onPostExecute(rcqty);
             pDialog.dismiss();
             String isEmpty = "";
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtrequest.this);
-            if (RPPRICE != null) {
-                if (isEmpty.equals("") && !RPPRICE.equals("HTTPSERVER_ERROR")) { }
+            if (rcqty != null) {
+                if (isEmpty.equals("") && !rcqty.equals("HTTPSERVER_ERROR")) { }
 
 
-                String rrprice = RPPRICE;
+                String rrqty = rcqty;
 
-                String str = rrprice;
-                final String rrprices[] = str.split("-");
-                list_rprice = new ArrayList<String>(Arrays.asList(rrprices));
+                String str = rrqty;
+                final String rrqtys[] = str.split("-");
+                list_rqty = new ArrayList<String>(Arrays.asList(rrqtys));
                 adapter_requestedproductqty = new ArrayAdapter<String>(edtrequest.this,
-                        android.R.layout.simple_list_item_1,list_rprice);
+                        android.R.layout.simple_list_item_1,list_rqty);
 
 
             } else {
@@ -543,7 +543,7 @@ public class edtrequest extends AppCompatActivity {
 
                 //listView.setAdapter(adapter_requestedproductdate);
                 //textView.setText(listView.getAdapter().getCount() + " " +"record(s) found.");
-                 CustomListAdapter customAdapter = new CustomListAdapter(edtrequest.this, list_username, list_rpname, list_rprice, list_redate);
+                 CustomListAdapter customAdapter = new CustomListAdapter(edtrequest.this, list_username, list_rpname, list_rqty, list_redate);
                  listView.setAdapter(customAdapter);
                 //listView.setAdapter(adapter_gender);
 

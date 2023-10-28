@@ -29,7 +29,7 @@ public class requestActivity extends AppCompatActivity {
     Button btnpost;
     SharedPreferences sharedPreferences;
     ImageView imgeditpost, backimg;
-    String requestproductname, requestprice, requestproductdate,username;
+    String requestproductname, requestqty, requestproductdate,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class requestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 requestproductname = String.valueOf(rpname.getText());
                 requestproductdate = String.valueOf(rpdate.getText());
-                requestprice = String.valueOf(rpprice.getText());
+                requestqty = String.valueOf(rpprice.getText());
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -128,7 +128,7 @@ public class requestActivity extends AppCompatActivity {
                         Map<String, String> paramV = new HashMap<>();
                         paramV.put("username",username);
                         paramV.put("request_product_name",requestproductname);
-                        paramV.put("request_product_price",requestprice);
+                        paramV.put("request_product_qty",requestqty);
                         paramV.put("request_product_date",requestproductdate);
 
                         return paramV;

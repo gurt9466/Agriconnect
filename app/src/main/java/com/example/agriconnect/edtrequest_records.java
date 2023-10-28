@@ -20,9 +20,9 @@ import org.json.JSONObject;
 public class edtrequest_records extends AppCompatActivity {
 
     private static Button btnQuery;
-    private static EditText edtproduct, edtrprice, edtrdate,edtusername;
-    private static TextView tvproduct, tvrprice,tvusername,tvrdate, txt1,txt2,txt3,txt4,txt5,txt6;
-    private String rusername, rproduct,rprice,rdate, aydi;
+    private static EditText edtproduct, edtrqty, edtrdate,edtusername;
+    private static TextView tvproduct, tvrqty,tvusername,tvrdate, txt1,txt2,txt3,txt4,txt5,txt6;
+    private String rusername, rproduct,rqty,rdate, aydi;
 
     public static final String USERNAME = "USERNAME";
     public static final String RPRODUCT = "RPRODUCT";
@@ -40,7 +40,7 @@ public class edtrequest_records extends AppCompatActivity {
 
     public static String Requestusername;
     public static String RequestProduct;
-    public static String Requestprice;
+    public static String Requestqty;
     public static String Requestdate;
 
 
@@ -51,13 +51,13 @@ public class edtrequest_records extends AppCompatActivity {
         setContentView(R.layout.activity_edtrequest_records);
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtproduct = findViewById(R.id.editrequestproductname);
-        edtrprice = findViewById(R.id.editrequestprice);
+        edtrqty = findViewById(R.id.editrequestprice);
         edtrdate = findViewById(R.id.editrequestdate);
 
         tvusername = (TextView) findViewById(R.id.edtcfname);
         tvproduct = (TextView) findViewById(R.id.edtclname);
         tvrdate = (TextView) findViewById(R.id.editpname);
-        tvrprice = (TextView) findViewById(R.id.edtpqty);
+        tvrqty = (TextView) findViewById(R.id.edtpqty);
 
 
         tv_civ = (TextView) findViewById(R.id.textView3);
@@ -73,21 +73,21 @@ public class edtrequest_records extends AppCompatActivity {
         Intent i = getIntent();
         rusername = i.getStringExtra(USERNAME);
         rproduct = i.getStringExtra(RPRODUCT);
-        rprice = i.getStringExtra(RQTY);
+        rqty = i.getStringExtra(RQTY);
         rdate = i.getStringExtra(RDATE);
         aydi = i.getStringExtra(ID);
 
 
 
         edtproduct.setText(rproduct);
-        edtrprice.setText(rprice);
+        edtrqty.setText(rqty);
         edtrdate.setText(rdate);
 
 
         tvusername.setVisibility(View.GONE);
         tvproduct.setVisibility(View.GONE);
         tvrdate.setVisibility(View.GONE);
-        tvrprice.setVisibility(View.GONE);
+        tvrqty.setVisibility(View.GONE);
 
         txt1.setVisibility(View.GONE);
         txt2.setVisibility(View.GONE);
@@ -103,7 +103,7 @@ public class edtrequest_records extends AppCompatActivity {
                 //Requestusername = tvusername.getText().toString();
                 RequestProduct = edtproduct.getText().toString();
                 Requestdate = edtrdate.getText().toString();
-                Requestprice = edtrprice.getText().toString();
+                Requestqty = edtrqty.getText().toString();
 
 
 
@@ -142,8 +142,8 @@ public class edtrequest_records extends AppCompatActivity {
                 ContentValues cv = new ContentValues();
                 //insert anything in this cod
 
-               // cPostSQL = Requestusername;
-               // cv.put("username", cPostSQL);
+                // cPostSQL = Requestusername;
+                // cv.put("username", cPostSQL);
 
                 cPostSQL = aydi;
                 cv.put("id", cPostSQL);
@@ -151,8 +151,8 @@ public class edtrequest_records extends AppCompatActivity {
                 cPostSQL = " '" + RequestProduct + "' ";
                 cv.put("request_product_name", cPostSQL);
 
-                cPostSQL = " '" + Requestprice + "' ";
-                cv.put("request_product_price", cPostSQL);
+                cPostSQL = " '" + Requestqty + "' ";
+                cv.put("request_product_qty", cPostSQL);
 
                 cPostSQL = " '" + Requestdate + "' ";
                 cv.put("request_product_date",cPostSQL);
