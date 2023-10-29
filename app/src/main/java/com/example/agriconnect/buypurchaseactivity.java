@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -33,9 +34,9 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static final String PFID = "PFID";
     public static final String ID = "ID";
 
-    private static TextView tv_civ;
+    private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "";
+    private static String urlHost = "http://192.168.1.4/agriconnect/php/product/uploadcart.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -45,9 +46,12 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static String ProductQTYY;
     public static String ProductPrice;
     public static String edtProductQTYY;
+    public static String username;
+    SharedPreferences sharedPreferences;
 
 
     private static TextView pid, pname, hard, qty, price;
+
 
 
 
@@ -59,11 +63,16 @@ public class buypurchaseactivity extends AppCompatActivity {
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtqty = findViewById(R.id.editTextqty);
 
+        sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
+        username =(sharedPreferences.getString("username",""));
+
         pid = (TextView) findViewById(R.id.textViewid);
         pname = (TextView) findViewById(R.id.textViewpname);
         hard = (TextView) findViewById(R.id.textViewhdate);
         qty = (TextView) findViewById(R.id.textViewqty);
         price = (TextView) findViewById(R.id.textViewprice);
+
+
 
 
 
@@ -109,12 +118,8 @@ public class buypurchaseactivity extends AppCompatActivity {
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Requestusername = tvusername.getText().toString();
-                ProductName = pname.getText().toString();
-                HarvestDate = hard.getText().toString();
                 edtProductQTYY = edtqty.getText().toString();
-                ProductQTYY = qty.getText().toString();
-                ProductPrice = price.getText().toString();
+
 
 
                 new uploadDataToURL().execute();
@@ -151,25 +156,13 @@ public class buypurchaseactivity extends AppCompatActivity {
             int nSuccess;
             try {
                 ContentValues cv = new ContentValues();
-                //insert anything in this cod
 
-                // cPostSQL = Requestusername;
-                // cv.put("username", cPostSQL);
+                cv.put("username", username);
+                cv.put("product_id", aydi);
+                cv.put("product_name", ppname);
+                cv.put("product_qty", edtProductQTYY);
+                cv.put("product_price", ppprice);
 
-                cPostSQL = aydi;
-                cv.put("id", cPostSQL);
-
-                cPostSQL = " '" + ProductName + "' ";
-                cv.put("product_name", cPostSQL);
-
-                cPostSQL = " '" + HarvestDate + "' ";
-                cv.put("haervest_date", cPostSQL);
-
-                cPostSQL = " '" + ProductQTYY + "' ";
-                cv.put("product_qty", cPostSQL);
-
-                cPostSQL = " '" + ProductPrice + "' ";
-                cv.put("product_price", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHost, "POST", cv);
                 if (json != null) {
