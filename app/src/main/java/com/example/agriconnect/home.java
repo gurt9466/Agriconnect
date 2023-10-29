@@ -27,7 +27,7 @@ import java.util.Map;
 public class home extends AppCompatActivity {
     TextView txtfname, txtviewfetchreslt;
     Button btnrequest, btnpurchase;
-    ImageView btnlogout;
+    ImageView btnlogout, btncart;
 
     SharedPreferences sharedPreferences;
 
@@ -42,6 +42,7 @@ public class home extends AppCompatActivity {
         btnlogout = findViewById(R.id.logout13);
         txtviewfetchreslt = findViewById(R.id.ftechresult);
         btnpurchase =findViewById(R.id.purchase);
+        btncart =findViewById(R.id.cart);
 
 
 
@@ -110,6 +111,16 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(home.this, purchaseActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        btncart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(home.this, cartActivity.class);
                 startActivity(intent);
                 finish();
 
