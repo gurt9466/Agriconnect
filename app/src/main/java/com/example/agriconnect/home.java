@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class home extends AppCompatActivity {
     TextView txtfname, txtviewfetchreslt;
-    Button btnrequest;
+    Button btnrequest, btnpurchase;
     ImageView btnlogout;
 
     SharedPreferences sharedPreferences;
@@ -41,6 +41,7 @@ public class home extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         btnlogout = findViewById(R.id.logout13);
         txtviewfetchreslt = findViewById(R.id.ftechresult);
+        btnpurchase =findViewById(R.id.purchase);
 
 
 
@@ -52,11 +53,13 @@ public class home extends AppCompatActivity {
         }
         txtfname.setText(sharedPreferences.getString("name_first",""));
 
+
+
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.4/agriconnect/php/logout.php"; //host ip and phpfile
+                String url = "http://192.168.1.4/agriconnect/php/register/logout.php"; //host ip and phpfile
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
@@ -100,6 +103,16 @@ public class home extends AppCompatActivity {
                 Intent intent =new Intent(home.this, requestActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        btnpurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(home.this, purchaseActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 

@@ -9,17 +9,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/usernameTextView"
+        android:id="@+id/productnameTextView"
         android:layout_width="307dp"
         android:layout_height="34dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:padding="8dp"
         android:text="Username"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,9 +28,9 @@
         android:id="@+id/usernameTextView2"
         android:layout_width="95dp"
         android:layout_height="34dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="36dp"
         android:padding="8dp"
-        android:text="Username:"
+        android:text="Product:"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +57,13 @@
         android:layout_height="34dp"
         android:layout_marginStart="50dp"
         android:padding="8dp"
-        android:text="Product Name:"
+        android:text="Price :"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/usernameTextView4"
-        app:layout_constraintEnd_toStartOf="@+id/requestedProductTextView"
+        app:layout_constraintEnd_toStartOf="@+id/ProductpsTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
 
     <TextView
         android:id="@+id/usernameTextView5"
@@ -74,9 +75,9 @@
 "
         android:textColor="#000000"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/requestedProductDateTextView"
+        app:layout_constraintEnd_toStartOf="@+id/dateharvestTextView"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView6"
-        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/ProductpsTextView" />
 
     <TextView
         android:id="@+id/usernameTextView4"
@@ -87,9 +88,22 @@
         android:text="QTY:"
         android:textColor="#000000"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/requestedProductQtyTextView"
+        app:layout_constraintEnd_toStartOf="@+id/pproqtysTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameTextView3" />
+
+    <TextView
+        android:id="@+id/usernameTextView8"
+        android:layout_width="80dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        android:padding="8dp"
+        android:text="Product ID : "
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/usernameTextView6"
@@ -101,11 +115,11 @@
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/usernameTextView5"
-        app:layout_constraintStart_toEndOf="@+id/requestedProductQtyTextView"
-        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView" />
+        app:layout_constraintStart_toEndOf="@+id/pproqtysTextView"
+        app:layout_constraintTop_toBottomOf="@+id/ProductpsTextView" />
 
     <TextView
-        android:id="@+id/requestedProductTextView"
+        android:id="@+id/ProductpsTextView"
         android:layout_width="200dp"
         android:layout_height="34dp"
         android:layout_marginEnd="111dp"
@@ -115,21 +129,36 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView3"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
 
     <TextView
-        android:id="@+id/requestedProductQtyTextView"
+        android:id="@+id/pproqtysTextView"
         android:layout_width="70dp"
         android:layout_height="34dp"
         android:padding="8dp"
-        android:text="Requested Product Qty"
+        android:text="Product Qty"
         android:textColor="#666666"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView4"
         app:layout_constraintTop_toBottomOf="@+id/usernameTextView3" />
 
     <TextView
-        android:id="@+id/requestedProductDateTextView"
+        android:id="@+id/adyiview"
+        android:layout_width="70dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:padding="8dp"
+        android:text="id"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/productnameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateharvestTextView"
         android:layout_width="170dp"
         android:layout_height="34dp"
         android:layout_marginStart="1dp"
@@ -140,5 +169,5 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView5"
-        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/ProductpsTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

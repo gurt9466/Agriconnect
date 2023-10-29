@@ -37,15 +37,15 @@ public class edtrequest extends AppCompatActivity {
     // Product Name, Estimated Price, Date Expected
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
 
-    private static String urlHost = "http://192.168.1.4/Agriconnect/php/selectUsername.php";
-    private static String urlHostDelete = "http://192.168.1.4/Agriconnect/php/delete.php";
+    private static String urlHost = "http://192.168.1.4/Agriconnect/php/request/selectUsername.php";
+    private static String urlHostDelete = "http://192.168.1.4/Agriconnect/php/request/delete.php";
 
-    //private static String urlUserName = "http://192.168.1.4/veggi/delete.php";
-    private static String urlRequestProductName = "http://192.168.1.4/Agriconnect/php/selectRequestproductname.php";
-    private static String urlRequestproductqty = "http://192.168.1.4/Agriconnect/php/selectRequestproductqty.php";
-    private static String urlRequestproductdate = "http://192.168.1.4/Agriconnect/php/selectRequestproductdate.php";
 
-    private static String urlHostID = "http://192.168.1.4/Agriconnect/php/selectid.php";
+    private static String urlRequestProductName = "http://192.168.1.4/Agriconnect/php/request/selectRequestproductname.php";
+    private static String urlRequestproductqty = "http://192.168.1.4/Agriconnect/php/request/selectRequestproductqty.php";
+    private static String urlRequestproductdate = "http://192.168.1.4/Agriconnect/php/request/selectRequestproductdate.php";
+
+    private static String urlHostID = "http://192.168.1.4/Agriconnect/php/request/selectid.php";
     SharedPreferences sharedPreferences;
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
