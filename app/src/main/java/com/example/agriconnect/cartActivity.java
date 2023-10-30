@@ -43,6 +43,8 @@ public class cartActivity extends AppCompatActivity {
     private static String urlcartdatedd = "http://192.168.1.4/Agriconnect/php/cart/selectcartdateadded.php";
     private static String urlHostID = "http://192.168.1.4/Agriconnect/php/cart/selectcartid.php";
 
+    private static String urlHostDelete = "http://192.168.1.4/Agriconnect/php/cart/delete.php";
+
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
     private static String online_dataset = "";
@@ -146,7 +148,7 @@ public class cartActivity extends AppCompatActivity {
                         new androidx.appcompat.app.AlertDialog.Builder(context);
                 alert_confirm.setMessage(" Do you wish to continue ");
 
-                alert_confirm.setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                alert_confirm.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         txtDefaultcartusername.setText(cltemSelected_cartusername);
@@ -179,9 +181,12 @@ public class cartActivity extends AppCompatActivity {
                     }
                 });
 
-                alert_confirm.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                alert_confirm.setNegativeButton("delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        txtDefault_ID.setText(cItemSelected_ID);
+                        aydi = txtDefault_ID.getText().toString().trim();
+                        new cartActivity.delete().execute();
 
                     }
                 });
@@ -726,6 +731,72 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
+    private class delete extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
+
+        public delete() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = cItemSelected_ID;
+                cv.put("id", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlHostDelete, "POST", cv);
+                if (json != null) {
+                    nSuccess =json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String del) {
+            super.onPostExecute(del);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
+            if (aydi != null) {
+                if (isEmpty.equals("") && !del.equals("HTTPSERVER_ERROR")) { }
+                Toast.makeText(cartActivity.this, "Data Deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
     private class CustomListAdapter extends BaseAdapter {
         private Context context;
 
@@ -763,19 +834,14 @@ public class cartActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View listViewItem = inflater.inflate(R.layout.custom_list_item_2, null);
+            View listViewItem = inflater.inflate(R.layout.custom_list_item_3, null);
 
             TextView cartproductnameTextView = listViewItem.findViewById(R.id.productnameTextView);
             TextView cartQtyTextView = listViewItem.findViewById(R.id.pproqtysTextView);
             TextView cartpriceTextView = listViewItem.findViewById(R.id.ProductpsTextView);
-            TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview);
-
-            TextView usernameTextView5TextView = listViewItem.findViewById(R.id.usernameTextView5);
-            TextView totalpricetxtview = listViewItem.findViewById(R.id.dateharvestTextView);
+            TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview2);
 
 
-            usernameTextView5TextView.setVisibility(View.GONE);
-            totalpricetxtview.setVisibility(View.GONE);
 
 
 

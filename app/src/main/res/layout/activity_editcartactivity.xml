@@ -4,6 +4,286 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".editcartactivity">
+    tools:context=".buypurchaseactivity">
+
+    <TextView
+        android:id="@+id/textViewedtid"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="260dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewedtprice" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="26dp"
+        android:text="================================================"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="192dp"
+        android:text="Add To Cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="352dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView69"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="22dp"
+        android:text="Product ID:  "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="15dp"
+        android:text="Price :"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="15dp"
+        android:text="Harvest Date :"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="48dp"
+        android:text="Enter Quantity : "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewprice" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="15dp"
+        android:text="Available Qty: "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="15dp"
+        android:text="Product Name :"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView69" />
+
+    <TextView
+        android:id="@+id/textViewid"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="22dp"
+        android:text="ID"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView69"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textViewpname"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="13dp"
+        android:text="product name"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/textViewid" />
+
+    <TextView
+        android:id="@+id/textViewhdate"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="10dp"
+        android:text="harvest date"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/textViewpname" />
+
+    <TextView
+        android:id="@+id/textViewqty"
+        android:layout_width="64dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:text="qty"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
+
+    <TextView
+        android:id="@+id/textViewprice"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
+        android:text="PRice"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/textViewqty" />
+
+    <TextView
+        android:id="@+id/textViewhdate3"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="9dp"
+        android:text="KG "
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewqty"
+        app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
+
+    <TextView
+        android:id="@+id/textViewhdate4"
+        android:layout_width="33dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="84dp"
+        android:text="KG "
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextqty"
+        app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
+
+    <EditText
+        android:id="@+id/editTextqty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textViewedtpname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:layout_marginEnd="260dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewedtharvestd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="259dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewedtpname" />
+
+    <TextView
+        android:id="@+id/textViewedtpqty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="260dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewedtharvestd" />
+
+    <TextView
+        android:id="@+id/textViewedtprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="259dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewedtfid" />
+
+    <TextView
+        android:id="@+id/textViewedtfid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="260dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewedtpqty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
