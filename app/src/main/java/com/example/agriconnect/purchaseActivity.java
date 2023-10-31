@@ -44,7 +44,7 @@ public class purchaseActivity extends AppCompatActivity {
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
     private static String online_dataset = "";
-    private static Button btnQuery;
+    private static ImageView btnQuery;
     private static EditText edtitemcode;
     ListView listView;
     TextView textView,txtDefault_ID, txtDefaultProductName, txtDefaultHarvestDate, txtDefaultQuantity, txtDefaultPrice,txtDefaultFarmerID;
@@ -62,7 +62,7 @@ public class purchaseActivity extends AppCompatActivity {
     ArrayList <String> list_pqty;
     ArrayList <String> list_ID;
 
-    ImageView backimgbtn;
+    ImageView backimgbtn, cart;
 
     String cltemSelected_productname,cItemSelected_ID, cltemSelected_harvestdate, cltemSelected_qty, cltemSelected_price,cltemSelected_farmerid, cltemSelected_quantity;
     Context context = this;
@@ -74,11 +74,12 @@ public class purchaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
-        btnQuery = (Button) findViewById(R.id.btnQuery);
+        btnQuery = (ImageView) findViewById(R.id.imgreload2);
         edtitemcode = (EditText) findViewById(R.id.edtitemcode);
         listView = (ListView) findViewById(R.id.listview);
         textView = (TextView) findViewById(R.id.textView4);
         backimgbtn = findViewById(R.id.logout2);
+        cart = findViewById(R.id.cart2);
 
         txtDefault_ID = (TextView) findViewById(R.id.txt_ID);
         txtDefaultProductName = (TextView) findViewById(R.id.txt_productname);
@@ -105,6 +106,15 @@ public class purchaseActivity extends AppCompatActivity {
             }
         });
 
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(purchaseActivity.this,cartActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         Toast.makeText(purchaseActivity.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
 
@@ -126,6 +136,7 @@ public class purchaseActivity extends AppCompatActivity {
 
             }
         });
+        btnQuery.performClick();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

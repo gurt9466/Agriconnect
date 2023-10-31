@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class edtrequest extends AppCompatActivity {
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
     private static String online_dataset = "";
-    private static Button btnQuery;
+    private static ImageView btnQuery;
     private static EditText edtitemcode;
     ListView listView;
     TextView textView,txtDefault_ID, txtDefaultUsername, txtDefaultRequestProduct, txtDefaultRequestqty, txtDefaultdate;
@@ -78,7 +79,7 @@ public class edtrequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edtrequest);
-        btnQuery = (Button) findViewById(R.id.btnQuery);
+        btnQuery = (ImageView) findViewById(R.id.imgreload3);
         edtitemcode = (EditText) findViewById(R.id.edtitemcode);
         listView = (ListView) findViewById(R.id.listview);
         textView = (TextView) findViewById(R.id.textView4);
@@ -107,24 +108,23 @@ public class edtrequest extends AppCompatActivity {
         });
 
 
-        Toast.makeText(edtrequest.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(edtrequest.this, "Edit Requests", Toast.LENGTH_SHORT).show();
 
 
+                btnQuery.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                        cItemcode = edtitemcode.getText().toString();
+                        new uploadDataToURL().execute();
+                        new RPRODUCT().execute();
+                        new RQTY().execute();
+                        new RPDATE().execute();
+                        new id().execute();
+                    }
+                });
+                btnQuery.performClick();
 
-
-        btnQuery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                cItemcode = edtitemcode.getText().toString();
-                new uploadDataToURL().execute();
-                new RPRODUCT().execute();
-               new RQTY().execute();
-                new RPDATE().execute();
-                new id().execute();
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -137,7 +137,7 @@ public class edtrequest extends AppCompatActivity {
 
                 androidx.appcompat.app.AlertDialog.Builder alert_confirm =
                         new androidx.appcompat.app.AlertDialog.Builder(context);
-                alert_confirm.setMessage("If you want to edit your request, click 'edit.' Otherwise, to delete, click 'delete'.");
+                alert_confirm.setMessage("If you want to edit your"+ cltemSelected_requestedproduct +", click 'edit.' Otherwise, to delete, click 'delete'.");
 
                 alert_confirm.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
@@ -675,6 +675,4 @@ public class edtrequest extends AppCompatActivity {
         }
     }
 }
-
-
 

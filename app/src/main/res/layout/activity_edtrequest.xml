@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".edtrequest">
 
+    <ImageView
+        android:id="@+id/imgreload3"
+        android:layout_width="44dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reload2" />
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="201dp"
@@ -41,12 +51,10 @@
         android:layout_height="45dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="120dp"
-        android:layout_marginBottom="8dp"
         android:ems="18"
-        android:visibility="gone"
         android:hint="Search"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btnQuery"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -165,28 +173,18 @@
         app:layout_constraintEnd_toStartOf="@+id/txt_username"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnQuery"
-        android:layout_width="98dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="8dp"
-        android:text="search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtitemcode" />
-
     <ListView
         android:id="@+id/listview"
-        android:layout_width="356dp"
-        android:layout_height="590dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="380dp"
+        android:layout_height="718dp"
 
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnQuery" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView4"
