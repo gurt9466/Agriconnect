@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 public class edtrequest_records extends AppCompatActivity {
 
+
     private static Button btnQuery;
     private static EditText edtproduct, edtrqty, edtrdate,edtusername;
     private static TextView tvproduct, tvrqty,tvusername,tvrdate, txt1,txt2,txt3,txt4,txt5,txt6;
