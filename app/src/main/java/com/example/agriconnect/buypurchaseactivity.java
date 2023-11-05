@@ -44,7 +44,7 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static String ProductName;
     public static String HarvestDate;
     public static String ProductQTYY;
-    public static String ProductPrice;
+    public static String Productid;
     public static String edtProductQTYY;
     public static String username;
     SharedPreferences sharedPreferences;
@@ -84,7 +84,7 @@ public class buypurchaseactivity extends AppCompatActivity {
         tvid = (TextView) findViewById(R.id.textViewedtid);
 
 
-        tv_civ = (TextView) findViewById(R.id.textView3);
+
 
 
         Intent i = getIntent();
@@ -119,6 +119,7 @@ public class buypurchaseactivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 edtProductQTYY = edtqty.getText().toString();
+                Productid = pid.getText().toString();
 
 
 
@@ -158,7 +159,7 @@ public class buypurchaseactivity extends AppCompatActivity {
                 ContentValues cv = new ContentValues();
 
                 cv.put("username", username);
-                cv.put("product_id", aydi);
+                cv.put("product_id", Productid);
                 cv.put("product_name", ppname);
                 cv.put("product_qty", edtProductQTYY);
                 cv.put("product_price", ppprice);

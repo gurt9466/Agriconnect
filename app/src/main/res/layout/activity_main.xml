@@ -7,6 +7,17 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="410dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="40dp"
+        android:background="#F3CD96"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="445dp"
