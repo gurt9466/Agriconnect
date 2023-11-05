@@ -7,6 +7,16 @@
     tools:context=".edtprofiles">
 
     <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="500dp"
+        android:layout_height="310dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@drawable/farmer7" />
+
+    <ImageView
         android:id="@+id/imgreload3"
         android:layout_width="44dp"
         android:layout_height="38dp"
@@ -30,15 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="500dp"
-        android:layout_height="310dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/farmer7" />
+
 
     <TextView
         android:id="@+id/textView17"
@@ -202,13 +204,12 @@
         android:layout_width="400dp"
         android:layout_height="460dp"
 
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.693" />
 
     <TextView
         android:id="@+id/textView4"

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+
+
 
 <androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".edtrequest">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="478dp"
+        android:layout_height="274dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@drawable/farmer6" />
 
     <ImageView
         android:id="@+id/imgreload3"
@@ -193,22 +202,19 @@
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="393dp"
-        android:layout_height="718dp"
+        android:layout_width="390dp"
+        android:layout_height="488dp"
 
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.645" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="478dp"
-        android:layout_height="274dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/farmer6" />
+
 
     <TextView
         android:id="@+id/textView4"
@@ -232,4 +238,3 @@
         app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>

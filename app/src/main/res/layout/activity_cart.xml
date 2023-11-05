@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".cartActivity">
@@ -48,9 +47,8 @@
         android:id="@+id/textView18"
         android:layout_width="409dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="70dp"
         android:background="#FFEB3B"
         android:padding="10dp"
         android:text="Subtotal : "
@@ -59,10 +57,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listview"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/listview" />
 
     <ImageView
         android:id="@+id/logout2"
@@ -204,8 +200,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="436dp"
-        android:layout_height="171.5dp"
+        android:layout_width="700dp"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,12 +210,16 @@
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="396dp"
-        android:layout_height="569dp"
+        android:layout_width="407dp"
+        android:layout_height="488dp"
 
+        android:layout_marginTop="292dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -254,11 +254,11 @@
 
     <TextView
         android:id="@+id/textViewtotalamount"
-        android:layout_width="158dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="592dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="169dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="75dp"
         android:background="@color/white"
         android:padding="10dp"
         android:text="AMOUNT"
@@ -266,21 +266,22 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/listview" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listview"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="125dp"
         android:layout_height="47dp"
-        android:layout_marginTop="590dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="507dp"
+        android:layout_marginBottom="70dp"
         android:backgroundTint="#FF9800"
         android:text="Check Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
         app:layout_constraintTop_toTopOf="@+id/listview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
