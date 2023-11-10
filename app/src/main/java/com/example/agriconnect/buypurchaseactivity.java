@@ -9,14 +9,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class buypurchaseactivity extends AppCompatActivity {
     private static Button btnQuery;
@@ -25,7 +35,9 @@ public class buypurchaseactivity extends AppCompatActivity {
 
     private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid;
 
-    private String ppname, ppharvest, pppqty, ppprice, pppfid,aydi;
+    private String ppname, ppharvest, pppqty, ppprice, pppfid, aydi;
+
+    private static String cItemcode = "";
 
     public static final String PNAME = "PNAME";
     public static final String PHARVEST = "PHARVEST";
@@ -36,7 +48,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.4/agriconnect/php/product/uploadcart.php";
+    private static String urlHost = "http://192.168.1.7/agriconnect/php/img/etch_image_urls.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -47,13 +59,11 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static String Productid;
     public static String edtProductQTYY;
     public static String username;
+    ImageView imageview;
     SharedPreferences sharedPreferences;
 
 
     private static TextView pid, pname, hard, qty, price;
-
-
-
 
 
     @Override
@@ -62,9 +72,13 @@ public class buypurchaseactivity extends AppCompatActivity {
         setContentView(R.layout.activity_buypurchaseactivity);
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtqty = findViewById(R.id.editTextqty);
+        imageview = findViewById(R.id.imageView3);
+
+        new FetchImageUrlsTask().execute();
+
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
-        username =(sharedPreferences.getString("username",""));
+        username = (sharedPreferences.getString("username", ""));
 
         pid = (TextView) findViewById(R.id.textViewid);
         pname = (TextView) findViewById(R.id.textViewpname);
@@ -73,18 +87,12 @@ public class buypurchaseactivity extends AppCompatActivity {
         price = (TextView) findViewById(R.id.textViewprice);
 
 
-
-
-
         tvproductname = (TextView) findViewById(R.id.textViewedtpname);
         tvharvestdate = (TextView) findViewById(R.id.textViewedtharvestd);
         tvpqty = (TextView) findViewById(R.id.textViewedtpqty);
         tvprice = (TextView) findViewById(R.id.textViewedtprice);
         tvpfid = (TextView) findViewById(R.id.textViewedtfid);
         tvid = (TextView) findViewById(R.id.textViewedtid);
-
-
-
 
 
         Intent i = getIntent();
@@ -103,8 +111,6 @@ public class buypurchaseactivity extends AppCompatActivity {
         price.setText(ppprice);
 
 
-
-
         tvproductname.setVisibility(View.GONE);
         tvharvestdate.setVisibility(View.GONE);
         tvpqty.setVisibility(View.GONE);
@@ -113,14 +119,11 @@ public class buypurchaseactivity extends AppCompatActivity {
         tvid.setVisibility(View.GONE);
 
 
-
-
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 edtProductQTYY = edtqty.getText().toString();
                 Productid = pid.getText().toString();
-
 
 
                 new uploadDataToURL().execute();
@@ -200,4 +203,80 @@ public class buypurchaseactivity extends AppCompatActivity {
             }
         }
     }
+
+    /*
+        private class FetchImageUrlsTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected String doInBackground(String... urls) {
+
+
+                String url = urls[0];
+                String imageUrl = null;
+                try {
+
+                    HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+                    conn.setRequestMethod("GET");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    JSONArray jsonArray = new JSONArray(sb.toString());
+                    if (jsonArray.length() > 0) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        imageUrl = jsonObject.getString("product_image");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return imageUrl;
+            }
+
+     */
+    private class FetchImageUrlsTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            String imageUrl = null;
+            try {
+                // Retrieve the product ID from the intent
+                Intent intent = getIntent();
+                String productId = intent.getStringExtra(ID);
+
+                // Add debug log to check the retrieved product ID
+                Log.d("FetchImageUrlsTask", "Product ID: " + productId);
+
+                // Construct the API URL with the product ID
+                String apiUrl = "http://192.168.1.6/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+
+                HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
+                conn.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                JSONArray jsonArray = new JSONArray(sb.toString());
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    imageUrl = jsonObject.getString("product_image");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return imageUrl;
+        }
+
+        @Override
+        protected void onPostExecute(String imageUrl) {
+            if (imageUrl != null) {
+                Glide.with(buypurchaseactivity.this).load(imageUrl).into(imageview);
+            }
+        }
+    }
+
 }
+

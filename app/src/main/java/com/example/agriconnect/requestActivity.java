@@ -100,7 +100,7 @@ public class requestActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.4/agriconnect/php/request/request_product.php"; //host ip and phpfile
+                String url = "http://192.168.1.6/agriconnect/php/request/request_product.php"; //host ip and phpfile
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

@@ -39,7 +39,7 @@ public class editcartactivity extends AppCompatActivity {
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.4/agriconnect/php/cart/updatecartqty.php";
+    private static String urlHost = "http://192.168.1.6/agriconnect/php/cart/updatecartqty.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";

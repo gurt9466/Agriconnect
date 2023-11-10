@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.4/agriconnect/php/register/register.php"; //host ip and phpfile
+                String url = "http://192.168.1.6/agriconnect/php/register/register.php"; //host ip and phpfile
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
