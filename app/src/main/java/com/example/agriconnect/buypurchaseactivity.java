@@ -48,7 +48,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.7/agriconnect/php/img/etch_image_urls.php";
+    private static String urlHost = "http://192.168.1.9/agriconnect/php/product/uploadcart.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -204,36 +204,7 @@ public class buypurchaseactivity extends AppCompatActivity {
         }
     }
 
-    /*
-        private class FetchImageUrlsTask extends AsyncTask<String, Void, String> {
-            @Override
-            protected String doInBackground(String... urls) {
 
-
-                String url = urls[0];
-                String imageUrl = null;
-                try {
-
-                    HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-                    conn.setRequestMethod("GET");
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line);
-                    }
-                    JSONArray jsonArray = new JSONArray(sb.toString());
-                    if (jsonArray.length() > 0) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        imageUrl = jsonObject.getString("product_image");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return imageUrl;
-            }
-
-     */
     private class FetchImageUrlsTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
@@ -243,11 +214,9 @@ public class buypurchaseactivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String productId = intent.getStringExtra(ID);
 
-                // Add debug log to check the retrieved product ID
-                Log.d("FetchImageUrlsTask", "Product ID: " + productId);
 
                 // Construct the API URL with the product ID
-                String apiUrl = "http://192.168.1.6/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "http://192.168.1.9/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");

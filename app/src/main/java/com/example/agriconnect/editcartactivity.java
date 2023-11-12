@@ -12,11 +12,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class editcartactivity extends AppCompatActivity {
 
@@ -36,10 +45,11 @@ public class editcartactivity extends AppCompatActivity {
     public static final String CARTDATEADDED = "CARTDATEADDED";
 
     public static final String ID = "ID";
+    ImageView imageview;
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.6/agriconnect/php/cart/updatecartqty.php";
+    private static String urlHost = "http://192.168.1.9/agriconnect/php/cart/updatecartqty.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -58,6 +68,8 @@ public class editcartactivity extends AppCompatActivity {
 
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtqty = findViewById(R.id.editTextqty);
+        imageview = findViewById(R.id.imageView3);
+        new editcartactivity.FetchImageUrlsTask().execute();
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         username =(sharedPreferences.getString("username",""));
@@ -194,4 +206,46 @@ public class editcartactivity extends AppCompatActivity {
             }
         }
     }
+    private class FetchImageUrlsTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            String imageUrl = null;
+            try {
+                // Retrieve the product ID from the intent
+                Intent intent = getIntent();
+                String productId = intent.getStringExtra(ID);
+
+
+                // Construct the API URL with the product ID
+                String apiUrl = "http://192.168.1.9/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+
+                HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
+                conn.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                JSONArray jsonArray = new JSONArray(sb.toString());
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    imageUrl = jsonObject.getString("product_image");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return imageUrl;
+        }
+
+        @Override
+        protected void onPostExecute(String imageUrl) {
+            if (imageUrl != null) {
+                Glide.with(editcartactivity.this).load(imageUrl).into(imageview);
+            }
+        }
+    }
+
 }

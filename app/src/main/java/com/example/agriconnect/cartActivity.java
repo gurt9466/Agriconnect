@@ -24,29 +24,39 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class cartActivity extends AppCompatActivity {
 
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.1.6/Agriconnect/php/cart/selectcartusername.php";
-    private static String urlcartqty = "http://192.168.1.6/Agriconnect/php/cart/selectcartqty.php";
-    private static String urlcartprice = "http://192.168.1.6/Agriconnect/php/cart/selectcartprice.php";
-    private static String urlcartproductid = "http://192.168.1.6/Agriconnect/php/cart/selectcartproductid.php";
-    private static String urlcartproductname = "http://192.168.1.6/Agriconnect/php/cart/selectcartproductname.php";
-    private static String urlcartdatedd = "http://192.168.1.6/Agriconnect/php/cart/selectcartdateadded.php";
-    private static String urltotalA = "http://192.168.1.6/Agriconnect/php/cart/selecttotalamount.php";
-    private static String urlHostID = "http://192.168.1.6/Agriconnect/php/cart/selectcartid.php";
+    private static String urlHost = "http://192.168.1.9/Agriconnect/php/cart/selectcartusername.php";
+    private static String urlcartqty = "http://192.168.1.9/Agriconnect/php/cart/selectcartqty.php";
+    private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/cart/selectcartprice.php";
+    private static String urlcartproductid = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductid.php";
+    private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductname.php";
+    private static String urlcartdatedd = "http://192.168.1.9/Agriconnect/php/cart/selectcartdateadded.php";
+    private static String urltotalA = "http://192.168.1.9/Agriconnect/php/cart/selecttotalamount.php";
+    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/cart/selectcartid.php";
 
-    private static String uploadcheckout = "http://192.168.1.6/agriconnect/php/product/selectcheckout.php";
+    private static String uploadcheckout = "http://192.168.1.9/agriconnect/php/product/selectcheckout.php";
 
-    private static String urlHostDelete = "http://192.168.1.6/Agriconnect/php/cart/delete.php";
+    private static String urlHostDelete = "http://192.168.1.9/Agriconnect/php/cart/delete.php";
+
+    String urlimges = "http://192.168.1.9/agriconnect/php/img/cart_iamge.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -103,6 +113,7 @@ public class cartActivity extends AppCompatActivity {
         txtDefaultdateadded = (TextView) findViewById(R.id.txt_cartdateadded);
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
+        String username = (sharedPreferences.getString("username",""));
 
         txtDefault_ID.setVisibility(View.GONE);
         txtDefaultcartusername.setVisibility(View.GONE);
@@ -141,6 +152,8 @@ public class cartActivity extends AppCompatActivity {
                 new cartActivity.CDateDD().execute();
                 new cartActivity.id().execute();
                 new cartActivity.TotalP().execute();
+                FetchImageUrlsTask task = new FetchImageUrlsTask(username);
+                task.execute(urlimges);
 
             }
         });
@@ -877,14 +890,6 @@ public class cartActivity extends AppCompatActivity {
                 list_ID = new ArrayList<String>(Arrays.asList(ayds));
                 adapter_ID = new ArrayAdapter<String>(cartActivity.this,
                         android.R.layout.simple_list_item_1,list_ID);
-
-                cartActivity.CustomListAdapter customAdapter = new CustomListAdapter(cartActivity.this, list_cartquantity, list_cartprice, list_cartproductname,list_ID);
-                listView.setAdapter(customAdapter);
-
-
-
-
-
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");
@@ -959,6 +964,46 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
+    private class FetchImageUrlsTask extends AsyncTask<String, Void, List<String>> {
+        private String username;
+
+        public FetchImageUrlsTask(String username) {
+            this.username = username;
+        }
+
+        @Override
+        protected List<String> doInBackground(String... urls) {
+            String url = urls[0] + "?username=" + username;
+            List<String> imageUrls = new ArrayList<>();
+            try {
+                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+                conn.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                JSONArray jsonArray = new JSONArray(sb.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    imageUrls.add(jsonObject.getString("product_image"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return imageUrls;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> imageUrls) {
+            CustomListAdapter adapter = new CustomListAdapter(cartActivity.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, imageUrls);
+            listView.setAdapter(adapter);
+        }
+    }
+
 
 
     private class CustomListAdapter extends BaseAdapter {
@@ -968,14 +1013,16 @@ public class cartActivity extends AppCompatActivity {
         private ArrayList<String> cartprice;
         private ArrayList<String> cartproductname;
         private ArrayList<String> cartaydi;
+        private List<String> imageUrls;
 
 
-        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> cartaydi) {
+        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> cartaydi,List<String> imageUrls) {
             this.context = context;
             this.cartqty = cartqty;
             this.cartprice = cartprice;
             this.cartproductname = cartproductname;
             this.cartaydi = cartaydi;
+            this.imageUrls = imageUrls; // Initialize image URLs
 
         }
 
@@ -1004,10 +1051,7 @@ public class cartActivity extends AppCompatActivity {
             TextView cartQtyTextView = listViewItem.findViewById(R.id.pproqtysTextView);
             TextView cartpriceTextView = listViewItem.findViewById(R.id.ProductpsTextView);
             TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview2);
-
-
-
-
+            ImageView imageView = listViewItem.findViewById(R.id.imageView4); // ImageView for the image
 
             cartproductnameTextView.setText(cartproductname.get(position));
             cartQtyTextView.setText(cartqty.get(position));
@@ -1015,8 +1059,12 @@ public class cartActivity extends AppCompatActivity {
             cartaydiTextView.setText(cartaydi.get(position));
 
 
+            if (imageUrls != null && imageUrls.size() > position) {
+                String imageUrl = imageUrls.get(position);
+                Glide.with(context).load(imageUrl).into(imageView);
+            }
+
             return listViewItem;
         }
-
     }
 }
