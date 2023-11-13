@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,12 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".orderstatus_details"
+            android:exported="false" />
+        <activity
             android:name=".profileeditactivity"
             android:exported="false" />
         <activity
             android:name=".edtprofiles"
             android:exported="false" />
-
         <activity
             android:name=".editcartactivity"
             android:exported="false" />
@@ -34,7 +36,6 @@
             android:exported="false"
             android:label="@string/title_activity_buypurchaseactivity"
             android:theme="@style/Theme.Agriconnect" />
-
         <activity
             android:name=".edtrequest_records"
             android:exported="false" />

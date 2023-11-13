@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class home extends AppCompatActivity {
     TextView txtfname, txtviewfetchreslt;
-    Button btnrequest, btnpurchase;
+    Button btnrequest, btnpurchase,btnstatus;
     ImageView btnlogout, btncart,btnprofile;
 
     SharedPreferences sharedPreferences;
@@ -44,6 +44,7 @@ public class home extends AppCompatActivity {
         btnpurchase =findViewById(R.id.purchase);
         btncart =findViewById(R.id.cart);
         btnprofile = findViewById(R.id.profileimg);
+        btnstatus = findViewById(R.id.orderstatus);
 
         if (sharedPreferences.getString("logged", "false").equals("false")) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -130,6 +131,15 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(home.this, edtprofiles.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnstatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(home.this, orderstatusActivity.class);
                 startActivity(intent);
                 finish();
             }
