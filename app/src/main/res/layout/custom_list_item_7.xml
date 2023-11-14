@@ -1,0 +1,154 @@
+<!-- custom_list_item.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F6F2CD"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/adyiview2"
+        android:layout_width="70dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="7dp"
+        android:padding="8dp"
+        android:text="id"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/usernameTextView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Product ID : "
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/productnameTextView"
+        android:layout_width="182dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="7dp"
+        android:paddingTop="8dp"
+        android:text="Username"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/usernameTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Product:"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/adyiview2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/usernameTextView7"
+        android:layout_width="409dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="1dp"
+        android:background="@color/white"
+        android:padding="8dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pproqtysTextView" />
+
+    <TextView
+        android:id="@+id/usernameTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Price :"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ProductpsTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView8" />
+
+    <TextView
+        android:id="@+id/ProductpsTextView"
+        android:layout_width="108dp"
+        android:layout_height="34dp"
+
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="7dp"
+        android:paddingTop="8dp"
+        android:text="Requested Product"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView3"
+        app:layout_constraintTop_toBottomOf="@+id/adyiview2" />
+
+    <TextView
+        android:id="@+id/pproqtysTextView"
+        android:layout_width="70dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Product Qty"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView4"
+        app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
+
+    <TextView
+        android:id="@+id/usernameTextView4"
+        android:layout_width="42dp"
+        android:layout_height="31dp"
+
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="QTY:"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/usernameTextView7"
+        app:layout_constraintStart_toEndOf="@+id/ProductpsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView2" />
+
+    <TextView
+        android:id="@+id/usernameTextView6"
+        android:layout_width="32dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="KG"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/pproqtysTextView"
+        app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,20 +43,20 @@ public class cartActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/cart/selectcartusername.php";
-    private static String urlcartqty = "http://192.168.1.9/Agriconnect/php/cart/selectcartqty.php";
-    private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/cart/selectcartprice.php";
-    private static String urlcartproductid = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductid.php";
-    private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductname.php";
-    private static String urlcartdatedd = "http://192.168.1.9/Agriconnect/php/cart/selectcartdateadded.php";
-    private static String urltotalA = "http://192.168.1.9/Agriconnect/php/cart/selecttotalamount.php";
-    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/cart/selectcartid.php";
+    private static String urlHost = "http://192.168.19.31/Agriconnect/php/cart/selectcartusername.php";
+    private static String urlcartqty = "http://192.168.19.31/Agriconnect/php/cart/selectcartqty.php";
+    private static String urlcartprice = "http://192.168.19.31/Agriconnect/php/cart/selectcartprice.php";
+    private static String urlcartproductid = "http://192.168.19.31/Agriconnect/php/cart/selectcartproductid.php";
+    private static String urlcartproductname = "http://192.168.19.31/Agriconnect/php/cart/selectcartproductname.php";
+    private static String urlcartdatedd = "http://192.168.19.31/Agriconnect/php/cart/selectcartdateadded.php";
+    private static String urltotalA = "http://192.168.19.31/Agriconnect/php/cart/selecttotalamount.php";
+    private static String urlHostID = "http://192.168.19.31/Agriconnect/php/cart/selectcartid.php";
 
-    private static String uploadcheckout = "http://192.168.1.9/agriconnect/php/product/selectcheckout.php";
+    private static String uploadcheckout = "http://192.168.19.31/agriconnect/php/product/selectcheckout.php";
 
-    private static String urlHostDelete = "http://192.168.1.9/Agriconnect/php/cart/delete.php";
+    private static String urlHostDelete = "http://192.168.19.31/Agriconnect/php/cart/delete.php";
 
-    String urlimges = "http://192.168.1.9/agriconnect/php/img/cart_iamge.php";
+    String urlimges = "http://192.168.19.31/agriconnect/php/img/cart_iamge.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -227,7 +227,7 @@ public class cartActivity extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(cartActivity.this,cartActivity.class);
+                Intent intent = new Intent(cartActivity.this,purchaseActivity.class);
                 startActivity(intent);
                 finish();
                 new cartActivity.CHECKOUTF().execute();

@@ -38,7 +38,7 @@ public class profileeditactivity extends AppCompatActivity {
 
     private static TextView tv_civ;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.9/agriconnect/php/register/updateprofile.php";
+    private static String urlHost = "http://192.168.19.31/agriconnect/php/register/updateprofile.php";
 
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";

@@ -34,9 +34,9 @@ import java.util.List;
 
 public class orderstatusActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/request/selectdate.php"; // Date of purchase
+    private static String urlHost = "http://192.168.19.31/Agriconnect/php/request/selectdate.php"; // Date of purchase
 
-    private static String urlstatus = "http://192.168.1.9/Agriconnect/php/request/selectstatus.php"; // status
+    private static String urlstatus = "http://192.168.19.31/Agriconnect/php/request/selectstatus.php"; // status
     SharedPreferences sharedPreferences;
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -104,10 +104,18 @@ public class orderstatusActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                cltemSelected_date = adapter_date.getItem(position);
-                cItemSelected_status = adapter_status.getItem(position);
+                if (position < adapter_date.getCount() && position < adapter_status.getCount()) {
+                    cltemSelected_date = adapter_date.getItem(position);
+                    cItemSelected_status = adapter_status.getItem(position);
 
-                androidx.appcompat.app.AlertDialog.Builder alert_confirm =
+                } else {
+                    // Handle the case where the position is out of bounds
+                    Toast.makeText(orderstatusActivity.this, "Invalid selection", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            androidx.appcompat.app.AlertDialog.Builder alert_confirm =
                         new androidx.appcompat.app.AlertDialog.Builder(context);
                 alert_confirm.setMessage("Check Orders");
 
@@ -118,13 +126,11 @@ public class orderstatusActivity extends AppCompatActivity {
                         txtdefaltstatus.setText(cItemSelected_status);
 
                         cdate = txtdefaltdate.getText().toString().trim();
-                        cstatus = txtdefaltstatus.getText().toString().trim();
+
 
 
                         Intent intent = new Intent(orderstatusActivity.this,orderstatus_details. class);
                         intent.putExtra(orderstatus_details.CDATE, cdate);
-                        intent.putExtra(orderstatus_details.CSTATUS, cstatus);
-
                         startActivity(intent);
                     }
                 });
@@ -242,6 +248,7 @@ public class orderstatusActivity extends AppCompatActivity {
 
                     cPostSQL = (sharedPreferences.getString("username",""));
                     cv.put("code", cPostSQL);
+
 
                     JSONObject json = jParser.makeHTTPRequest(urlstatus, "POST", cv);
                     if (json != null) {

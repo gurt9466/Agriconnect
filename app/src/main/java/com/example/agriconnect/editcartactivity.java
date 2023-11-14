@@ -49,7 +49,7 @@ public class editcartactivity extends AppCompatActivity {
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.9/agriconnect/php/cart/updatecartqty.php";
+    private static String urlHost = "http://192.168.19.31/agriconnect/php/cart/updatecartqty.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -217,7 +217,7 @@ public class editcartactivity extends AppCompatActivity {
 
 
                 // Construct the API URL with the product ID
-                String apiUrl = "http://192.168.1.9/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "http://192.168.19.31/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");
