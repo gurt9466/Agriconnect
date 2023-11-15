@@ -33,9 +33,9 @@ public class editcartactivity extends AppCompatActivity {
     private static EditText edtqty;
 
 
-    private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid;
+    private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid,ordertype;
 
-    private String cartuname, cartqty, cartprice, cartproid, cartproname,cartdateadded,aydi;
+    private String cartuname, cartqty, cartprice, cartproid, cartproname,cartdateadded,aydi, cartordertype;
 
     public static final String CARTUSERNAME = "CARTUSERNAME";
     public static final String CARTQUANTITY = "CARTQUANTITY";
@@ -43,6 +43,10 @@ public class editcartactivity extends AppCompatActivity {
     public static final String CARTPRODUCTID = "CARTPRODUCTID";
     public static final String CARTPRODUCTNAME = "CARTPRODUCTNAME";
     public static final String CARTDATEADDED = "CARTDATEADDED";
+
+    public static final String CARTORDERTYPE = "CARTORDERTYPE";
+
+
 
     public static final String ID = "ID";
     ImageView imageview;
@@ -79,6 +83,7 @@ public class editcartactivity extends AppCompatActivity {
         hard = (TextView) findViewById(R.id.textViewhdate);
         qty = (TextView) findViewById(R.id.textViewqty);
         price = (TextView) findViewById(R.id.textViewprice);
+        ordertype =(TextView)  findViewById(R.id.textViewordetype);
 
 
 
@@ -102,6 +107,7 @@ public class editcartactivity extends AppCompatActivity {
         cartproid = i.getStringExtra(CARTPRODUCTID);
         cartproname = i.getStringExtra(CARTPRODUCTNAME);
         cartdateadded = i.getStringExtra(CARTDATEADDED);
+        cartordertype = i.getStringExtra(CARTORDERTYPE);
         aydi = i.getStringExtra(ID);
 
 
@@ -110,6 +116,7 @@ public class editcartactivity extends AppCompatActivity {
         qty.setText(cartqty);
         edtqty.setText(cartqty);
         price.setText(cartprice);
+        ordertype.setText(cartordertype);
 
 
         tvproductname.setVisibility(View.GONE);

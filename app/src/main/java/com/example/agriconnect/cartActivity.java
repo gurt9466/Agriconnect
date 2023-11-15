@@ -53,6 +53,7 @@ public class cartActivity extends AppCompatActivity {
     private static String urlHostID = "http://192.168.19.31/Agriconnect/php/cart/selectcartid.php";
 
     private static String uploadcheckout = "http://192.168.19.31/agriconnect/php/product/selectcheckout.php";
+    private static String urlordertype = "http://192.168.19.31/agriconnect/php/cart/selectordertype.php";
 
     private static String urlHostDelete = "http://192.168.19.31/Agriconnect/php/cart/delete.php";
 
@@ -66,9 +67,9 @@ public class cartActivity extends AppCompatActivity {
     private static TextView totalamount;
     private static EditText edtitemcode;
     ListView listView;
-    TextView textView,txtDefault_ID, txtDefaultcartusername, txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname,txtDefaultdateadded;
+    TextView textView,txtDefault_ID, txtDefaultordertype,txtDefaultcartusername, txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname,txtDefaultdateadded;
     ArrayAdapter<String> adapter_cartusername;
-    ArrayAdapter<String> adapter_carttotalprice;
+    ArrayAdapter<String> adapter_ordertype;
     ArrayAdapter<String> adapter_cartquantity;
     ArrayAdapter<String> adapter_cartprice;
     ArrayAdapter<String> adapter_cartproductid;
@@ -76,7 +77,7 @@ public class cartActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter_dateadded;
     ArrayAdapter <String> adapter_ID;
 
-    ArrayList<String> list_carttotalprice;
+    ArrayList<String> list_cartordertype;
     ArrayList<String> list_cartdateadded;
     ArrayList<String> list_cartproductname;
     ArrayList <String> list_cartproductid;
@@ -87,9 +88,9 @@ public class cartActivity extends AppCompatActivity {
 
     ImageView backimgbtn;
 
-    String totalprice,cltemSelected_cartusername,cItemSelected_ID, cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_cartproductname, cltemSelected_dateadded;
+    String totalprice,cltemSelected_ordertype,cltemSelected_cartusername,cItemSelected_ID, cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_cartproductname, cltemSelected_dateadded;
     Context context = this;
-    private String Cart_Username, Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname,Cart_dateadded;
+    private String Cart_Username, Cart_ordertype,Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname,Cart_dateadded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,7 @@ public class cartActivity extends AppCompatActivity {
         txtDefaultcartproductid = (TextView) findViewById(R.id.txt_cartproductid);
         txtDefaultcartproductname = (TextView) findViewById(R.id.txt_cartproductname);
         txtDefaultdateadded = (TextView) findViewById(R.id.txt_cartdateadded);
+        txtDefaultordertype =(TextView) findViewById(R.id.txt_orderstatus);
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         String username = (sharedPreferences.getString("username",""));
@@ -150,6 +152,7 @@ public class cartActivity extends AppCompatActivity {
                 new cartActivity.CPRODUCTID().execute();
                 new cartActivity.CPRODUCTNAME().execute();
                 new cartActivity.CDateDD().execute();
+                new cartActivity.OrderType().execute();
                 new cartActivity.id().execute();
                 new cartActivity.TotalP().execute();
                 FetchImageUrlsTask task = new FetchImageUrlsTask(username);
@@ -168,6 +171,7 @@ public class cartActivity extends AppCompatActivity {
                 cltemSelected_cartproductid = adapter_cartproductid.getItem(position);
                 cltemSelected_cartproductname = adapter_cartproductname.getItem(position);
                 cltemSelected_dateadded = adapter_dateadded.getItem(position);
+                cltemSelected_ordertype = adapter_ordertype.getItem(position);
                 cItemSelected_ID = adapter_ID.getItem(position);
 
                 androidx.appcompat.app.AlertDialog.Builder alert_confirm =
@@ -184,6 +188,7 @@ public class cartActivity extends AppCompatActivity {
                         txtDefaultcartproductid.setText(cltemSelected_cartproductid);
                         txtDefaultcartproductname.setText(cltemSelected_cartproductname);
                         txtDefaultdateadded.setText(cltemSelected_dateadded);
+                        txtDefaultordertype.setText(cltemSelected_ordertype);
                         txtDefault_ID.setText(cItemSelected_ID);
 
 
@@ -195,6 +200,7 @@ public class cartActivity extends AppCompatActivity {
                         Cart_productid = txtDefaultcartproductid.getText().toString().trim();
                         Cart_porductname = txtDefaultcartproductname.getText().toString().trim();
                         Cart_dateadded = txtDefaultdateadded.getText().toString().trim();
+                        Cart_ordertype = txtDefaultordertype.getText().toString().trim();
                         aydi = txtDefault_ID.getText().toString().trim();
 
 
@@ -205,6 +211,7 @@ public class cartActivity extends AppCompatActivity {
                         intent.putExtra(editcartactivity.CARTPRODUCTID, Cart_productid);
                         intent.putExtra(editcartactivity.CARTPRODUCTNAME, Cart_porductname);
                         intent.putExtra(editcartactivity.CARTDATEADDED, Cart_dateadded);
+                        intent.putExtra(editcartactivity.CARTORDERTYPE, Cart_ordertype);
                         intent.putExtra(editcartactivity.ID, aydi);
                         startActivity(intent);
                     }
@@ -612,6 +619,84 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
+    private class OrderType extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
+
+        public OrderType() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlordertype, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String cartordERtype) {
+            super.onPostExecute(cartordERtype);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
+            if (cartordERtype != null) {
+                if (isEmpty.equals("") && !cartordERtype.equals("HTTPSERVER_ERROR")) { }
+
+
+                String Cordertype = cartordERtype;
+
+                String str = Cordertype;
+                final String Cordertypes[] = str.split("-");
+                list_cartordertype = new ArrayList<String>(Arrays.asList(Cordertypes));
+                adapter_ordertype = new ArrayAdapter<String>(cartActivity.this,
+                        android.R.layout.simple_list_item_1,list_cartordertype);
+
+                //listView.setAdapter(adapter_gender);
+
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
     private class CDateDD extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
         int nPostValueIndex;
@@ -824,6 +909,7 @@ public class cartActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private class id extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";

@@ -248,6 +248,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewprice" />
 
         <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="15dp"
+            android:text="Order Options : "
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextqty" />
+
+        <TextView
             android:id="@+id/textViewhdate4"
             android:layout_width="33dp"
             android:layout_height="40dp"
@@ -324,6 +336,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewedtpqty" />
+
+        <RadioGroup
+            android:id="@+id/orderoptions"
+            android:layout_width="316dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="46dp"
+            android:background="#ECECEC"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextqty">
+
+            <RadioButton
+                android:id="@+id/delivery"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delivery" />
+
+            <RadioButton
+                android:id="@+id/pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pick up" />
+        </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import java.net.URL;
 public class buypurchaseactivity extends AppCompatActivity {
     private static Button btnQuery;
     private static EditText edtqty;
+
+    RadioGroup OrderOption;
 
 
     private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid;
@@ -53,6 +57,8 @@ public class buypurchaseactivity extends AppCompatActivity {
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
 
+
+
     public static String ProductName;
     public static String HarvestDate;
     public static String ProductQTYY;
@@ -73,6 +79,12 @@ public class buypurchaseactivity extends AppCompatActivity {
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtqty = findViewById(R.id.editTextqty);
         imageview = findViewById(R.id.imageView3);
+        OrderOption =findViewById(R.id.orderoptions);
+
+
+
+
+
 
         new FetchImageUrlsTask().execute();
 
@@ -117,7 +129,6 @@ public class buypurchaseactivity extends AppCompatActivity {
         tvprice.setVisibility(View.GONE);
         tvpfid.setVisibility(View.GONE);
         tvid.setVisibility(View.GONE);
-
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +177,11 @@ public class buypurchaseactivity extends AppCompatActivity {
                 cv.put("product_name", ppname);
                 cv.put("product_qty", edtProductQTYY);
                 cv.put("product_price", ppprice);
+
+                RadioButton checkedBtn = findViewById(OrderOption.getCheckedRadioButtonId());
+                String selectedoption = checkedBtn.getText().toString();
+                cv.put("order_type", selectedoption);
+                
 
 
                 JSONObject json = jParser.makeHTTPRequest(urlHost, "POST", cv);

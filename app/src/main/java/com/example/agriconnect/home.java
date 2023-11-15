@@ -25,9 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class home extends AppCompatActivity {
-    TextView txtfname, txtviewfetchreslt;
+    TextView txtfname, txtviewfetchreslt, btnclickhere2;
     Button btnrequest, btnpurchase,btnstatus;
-    ImageView btnlogout, btncart,btnprofile;
+    ImageView btnlogout, btncart,btnprofile,btncontact;
 
     SharedPreferences sharedPreferences;
 
@@ -45,6 +45,8 @@ public class home extends AppCompatActivity {
         btncart =findViewById(R.id.cart);
         btnprofile = findViewById(R.id.profileimg);
         btnstatus = findViewById(R.id.orderstatus);
+        btncontact = findViewById(R.id.contanctbtnimg);
+        btnclickhere2 = findViewById(R.id.textViewclickhere2);
 
         if (sharedPreferences.getString("logged", "false").equals("false")) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -140,6 +142,24 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(home.this, orderstatusActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btncontact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(home.this, contactus.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnclickhere2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(home.this, edtprofiles.class);
                 startActivity(intent);
                 finish();
             }
