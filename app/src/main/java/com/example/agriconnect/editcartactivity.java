@@ -53,7 +53,7 @@ public class editcartactivity extends AppCompatActivity {
 
     private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.19.31/agriconnect/php/cart/updatecartqty.php";
+    private static String urlHost = "http://192.168.1.9/agriconnect/php/cart/updatecartqty.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -148,7 +148,7 @@ public class editcartactivity extends AppCompatActivity {
     }
 
     private class uploadDataToURL extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cPostSQL2 = "", cMessage = "Querying data...";
         String gens, civil;
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(editcartactivity.this);
@@ -171,11 +171,11 @@ public class editcartactivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cPostSQL = aydi;
+                cPostSQL = cartproid;
                 cv.put("id", cPostSQL);
 
-                cPostSQL = " '" + edtProductQTYY + "' ";
-                cv.put("product_qty", cPostSQL);
+                cPostSQL2 = edtProductQTYY;
+                cv.put("product_qty", cPostSQL2);
 
 
                 JSONObject json = jParser.makeHTTPRequest(urlHost, "POST", cv);
@@ -224,7 +224,7 @@ public class editcartactivity extends AppCompatActivity {
 
 
                 // Construct the API URL with the product ID
-                String apiUrl = "http://192.168.19.31/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "http://192.168.1.9/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");

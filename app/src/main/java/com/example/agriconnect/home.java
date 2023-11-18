@@ -62,7 +62,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.19.31/agriconnect/php/register/logout.php"; //host ip and phpfile
+                String url = "http://192.168.1.9/agriconnect/php/register/logout.php"; //host ip and phpfile
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override

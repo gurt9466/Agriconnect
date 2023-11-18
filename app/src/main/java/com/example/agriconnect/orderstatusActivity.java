@@ -34,9 +34,9 @@ import java.util.List;
 
 public class orderstatusActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.19.31/Agriconnect/php/request/selectdate.php"; // Date of purchase
+    private static String urlHost = "http://192.168.1.9/Agriconnect/php/request/selectdate.php"; // Date of purchase
 
-    private static String urlstatus = "http://192.168.19.31/Agriconnect/php/request/selectstatus.php"; // status
+    private static String urlorderid = "http://192.168.1.9/Agriconnect/php/request/selectstatus.php"; // status
     SharedPreferences sharedPreferences;
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -46,17 +46,17 @@ public class orderstatusActivity extends AppCompatActivity {
 
     ListView listView;
     ImageView backimgbtn;
-    TextView txtdefaltdate, txtdefaltstatus;
+    TextView txtdefaltdate, txtdefaltorderid;
 
-    String cltemSelected_date,cItemSelected_status;
+    String cltemSelected_date,cItemSelected_orderid;
 
     ArrayAdapter<String> adapter_date;
-    ArrayAdapter<String> adapter_status;
+    ArrayAdapter<String> adapter_orderid;
     ArrayList <String> list_date;
-    ArrayList <String> list_status;
+    ArrayList <String> list_orderid;
     Context context = this;
 
-    private String cstatus, cdate;
+    private String corderid, cdate;
 
 
     @Override
@@ -70,11 +70,11 @@ public class orderstatusActivity extends AppCompatActivity {
         edtitemcode = (EditText) findViewById(R.id.edtitemcode);
 
         txtdefaltdate = (TextView) findViewById(R.id.txt_date);
-        txtdefaltstatus = (TextView) findViewById(R.id.txt_status);
+        txtdefaltorderid = (TextView) findViewById(R.id.txt_status);
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
         txtdefaltdate.setVisibility(View.GONE);
-        txtdefaltstatus.setVisibility(View.GONE);
+        txtdefaltorderid.setVisibility(View.GONE);
 
         backimgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +95,7 @@ public class orderstatusActivity extends AppCompatActivity {
 
                 cItemcode = edtitemcode.getText().toString();
                 new orderstatusActivity.uploadDataToURL().execute();
-                new orderstatusActivity.STATUS().execute();
+                new orderstatusActivity.ODRDERID().execute();
 
             }
         });
@@ -104,9 +104,9 @@ public class orderstatusActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (position < adapter_date.getCount() && position < adapter_status.getCount()) {
+                if (position < adapter_date.getCount() && position < adapter_orderid.getCount()) {
                     cltemSelected_date = adapter_date.getItem(position);
-                    cItemSelected_status = adapter_status.getItem(position);
+                    cItemSelected_orderid = adapter_orderid.getItem(position);
 
                 } else {
                     // Handle the case where the position is out of bounds
@@ -123,13 +123,14 @@ public class orderstatusActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         txtdefaltdate.setText(cltemSelected_date);
-                        txtdefaltstatus.setText(cItemSelected_status);
+                        txtdefaltorderid.setText(cItemSelected_orderid);
 
                         cdate = txtdefaltdate.getText().toString().trim();
 
 
 
                         Intent intent = new Intent(orderstatusActivity.this,orderstatus_details. class);
+                        intent.putExtra(orderstatus_details.CORDERID, corderid);
                         intent.putExtra(orderstatus_details.CDATE, cdate);
                         startActivity(intent);
                     }
@@ -221,12 +222,12 @@ public class orderstatusActivity extends AppCompatActivity {
             }
         }
 
-        private class STATUS extends AsyncTask<String, String, String> {
+        private class ODRDERID extends AsyncTask<String, String, String> {
             String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
             int nPostValueIndex;
             ProgressDialog pDialog = new ProgressDialog(orderstatusActivity.this);
 
-            public STATUS() {
+            public ODRDERID() {
             }
 
             @Override
@@ -250,7 +251,7 @@ public class orderstatusActivity extends AppCompatActivity {
                     cv.put("code", cPostSQL);
 
 
-                    JSONObject json = jParser.makeHTTPRequest(urlstatus, "POST", cv);
+                    JSONObject json = jParser.makeHTTPRequest(urlorderid, "POST", cv);
                     if (json != null) {
                         nSuccess = json.getInt(TAG_SUCCESS);
                         if (nSuccess == 1) {
@@ -271,24 +272,24 @@ public class orderstatusActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(String ccstatus) {
-                super.onPostExecute(ccstatus);
+            protected void onPostExecute(String ccorderid) {
+                super.onPostExecute(ccorderid);
                 pDialog.dismiss();
                 String isEmpty = "";
                 android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatusActivity.this);
-                if (ccstatus != null) {
-                    if (isEmpty.equals("") && !ccstatus.equals("HTTPSERVER_ERROR")) { }
+                if (ccorderid != null) {
+                    if (isEmpty.equals("") && !ccorderid.equals("HTTPSERVER_ERROR")) { }
 
 
-                    String cCstat = ccstatus;
+                    String cCstat = ccorderid;
 
                     String str = cCstat;
                     final String cCstats[] = str.split("-");
-                    list_status = new ArrayList<String>(Arrays.asList(cCstats));
-                    adapter_status = new ArrayAdapter<String>(orderstatusActivity.this,
-                            android.R.layout.simple_list_item_1,list_status);
+                    list_orderid = new ArrayList<String>(Arrays.asList(cCstats));
+                    adapter_orderid = new ArrayAdapter<String>(orderstatusActivity.this,
+                            android.R.layout.simple_list_item_1,list_orderid);
 
-                    orderstatusActivity.CustomListAdapter adapter = new orderstatusActivity.CustomListAdapter(orderstatusActivity.this, list_date, list_status);
+                    orderstatusActivity.CustomListAdapter adapter = new orderstatusActivity.CustomListAdapter(orderstatusActivity.this, list_date, list_orderid);
                     listView.setAdapter(adapter);
 
                 } else {

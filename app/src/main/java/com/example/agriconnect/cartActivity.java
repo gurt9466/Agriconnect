@@ -34,6 +34,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,21 +44,21 @@ public class cartActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.19.31/Agriconnect/php/cart/selectcartusername.php";
-    private static String urlcartqty = "http://192.168.19.31/Agriconnect/php/cart/selectcartqty.php";
-    private static String urlcartprice = "http://192.168.19.31/Agriconnect/php/cart/selectcartprice.php";
-    private static String urlcartproductid = "http://192.168.19.31/Agriconnect/php/cart/selectcartproductid.php";
-    private static String urlcartproductname = "http://192.168.19.31/Agriconnect/php/cart/selectcartproductname.php";
-    private static String urlcartdatedd = "http://192.168.19.31/Agriconnect/php/cart/selectcartdateadded.php";
-    private static String urltotalA = "http://192.168.19.31/Agriconnect/php/cart/selecttotalamount.php";
-    private static String urlHostID = "http://192.168.19.31/Agriconnect/php/cart/selectcartid.php";
+    private static String urlHost = "http://192.168.1.9/Agriconnect/php/cart/selectcartusername.php";
+    private static String urlcartqty = "http://192.168.1.9/Agriconnect/php/cart/selectcartqty.php";
+    private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/cart/selectcartprice.php";
+    private static String urlcartproductid = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductid.php";
+    private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductname.php";
+    private static String urlcartdatedd = "http://192.168.1.9/Agriconnect/php/cart/selectcartdateadded.php";
+    private static String urltotalA = "http://192.168.1.9/Agriconnect/php/cart/selecttotalamount.php";
+    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/cart/selectcartid.php";
 
-    private static String uploadcheckout = "http://192.168.19.31/agriconnect/php/product/selectcheckout.php";
-    private static String urlordertype = "http://192.168.19.31/agriconnect/php/cart/selectordertype.php";
+    private static String uploadcheckout = "http://192.168.1.9/agriconnect/php/product/selectcheckout.php";
+    private static String urlordertype = "http://192.168.1.9/agriconnect/php/cart/selectordertype.php";
 
-    private static String urlHostDelete = "http://192.168.19.31/Agriconnect/php/cart/delete.php";
+    private static String urlHostDelete = "http://192.168.1.9/Agriconnect/php/cart/delete.php";
 
-    String urlimges = "http://192.168.19.31/agriconnect/php/img/cart_iamge.php";
+    String urlimges = "http://192.168.1.9/agriconnect/php/img/cart_iamge.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -170,7 +171,7 @@ public class cartActivity extends AppCompatActivity {
                 cltemSelected_cartprice = adapter_cartprice.getItem(position);
                 cltemSelected_cartproductid = adapter_cartproductid.getItem(position);
                 cltemSelected_cartproductname = adapter_cartproductname.getItem(position);
-                cltemSelected_dateadded = adapter_dateadded.getItem(position);
+                //cltemSelected_dateadded = adapter_dateadded.getItem(position);
                 cltemSelected_ordertype = adapter_ordertype.getItem(position);
                 cItemSelected_ID = adapter_ID.getItem(position);
 
@@ -187,7 +188,7 @@ public class cartActivity extends AppCompatActivity {
                         txtDefaultcartprice.setText(cltemSelected_cartprice);
                         txtDefaultcartproductid.setText(cltemSelected_cartproductid);
                         txtDefaultcartproductname.setText(cltemSelected_cartproductname);
-                        txtDefaultdateadded.setText(cltemSelected_dateadded);
+                        //txtDefaultdateadded.setText(cltemSelected_dateadded);
                         txtDefaultordertype.setText(cltemSelected_ordertype);
                         txtDefault_ID.setText(cItemSelected_ID);
 
@@ -199,7 +200,7 @@ public class cartActivity extends AppCompatActivity {
                         Cart_price = txtDefaultcartprice.getText().toString().trim();
                         Cart_productid = txtDefaultcartproductid.getText().toString().trim();
                         Cart_porductname = txtDefaultcartproductname.getText().toString().trim();
-                        Cart_dateadded = txtDefaultdateadded.getText().toString().trim();
+                        //Cart_dateadded = txtDefaultdateadded.getText().toString().trim();
                         Cart_ordertype = txtDefaultordertype.getText().toString().trim();
                         aydi = txtDefault_ID.getText().toString().trim();
 
@@ -210,7 +211,7 @@ public class cartActivity extends AppCompatActivity {
                         intent.putExtra(editcartactivity.CARTPRICE, Cart_price);
                         intent.putExtra(editcartactivity.CARTPRODUCTID, Cart_productid);
                         intent.putExtra(editcartactivity.CARTPRODUCTNAME, Cart_porductname);
-                        intent.putExtra(editcartactivity.CARTDATEADDED, Cart_dateadded);
+                        //intent.putExtra(editcartactivity.CARTDATEADDED, Cart_dateadded);
                         intent.putExtra(editcartactivity.CARTORDERTYPE, Cart_ordertype);
                         intent.putExtra(editcartactivity.ID, aydi);
                         startActivity(intent);
@@ -1059,11 +1060,21 @@ public class cartActivity extends AppCompatActivity {
 
         @Override
         protected List<String> doInBackground(String... urls) {
-            String url = urls[0] + "?username=" + username;
             List<String> imageUrls = new ArrayList<>();
+            String baseUrl = urls[0];  // Assuming urls[0] is the base URL without query parameters
+
             try {
-                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+                // URL-encode the username
+                String encodedUsername = URLEncoder.encode(username, "UTF-8");
+
+                // Build the URL with the username parameter
+                String urlString = baseUrl + "?username=" + encodedUsername;
+
+                // Open a connection
+                HttpURLConnection conn = (HttpURLConnection) new URL(urlString).openConnection();
                 conn.setRequestMethod("GET");
+
+                // Read the response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
@@ -1072,18 +1083,22 @@ public class cartActivity extends AppCompatActivity {
                     sb.append(line);
                 }
 
+                // Parse the JSON array
                 JSONArray jsonArray = new JSONArray(sb.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     imageUrls.add(jsonObject.getString("product_image"));
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
+                // Handle errors or log them
             }
+
             return imageUrls;
         }
 
-        @Override
+    @Override
         protected void onPostExecute(List<String> imageUrls) {
             CustomListAdapter adapter = new CustomListAdapter(cartActivity.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, imageUrls);
             listView.setAdapter(adapter);
