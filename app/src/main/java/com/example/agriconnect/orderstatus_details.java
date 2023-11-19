@@ -43,6 +43,9 @@ public class orderstatus_details extends AppCompatActivity {
 
     private static String urltotalA = "http://192.168.1.9/Agriconnect/php/orders/selectordertotalamount.php"; //total amount
 
+    private static  String urlordertype ="http://192.168.1.9/Agriconnect/php/orders/selectordertyp.php";
+    private static  String urlorderstatus ="http://192.168.1.9/Agriconnect/php/orders/selectordertyp.php";
+
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
 
@@ -56,16 +59,17 @@ public class orderstatus_details extends AppCompatActivity {
     private static ImageView btnQuery;
     private static TextView totalamount ,sample;
 
-    TextView textView,txtDefault_ID, txtDefaultporductname, txtDefaultquantity, txtDefaultprice;
-
     ArrayAdapter<String> adapter_cartusername;
     ArrayAdapter<String> adapter_cartquantity;
     ArrayAdapter<String> adapter_cartprice;
     ArrayAdapter<String> adapter_cartproductname;
     ArrayAdapter <String> adapter_ID;
-
+    ArrayAdapter <String> adapter_orderstatus;
+    ArrayAdapter <String> adapter_ordertype;
     ArrayList<String> list_cartproductname;
+    ArrayList<String> list_cartordertype;
     ArrayList <String> list_cartprice;
+    ArrayList <String> list_cartorderstatus;
     ArrayList <String> list_cartquantity;
     ArrayList <String> list_cartusername;
     ArrayList <String> list_ID;
@@ -80,26 +84,13 @@ public class orderstatus_details extends AppCompatActivity {
         btnQuery = (ImageView) findViewById(R.id.imgreload);//auto querry
         edtitemcode = (EditText) findViewById(R.id.edtitemcode);// searchbar
         listView = (ListView) findViewById(R.id.listview);//listview
-        //textView = (TextView) findViewById(R.id.textView4);//idk
         backimgbtn = findViewById(R.id.logout2);// go to previous
         totalamount=(TextView) findViewById(R.id.textViewtotalamount);// tp
-
-        txtDefault_ID = (TextView) findViewById(R.id.txtO_ID);// poduct_id
-        txtDefaultporductname = (TextView) findViewById(R.id.txtO_productname);// product_name
-        txtDefaultquantity = (TextView) findViewById(R.id.txtO_qty);//qty
-        txtDefaultprice = (TextView) findViewById(R.id.txtO_price);//price
-        sample = findViewById(R.id.textView18);
 
 
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         String username = (sharedPreferences.getString("username",""));
-
-        txtDefault_ID.setVisibility(View.GONE);
-        txtDefaultporductname.setVisibility(View.GONE);
-        txtDefaultquantity.setVisibility(View.GONE);
-        txtDefaultprice.setVisibility(View.GONE);
-
         Intent i = getIntent();
         date = i.getStringExtra(CDATE);
 
@@ -130,6 +121,8 @@ public class orderstatus_details extends AppCompatActivity {
                 new orderstatus_details.CQUANTITY().execute();// qty
                 new orderstatus_details.CPRICE().execute();// price
                 new orderstatus_details.CPRODUCTNAME().execute();// product name
+                new orderstatus_details.OrderType().execute();// product_id
+                new orderstatus_details.Orderstatus().execute();// product_id
                 new orderstatus_details.id().execute();// product_id
                 new orderstatus_details.TotalP().execute();// total price
 
@@ -138,7 +131,6 @@ public class orderstatus_details extends AppCompatActivity {
         });
         btnQuery.performClick();
 
-        // add list view here or somthing or not
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
@@ -436,8 +428,161 @@ public class orderstatus_details extends AppCompatActivity {
                 adapter_cartproductname = new ArrayAdapter<String>(orderstatus_details.this,
                         android.R.layout.simple_list_item_1,list_cartproductname);
 
-                //listView.setAdapter(adapter_gender);
 
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
+    private class OrderType extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
+
+        public OrderType() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cPostSQL2 = date;
+                cv.put("code", cPostSQL);
+                cv.put("code2", cPostSQL2);
+
+
+                JSONObject json = jParser.makeHTTPRequest(urlordertype, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String cartordERtype) {
+            super.onPostExecute(cartordERtype);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
+            if (cartordERtype != null) {
+                if (isEmpty.equals("") && !cartordERtype.equals("HTTPSERVER_ERROR")) { }
+
+
+                String Cordertype = cartordERtype;
+
+                String str = Cordertype;
+                final String Cordertypes[] = str.split("-");
+                list_cartordertype = new ArrayList<String>(Arrays.asList(Cordertypes));
+                adapter_ordertype = new ArrayAdapter<String>(orderstatus_details.this,
+                        android.R.layout.simple_list_item_1,list_cartordertype);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
+    private class Orderstatus extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
+
+        public Orderstatus() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cPostSQL2 = date;
+                cv.put("code", cPostSQL);
+                cv.put("code2", cPostSQL2);
+
+
+                JSONObject json = jParser.makeHTTPRequest(urlorderstatus, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String cartordERstatus) {
+            super.onPostExecute(cartordERstatus);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
+            if (cartordERstatus != null) {
+                if (isEmpty.equals("") && !cartordERstatus.equals("HTTPSERVER_ERROR")) { }
+
+
+                String Corderstatus = cartordERstatus;
+
+                String str = Corderstatus;
+                final String Corderstatuss[] = str.split("-");
+                list_cartorderstatus = new ArrayList<String>(Arrays.asList(Corderstatuss));
+                adapter_orderstatus = new ArrayAdapter<String>(orderstatus_details.this,
+                        android.R.layout.simple_list_item_1,list_cartorderstatus);
 
 
             } else {
@@ -516,7 +661,7 @@ public class orderstatus_details extends AppCompatActivity {
                 adapter_ID = new ArrayAdapter<String>(orderstatus_details.this,
                         android.R.layout.simple_list_item_1,list_ID);
 
-                orderstatus_details.CustomListAdapter adapter = new orderstatus_details.CustomListAdapter(orderstatus_details.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID);
+                orderstatus_details.CustomListAdapter adapter = new orderstatus_details.CustomListAdapter(orderstatus_details.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, list_cartordertype,list_cartorderstatus);
                 listView.setAdapter(adapter);
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
@@ -603,14 +748,18 @@ public class orderstatus_details extends AppCompatActivity {
         private ArrayList<String> cartprice;
         private ArrayList<String> cartproductname;
         private ArrayList<String> productid;
+        private ArrayList<String> dordertype;
+        private ArrayList<String> dorderstatus;
 
 
-        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> productid) {
+        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> productid,ArrayList<String> dordertype, ArrayList<String> dorderstatus) {
             this.context = context;
             this.cartqty = cartqty;
             this.cartprice = cartprice;
             this.cartproductname = cartproductname;
             this.productid = productid;
+            this.dordertype =dordertype;
+            this.dorderstatus =dorderstatus;
 
 
         }
@@ -640,12 +789,16 @@ public class orderstatus_details extends AppCompatActivity {
             TextView cartQtyTextView = listViewItem.findViewById(R.id.pproqtysTextView);
             TextView cartpriceTextView = listViewItem.findViewById(R.id.ProductpsTextView);
             TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview2);
+           TextView ordertypeTextView = listViewItem.findViewById(R.id.ordertypetxtview);
+            TextView orderstatusTextView = listViewItem.findViewById(R.id.orderstatustxtview);
 
 
             cartproductnameTextView.setText(cartproductname.get(position));
             cartQtyTextView.setText(cartqty.get(position));
             cartpriceTextView.setText(cartprice.get(position));
             cartaydiTextView.setText(productid.get(position));
+           ordertypeTextView.setText(dordertype.get(position));
+            orderstatusTextView.setText(dorderstatus.get(position));
 
             return listViewItem;
         }

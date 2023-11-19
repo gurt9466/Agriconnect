@@ -84,7 +84,7 @@ public class edtprofiles extends AppCompatActivity {
 
     String cltemSelected_username,cltemSelected_consumerid, cltemSelected_email, cltemSelected_namelast, cltemSelected_namefirst,cltemSelected_dob,cltemSelected_addressstreet,cltemSelected_addresscity,cltemSelected_addressregion,cltemSelected_contactnumber;
     Context context = this;
-    private String pcn, rproduct, par, pac,aydi,pas,pdob,pnf,pnl,pemail,pusername;
+    private String pcn, par, pac,aydi,pas,pdob,pnf,pnl,pemail,pusername;
 
 
     @Override
@@ -97,20 +97,6 @@ public class edtprofiles extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView4);
         backimgbtn = findViewById(R.id.logout2);
 
-        /*
-        username -- no need
-        consumer_id
-        password -- no need
-        email
-        name_last
-        name_first
-        gender -- no need
-        dob --
-        address_street
-        address_city
-        address_region
-        contact_number
-         */
 
         txtDefaultusername = (TextView) findViewById(R.id.txt_username);
         txtDefaultconsumerid = (TextView) findViewById(R.id.txt_consumerid);
@@ -124,15 +110,6 @@ public class edtprofiles extends AppCompatActivity {
         txtDefaultcontactnumber = (TextView) findViewById(R.id.txt_contactnumber);
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
-        txtDefaultconsumerid.setVisibility(View.GONE);
-        txtDefaultemail.setVisibility(View.GONE);
-        txtDefaultnamelast.setVisibility(View.GONE);
-        txtDefaultnamefirst.setVisibility(View.GONE);
-        txtDefaultdob.setVisibility(View.GONE);
-        txtDefaultaddressstreet.setVisibility(View.GONE);
-        txtDefaultaddresscity.setVisibility(View.GONE);
-        txtDefaultaddressregion.setVisibility(View.GONE);
-        txtDefaultcontactnumber.setVisibility(View.GONE);
 
         backimgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -752,7 +729,7 @@ public class edtprofiles extends AppCompatActivity {
 
                 String str = addresscity;
                 final String addresscitys[] = str.split("-");
-                list_addresscity = new ArrayList<String>(Arrays.asList(addresscity));
+                list_addresscity = new ArrayList<String>(Arrays.asList(addresscitys));
                 adapter_addresscity = new ArrayAdapter<String>(edtprofiles.this,
                         android.R.layout.simple_list_item_1,list_addresscity);
 

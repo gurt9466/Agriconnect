@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,16 +27,19 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class editcartactivity extends AppCompatActivity {
 
     private static Button btnQuery;
     private static EditText edtqty;
+    private static String cItemcode = "";
 
 
-    private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid,ordertype;
+    private static TextView  ordertype, address, btnclickhere3;
 
-    private String cartuname, cartqty, cartprice, cartproid, cartproname,cartdateadded,aydi, cartordertype;
+    private String cartuname, cartqty, cartprice, cartproid, cartproname, cartdateadded, aydi, cartordertype;
 
     public static final String CARTUSERNAME = "CARTUSERNAME";
     public static final String CARTQUANTITY = "CARTQUANTITY";
@@ -44,20 +48,20 @@ public class editcartactivity extends AppCompatActivity {
     public static final String CARTPRODUCTNAME = "CARTPRODUCTNAME";
     public static final String CARTDATEADDED = "CARTDATEADDED";
 
-    public static final String CARTORDERTYPE = "CARTORDERTYPE";
 
+    public static final String CARTORDERTYPE = "CARTORDERTYPE";
 
 
     public static final String ID = "ID";
     ImageView imageview;
 
-    private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     private static String urlHost = "http://192.168.1.9/agriconnect/php/cart/updatecartqty.php";
+    private static String urladdress = "http://192.168.1.9/agriconnect/php/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
-
+    ArrayList<String> list_conaddress;
     public static String edtProductQTYY;
     public static String username;
     SharedPreferences sharedPreferences;
@@ -73,31 +77,21 @@ public class editcartactivity extends AppCompatActivity {
         btnQuery = (Button) findViewById(R.id.btnQuery);
         edtqty = findViewById(R.id.editTextqty);
         imageview = findViewById(R.id.imageView3);
+
+        btnclickhere3 = findViewById(R.id.textViewclickhere3);
+        address = (TextView) findViewById(R.id.textViewdeliveryaddress2);
         new editcartactivity.FetchImageUrlsTask().execute();
+        new editcartactivity.conaddress().execute();
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
-        username =(sharedPreferences.getString("username",""));
+        username = (sharedPreferences.getString("username", ""));
 
         pid = (TextView) findViewById(R.id.textViewid);
         pname = (TextView) findViewById(R.id.textViewpname);
         hard = (TextView) findViewById(R.id.textViewhdate);
         qty = (TextView) findViewById(R.id.textViewqty);
         price = (TextView) findViewById(R.id.textViewprice);
-        ordertype =(TextView)  findViewById(R.id.textViewordetype);
-
-
-
-
-
-        tvproductname = (TextView) findViewById(R.id.textViewedtpname);
-        tvharvestdate = (TextView) findViewById(R.id.textViewedtharvestd);
-        tvpqty = (TextView) findViewById(R.id.textViewedtpqty);
-        tvprice = (TextView) findViewById(R.id.textViewedtprice);
-        tvpfid = (TextView) findViewById(R.id.textViewedtfid);
-        tvid = (TextView) findViewById(R.id.textViewedtid);
-
-
-        tv_civ = (TextView) findViewById(R.id.textView3);
+        ordertype = (TextView) findViewById(R.id.textViewordetype);
 
 
         Intent i = getIntent();
@@ -119,21 +113,20 @@ public class editcartactivity extends AppCompatActivity {
         ordertype.setText(cartordertype);
 
 
-        tvproductname.setVisibility(View.GONE);
-        tvharvestdate.setVisibility(View.GONE);
-        tvpqty.setVisibility(View.GONE);
-        tvprice.setVisibility(View.GONE);
-        tvpfid.setVisibility(View.GONE);
-        tvid.setVisibility(View.GONE);
 
-
-
+        btnclickhere3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(editcartactivity.this, edtprofiles.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 edtProductQTYY = edtqty.getText().toString();
-
 
 
                 new editcartactivity.uploadDataToURL().execute();
@@ -213,6 +206,7 @@ public class editcartactivity extends AppCompatActivity {
             }
         }
     }
+
     private class FetchImageUrlsTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
@@ -255,4 +249,80 @@ public class editcartactivity extends AppCompatActivity {
         }
     }
 
+    private class conaddress extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(editcartactivity.this);
+
+        public conaddress() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cItemcode = cPostSQL;
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urladdress, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String proqtyes) {
+            super.onPostExecute(proqtyes);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(editcartactivity.this);
+            if (proqtyes != null) {
+                if (isEmpty.equals("") && !proqtyes.equals("HTTPSERVER_ERROR")) {
+                }
+
+
+                String pproqtyes = proqtyes;
+
+                String str = pproqtyes;
+                final String pproqtys[] = str.split("-");
+                list_conaddress = new ArrayList<String>(Arrays.asList(pproqtys));
+
+                String addressText = TextUtils.join(", ", list_conaddress);
+                address.setText(addressText);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
 }

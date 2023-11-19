@@ -234,7 +234,7 @@
             android:background="#ECECEC"
             android:ems="10"
             android:hint="YYYY-MM-DD"
-            android:inputType="number"
+            android:inputType="date"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -74,8 +74,9 @@
             android:layout_width="167dp"
             android:layout_height="56dp"
             android:layout_marginStart="122dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="300dp"
             android:layout_marginEnd="122dp"
+            android:layout_marginBottom="50dp"
             android:backgroundTint="#FF9800"
             android:text="Add To Cart"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,6 +152,21 @@
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@+id/textViewid" />
+
+        <TextView
+            android:id="@+id/textViewdeliveryaddress2"
+            android:layout_width="311dp"
+            android:layout_height="83dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="72dp"
+            android:text="deliveryaddress"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnQuery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
         <TextView
             android:id="@+id/textView21"
@@ -239,8 +255,8 @@
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
             android:text="Enter Quantity : "
             android:textSize="18dp"
             android:textStyle="bold"
@@ -251,8 +267,8 @@
             android:id="@+id/textView34"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
             android:text="Order Options : "
             android:textSize="18dp"
             android:textStyle="bold"
@@ -260,16 +276,28 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextqty" />
 
         <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="Delivery Address : "
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderoptions" />
+
+        <TextView
             android:id="@+id/textViewhdate4"
             android:layout_width="33dp"
             android:layout_height="40dp"
             android:layout_marginStart="7dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="132dp"
             android:layout_marginEnd="84dp"
             android:text="KG "
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.636"
             app:layout_constraintStart_toEndOf="@+id/editTextqty"
             app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
 
@@ -364,6 +392,32 @@
                 android:layout_weight="1"
                 android:text="Pick up" />
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:text="Do you want to change delivery Address? "
+            app:layout_constraintEnd_toStartOf="@+id/textViewclickhere3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewdeliveryaddress2" />
+
+        <TextView
+            android:id="@+id/textViewclickhere3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="47dp"
+            android:text="Click Here"
+            android:textColor="#5C00FF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textViewdeliveryaddress2" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

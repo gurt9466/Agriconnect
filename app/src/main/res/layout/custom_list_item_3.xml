@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
     android:background="#F6F2CD"
     android:orientation="vertical">
 
@@ -18,6 +20,7 @@
         android:padding="8dp"
         android:textColor="#000000"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,21 +66,6 @@
 
 
     <TextView
-        android:id="@+id/usernameTextView7"
-        android:layout_width="409dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:background="@color/white"
-        android:padding="8dp"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pproqtysTextView" />
-
-    <TextView
         android:id="@+id/usernameTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,10 +86,12 @@
         android:layout_marginStart="19dp"
 
         android:layout_marginTop="13dp"
+        android:layout_marginBottom="14dp"
         android:paddingTop="8dp"
         android:text="QTY:"
         android:textColor="#000000"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/usernameTextView3" />
 
@@ -124,10 +114,12 @@
         android:layout_width="32dp"
         android:layout_height="31dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="14dp"
         android:padding="8dp"
         android:text="KG"
         android:textColor="#000000"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pproqtysTextView"
         app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
 
@@ -149,11 +141,13 @@
         android:layout_width="70dp"
         android:layout_height="34dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="12dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:text="Product Qty"
         android:textColor="#666666"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView4"
         app:layout_constraintTop_toBottomOf="@+id/ProductpsTextView" />
 

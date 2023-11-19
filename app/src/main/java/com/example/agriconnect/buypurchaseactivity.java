@@ -9,8 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +30,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class buypurchaseactivity extends AppCompatActivity {
     private static Button btnQuery;
@@ -37,9 +40,9 @@ public class buypurchaseactivity extends AppCompatActivity {
     RadioGroup OrderOption;
 
 
-    private static TextView tvproductname, tvharvestdate, tvpqty, tvprice, tvpfid, tvid;
+    private static TextView btnclickhere2,address;
 
-    private String ppname, ppharvest, pppqty, ppprice, pppfid, aydi;
+    private String ppname, ppharvest, pppqty, ppprice, aydi;
 
     private static String cItemcode = "";
 
@@ -49,19 +52,16 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static final String PPRICE = "PPRICE";
     public static final String PFID = "PFID";
     public static final String ID = "ID";
-
-    private static TextView tv_civ, tvusername;
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     private static String urlHost = "http://192.168.1.9/agriconnect/php/product/uploadcart.php";
+
+    private static String urladdress="http://192.168.1.9/agriconnect/php/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
 
 
-
-    public static String ProductName;
-    public static String HarvestDate;
-    public static String ProductQTYY;
+    ArrayList<String> list_conaddress;
     public static String Productid;
     public static String edtProductQTYY;
     public static String username;
@@ -80,12 +80,10 @@ public class buypurchaseactivity extends AppCompatActivity {
         edtqty = findViewById(R.id.editTextqty);
         imageview = findViewById(R.id.imageView3);
         OrderOption =findViewById(R.id.orderoptions);
+        btnclickhere2 = findViewById(R.id.textViewclickhere3);
 
 
-
-
-
-
+        new conaddress().execute();
         new FetchImageUrlsTask().execute();
 
 
@@ -97,15 +95,7 @@ public class buypurchaseactivity extends AppCompatActivity {
         hard = (TextView) findViewById(R.id.textViewhdate);
         qty = (TextView) findViewById(R.id.textViewqty);
         price = (TextView) findViewById(R.id.textViewprice);
-
-
-        tvproductname = (TextView) findViewById(R.id.textViewedtpname);
-        tvharvestdate = (TextView) findViewById(R.id.textViewedtharvestd);
-        tvpqty = (TextView) findViewById(R.id.textViewedtpqty);
-        tvprice = (TextView) findViewById(R.id.textViewedtprice);
-        tvpfid = (TextView) findViewById(R.id.textViewedtfid);
-        tvid = (TextView) findViewById(R.id.textViewedtid);
-
+        address = (TextView) findViewById(R.id.textViewdeliveryaddress2);
 
         Intent i = getIntent();
         ppname = i.getStringExtra(PNAME);
@@ -123,12 +113,6 @@ public class buypurchaseactivity extends AppCompatActivity {
         price.setText(ppprice);
 
 
-        tvproductname.setVisibility(View.GONE);
-        tvharvestdate.setVisibility(View.GONE);
-        tvpqty.setVisibility(View.GONE);
-        tvprice.setVisibility(View.GONE);
-        tvpfid.setVisibility(View.GONE);
-        tvid.setVisibility(View.GONE);
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +129,14 @@ public class buypurchaseactivity extends AppCompatActivity {
             }
         });
 
+        btnclickhere2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(buypurchaseactivity.this, edtprofiles.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -174,9 +166,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
                 cv.put("username", username);
                 cv.put("product_id", Productid);
-                //cv.put("product_name", ppname);
                 cv.put("product_qty", edtProductQTYY);
-               // cv.put("product_price", ppprice);
 
                 RadioButton checkedBtn = findViewById(OrderOption.getCheckedRadioButtonId());
                 String selectedoption = checkedBtn.getText().toString();
@@ -263,5 +253,81 @@ public class buypurchaseactivity extends AppCompatActivity {
         }
     }
 
+    private class conaddress extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(buypurchaseactivity.this);
+
+        public conaddress() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cItemcode = cPostSQL;
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urladdress, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String proqtyes) {
+            super.onPostExecute(proqtyes);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(buypurchaseactivity.this);
+            if (proqtyes != null) {
+                if (isEmpty.equals("") && !proqtyes.equals("HTTPSERVER_ERROR")) {
+                }
+
+
+                String pproqtyes = proqtyes;
+
+                String str = pproqtyes;
+                final String pproqtys[] = str.split("-");
+                list_conaddress = new ArrayList<String>(Arrays.asList(pproqtys));
+
+                String addressText = TextUtils.join(", ", list_conaddress);
+                address.setText(addressText);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
 }
 

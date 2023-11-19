@@ -21,7 +21,7 @@ public class edtrequest_records extends AppCompatActivity {
 
 
     private static Button btnQuery;
-    private static EditText edtproduct, edtrqty, edtrdate,edtusername;
+    private static EditText edtproduct, edtrqty, edtrdate;
     private static TextView tvproduct, tvrqty,tvusername,tvrdate, txt1,txt2,txt3,txt4,txt5,txt6;
     private String rusername, rproduct,rqty,rdate, aydi;
 
@@ -39,7 +39,6 @@ public class edtrequest_records extends AppCompatActivity {
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";
 
-    public static String Requestusername;
     public static String RequestProduct;
     public static String Requestqty;
     public static String Requestdate;
@@ -54,6 +53,7 @@ public class edtrequest_records extends AppCompatActivity {
         edtproduct = findViewById(R.id.editrequestproductname);
         edtrqty = findViewById(R.id.editrequestprice);
         edtrdate = findViewById(R.id.editrequestdate);
+
 
         tvusername = (TextView) findViewById(R.id.edtcfname);
         tvproduct = (TextView) findViewById(R.id.edtclname);
@@ -80,9 +80,11 @@ public class edtrequest_records extends AppCompatActivity {
 
 
 
+
         edtproduct.setText(rproduct);
         edtrqty.setText(rqty);
         edtrdate.setText(rdate);
+
 
 
         tvusername.setVisibility(View.GONE);
@@ -98,10 +100,12 @@ public class edtrequest_records extends AppCompatActivity {
         txt6.setVisibility(View.GONE);
 
 
+
+
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Requestusername = tvusername.getText().toString();
+
                 RequestProduct = edtproduct.getText().toString();
                 Requestdate = edtrdate.getText().toString();
                 Requestqty = edtrqty.getText().toString();
@@ -115,7 +119,6 @@ public class edtrequest_records extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
     }
@@ -141,10 +144,7 @@ public class edtrequest_records extends AppCompatActivity {
             int nSuccess;
             try {
                 ContentValues cv = new ContentValues();
-                //insert anything in this cod
 
-                // cPostSQL = Requestusername;
-                // cv.put("username", cPostSQL);
 
                 cPostSQL = aydi;
                 cv.put("id", cPostSQL);

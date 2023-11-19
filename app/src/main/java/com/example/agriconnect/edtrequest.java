@@ -92,12 +92,6 @@ public class edtrequest extends AppCompatActivity {
         txtDefault_ID = (TextView) findViewById(R.id.txt_ID);
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
-        txtDefaultUsername.setVisibility(View.GONE);
-        txtDefaultRequestProduct.setVisibility(View.GONE);
-        txtDefaultRequestqty.setVisibility(View.GONE);
-        txtDefaultdate.setVisibility(View.GONE);
-        txtDefault_ID.setVisibility(View.GONE);
-
         backimgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

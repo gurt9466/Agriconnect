@@ -332,7 +332,7 @@ public class orderstatusActivity extends AppCompatActivity {
             View listViewItem = inflater.inflate(R.layout.custom_list_item_5, null);
 
             TextView dateTextView = listViewItem.findViewById(R.id.datetxtview);
-            TextView statusTextView = listViewItem.findViewById(R.id.statustxtview);
+
 
             // Ensure the position is within the bounds of the 'date' ArrayList
             if (position < date.size()) {
@@ -341,15 +341,6 @@ public class orderstatusActivity extends AppCompatActivity {
                 // Handle the case where the position is out of bounds
                 dateTextView.setText("No record Found");
             }
-
-            // Ensure the position is within the bounds of the 'status' ArrayList
-            if (position < status.size()) {
-                statusTextView.setText(status.get(position));
-            } else {
-                // Handle the case where the position is out of bounds
-                statusTextView.setText("Status Unavailable");
-            }
-
             return listViewItem;
         }
     }

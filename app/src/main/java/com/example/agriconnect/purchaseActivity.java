@@ -47,6 +47,8 @@ public class purchaseActivity extends AppCompatActivity {
     private static String urlFarmerID = "http://192.168.1.9/Agriconnect/php/product/selectfarmerid.php";
     private static String urlHostID = "http://192.168.1.9/Agriconnect/php/product/selectproductid.php";
 
+    private  static String urladdress = "http://192.168.1.9/Agriconnect/php/product/selectaddress.php";
+
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
     private static String online_dataset = "";
@@ -55,14 +57,17 @@ public class purchaseActivity extends AppCompatActivity {
     ListView listView;
     TextView textView, txtDefault_ID, txtDefaultProductName, txtDefaultHarvestDate, txtDefaultQuantity, txtDefaultPrice, txtDefaultFarmerID;
     ArrayAdapter<String> adapter_qty;
+
     ArrayAdapter<String> adapter_productname;
-    ArrayAdapter<String> adapter_image;
+
     ArrayAdapter<String> adapter_harvestdate;
     ArrayAdapter<String> adapter_farmerid;
     ArrayAdapter<String> adapter_price;
     ArrayAdapter<String> adapter_ID;
 
     ArrayList<String> list_dateharvest;
+
+
     ArrayList<String> list_productname;
     ArrayList<String> list_farmerid;
     ArrayList<String> list_pprice;
@@ -71,7 +76,7 @@ public class purchaseActivity extends AppCompatActivity {
 
     ImageView backimgbtn, cart;
 
-    String cltemSelected_productname, cItemSelected_ID, cltemSelected_harvestdate, cltemSelected_qty, cltemSelected_price, cltemSelected_farmerid, cltemSelected_quantity;
+    String cltemSelected_productname, cItemSelected_ID, cltemSelected_harvestdate, cltemSelected_price, cltemSelected_farmerid, cltemSelected_quantity;
     Context context = this;
     private String pproductname, pharvestd, pqty, pprice, aydi, pframerid;
 
@@ -94,8 +99,8 @@ public class purchaseActivity extends AppCompatActivity {
         txtDefaultPrice = (TextView) findViewById(R.id.txt_requestprice);
         txtDefaultFarmerID = (TextView) findViewById(R.id.txt_harvestdate);
 
-        sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
+        sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         txtDefault_ID.setVisibility(View.GONE);
         txtDefaultProductName.setVisibility(View.GONE);
         txtDefaultHarvestDate.setVisibility(View.GONE);
@@ -155,6 +160,7 @@ public class purchaseActivity extends AppCompatActivity {
                 cItemSelected_ID = adapter_ID.getItem(position);
 
 
+
                 androidx.appcompat.app.AlertDialog.Builder alert_confirm =
                         new androidx.appcompat.app.AlertDialog.Builder(context);
                 alert_confirm.setMessage(" Do you wish to continue ");
@@ -168,6 +174,7 @@ public class purchaseActivity extends AppCompatActivity {
                         txtDefaultPrice.setText(cltemSelected_price);
                         txtDefaultFarmerID.setText(cltemSelected_farmerid);
                         txtDefault_ID.setText(cItemSelected_ID);
+
 
 
                         pproductname = txtDefaultProductName.getText().toString().trim();
@@ -276,7 +283,6 @@ public class purchaseActivity extends AppCompatActivity {
             }
         }
     }
-
     private class HDATE extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
         int nPostValueIndex;
@@ -534,7 +540,7 @@ public class purchaseActivity extends AppCompatActivity {
                 cItemcode = cPostSQL;
                 cv.put("code", cPostSQL);
 
-                JSONObject json = jParser.makeHTTPRequest(urlFarmerID, "POST", cv);
+                JSONObject json = jParser.makeHTTPRequest(urlHarvestDate, "POST", cv);
                 if (json != null) {
                     nSuccess = json.getInt(TAG_SUCCESS);
                     if (nSuccess == 1) {
@@ -688,7 +694,7 @@ public class purchaseActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<String> imageUrls) {
-            CustomListAdapter adapter = new CustomListAdapter(purchaseActivity.this, list_productname, list_dateharvest, list_pqty, list_pprice, list_farmerid, list_ID,imageUrls);
+            CustomListAdapter adapter = new CustomListAdapter(purchaseActivity.this, list_productname, list_dateharvest, list_pqty, list_pprice, list_farmerid, list_ID, imageUrls);
             listView.setAdapter(adapter);
 
         }
@@ -703,6 +709,7 @@ public class purchaseActivity extends AppCompatActivity {
         private ArrayList<String> farids;
         private ArrayList<String> ayds;
         private List<String> imageUrls;
+
 
         public CustomListAdapter(Context context, ArrayList<String> productname, ArrayList<String> dateharvests, ArrayList<String> pproqtys, ArrayList<String> Productps, ArrayList<String> farids, ArrayList<String> ayds, List<String> imageUrls) {
             this.context = context;
@@ -741,6 +748,7 @@ public class purchaseActivity extends AppCompatActivity {
             TextView productupsProductTextView = listViewItem.findViewById(R.id.ProductpsTextView);
             TextView aydsTextView = listViewItem.findViewById(R.id.adyiview);
             ImageView imageView = listViewItem.findViewById(R.id.imageView4); // ImageView for the image
+
 
             productnameTextView.setText(productname.get(position));
             dateharvestProductTextView.setText(dateharvests.get(position));

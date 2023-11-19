@@ -49,9 +49,10 @@ public class cartActivity extends AppCompatActivity {
     private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/cart/selectcartprice.php";
     private static String urlcartproductid = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductid.php";
     private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductname.php";
-    private static String urlcartdatedd = "http://192.168.1.9/Agriconnect/php/cart/selectcartdateadded.php";
     private static String urltotalA = "http://192.168.1.9/Agriconnect/php/cart/selecttotalamount.php";
     private static String urlHostID = "http://192.168.1.9/Agriconnect/php/cart/selectcartid.php";
+
+    private  static String urladdress = "http://192.168.1.9/Agriconnect/php/product/selectaddress.php";
 
     private static String uploadcheckout = "http://192.168.1.9/agriconnect/php/product/selectcheckout.php";
     private static String urlordertype = "http://192.168.1.9/agriconnect/php/cart/selectordertype.php";
@@ -68,18 +69,19 @@ public class cartActivity extends AppCompatActivity {
     private static TextView totalamount;
     private static EditText edtitemcode;
     ListView listView;
-    TextView textView,txtDefault_ID, txtDefaultordertype,txtDefaultcartusername, txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname,txtDefaultdateadded;
+    TextView textView,txtDefault_ID, txtDefaultordertype,txtDefaultcartusername, txtDefaultaddress,txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname;
     ArrayAdapter<String> adapter_cartusername;
     ArrayAdapter<String> adapter_ordertype;
+
     ArrayAdapter<String> adapter_cartquantity;
     ArrayAdapter<String> adapter_cartprice;
     ArrayAdapter<String> adapter_cartproductid;
     ArrayAdapter<String> adapter_cartproductname;
-    ArrayAdapter<String> adapter_dateadded;
     ArrayAdapter <String> adapter_ID;
 
+
+
     ArrayList<String> list_cartordertype;
-    ArrayList<String> list_cartdateadded;
     ArrayList<String> list_cartproductname;
     ArrayList <String> list_cartproductid;
     ArrayList <String> list_cartprice;
@@ -89,9 +91,9 @@ public class cartActivity extends AppCompatActivity {
 
     ImageView backimgbtn;
 
-    String totalprice,cltemSelected_ordertype,cltemSelected_cartusername,cItemSelected_ID, cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_cartproductname, cltemSelected_dateadded;
+    String totalprice,cltemSelected_ordertype,cltemSelected_cartusername,cItemSelected_ID, cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_cartproductname;
     Context context = this;
-    private String Cart_Username, Cart_ordertype,Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname,Cart_dateadded;
+    private String Cart_Username, Cart_ordertype,Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +114,9 @@ public class cartActivity extends AppCompatActivity {
         txtDefaultcartprice = (TextView) findViewById(R.id.txt_cartprice);
         txtDefaultcartproductid = (TextView) findViewById(R.id.txt_cartproductid);
         txtDefaultcartproductname = (TextView) findViewById(R.id.txt_cartproductname);
-        txtDefaultdateadded = (TextView) findViewById(R.id.txt_cartdateadded);
+
         txtDefaultordertype =(TextView) findViewById(R.id.txt_orderstatus);
+        txtDefaultaddress = (TextView) findViewById(R.id.txt_completeaddress2);
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         String username = (sharedPreferences.getString("username",""));
@@ -124,7 +127,7 @@ public class cartActivity extends AppCompatActivity {
         txtDefaultcartprice.setVisibility(View.GONE);
         txtDefaultcartproductid.setVisibility(View.GONE);
         txtDefaultcartproductname.setVisibility(View.GONE);
-        txtDefaultdateadded.setVisibility(View.GONE);
+
 
         btnQuery.performClick();
 
@@ -152,7 +155,6 @@ public class cartActivity extends AppCompatActivity {
                 new cartActivity.CPRICE().execute();
                 new cartActivity.CPRODUCTID().execute();
                 new cartActivity.CPRODUCTNAME().execute();
-                new cartActivity.CDateDD().execute();
                 new cartActivity.OrderType().execute();
                 new cartActivity.id().execute();
                 new cartActivity.TotalP().execute();
@@ -171,9 +173,10 @@ public class cartActivity extends AppCompatActivity {
                 cltemSelected_cartprice = adapter_cartprice.getItem(position);
                 cltemSelected_cartproductid = adapter_cartproductid.getItem(position);
                 cltemSelected_cartproductname = adapter_cartproductname.getItem(position);
-                //cltemSelected_dateadded = adapter_dateadded.getItem(position);
                 cltemSelected_ordertype = adapter_ordertype.getItem(position);
                 cItemSelected_ID = adapter_ID.getItem(position);
+
+
 
                 androidx.appcompat.app.AlertDialog.Builder alert_confirm =
                         new androidx.appcompat.app.AlertDialog.Builder(context);
@@ -188,7 +191,6 @@ public class cartActivity extends AppCompatActivity {
                         txtDefaultcartprice.setText(cltemSelected_cartprice);
                         txtDefaultcartproductid.setText(cltemSelected_cartproductid);
                         txtDefaultcartproductname.setText(cltemSelected_cartproductname);
-                        //txtDefaultdateadded.setText(cltemSelected_dateadded);
                         txtDefaultordertype.setText(cltemSelected_ordertype);
                         txtDefault_ID.setText(cItemSelected_ID);
 
@@ -200,7 +202,6 @@ public class cartActivity extends AppCompatActivity {
                         Cart_price = txtDefaultcartprice.getText().toString().trim();
                         Cart_productid = txtDefaultcartproductid.getText().toString().trim();
                         Cart_porductname = txtDefaultcartproductname.getText().toString().trim();
-                        //Cart_dateadded = txtDefaultdateadded.getText().toString().trim();
                         Cart_ordertype = txtDefaultordertype.getText().toString().trim();
                         aydi = txtDefault_ID.getText().toString().trim();
 
@@ -211,19 +212,21 @@ public class cartActivity extends AppCompatActivity {
                         intent.putExtra(editcartactivity.CARTPRICE, Cart_price);
                         intent.putExtra(editcartactivity.CARTPRODUCTID, Cart_productid);
                         intent.putExtra(editcartactivity.CARTPRODUCTNAME, Cart_porductname);
-                        //intent.putExtra(editcartactivity.CARTDATEADDED, Cart_dateadded);
                         intent.putExtra(editcartactivity.CARTORDERTYPE, Cart_ordertype);
                         intent.putExtra(editcartactivity.ID, aydi);
                         startActivity(intent);
                     }
                 });
 
-                alert_confirm.setNegativeButton("delete", new DialogInterface.OnClickListener() {
+                alert_confirm.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         txtDefault_ID.setText(cItemSelected_ID);
                         aydi = txtDefault_ID.getText().toString().trim();
                         new cartActivity.delete().execute();
+
+                        Intent intent = new Intent(cartActivity.this, cartActivity.class);
+                        startActivity(intent);
 
                     }
                 });
@@ -298,7 +301,6 @@ public class cartActivity extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
             if (s != null) {
                 if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                //toast.makeText(act_buy_manage.this, s, Toast.LENGTH_SHORT).show();
                 String wew = s;
 
                 String str = wew;
@@ -315,6 +317,8 @@ public class cartActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     private class CQUANTITY extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
@@ -698,83 +702,6 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
-    private class CDateDD extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
-        int nPostValueIndex;
-        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
-
-        public CDateDD() {
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.setMessage(cMessage);
-            pDialog.show();
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            int nSuccess;
-            try {
-                ContentValues cv = new ContentValues();
-
-                cPostSQL = (sharedPreferences.getString("username",""));
-                cv.put("code", cPostSQL);
-
-                JSONObject json = jParser.makeHTTPRequest(urlcartdatedd, "POST", cv);
-                if (json != null) {
-                    nSuccess = json.getInt(TAG_SUCCESS);
-                    if (nSuccess == 1) {
-                        online_dataset = json.getString(TAG_MESSAGE);
-                        return online_dataset;
-                    } else {
-                        return json.getString(TAG_MESSAGE);
-                    }
-                } else {
-                    return "HTTPSERVER_ERROR";
-                }
-
-
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String cartDateDD) {
-            super.onPostExecute(cartDateDD);
-            pDialog.dismiss();
-            String isEmpty = "";
-            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
-            if (cartDateDD != null) {
-                if (isEmpty.equals("") && !cartDateDD.equals("HTTPSERVER_ERROR")) { }
-
-
-                String cCartDateDD = cartDateDD;
-
-                String str = cCartDateDD;
-                final String cCartDateDDs[] = str.split("-");
-                list_cartdateadded = new ArrayList<String>(Arrays.asList(cCartDateDDs));
-                adapter_dateadded = new ArrayAdapter<String>(cartActivity.this,
-                        android.R.layout.simple_list_item_1,list_cartdateadded);
-
-                //listView.setAdapter(adapter_gender);
-
-
-
-            } else {
-                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
-                alert.setTitle("Error");
-                alert.show();
-            }
-        }
-    }
 
     private class TotalP extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
@@ -831,11 +758,11 @@ public class cartActivity extends AppCompatActivity {
             String isEmpty = "";
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
             if (tootalp != null) {
-                if (isEmpty.equals("") && !tootalp.equals("HTTPSERVER_ERROR")) { }
-                String otalprice = tootalp;
-                totalamount.setText(otalprice);
-
-
+                if (isEmpty.equals("") && !tootalp.equals("HTTPSERVER_ERROR")) {
+                    // Remove trailing hyphens from the total
+                    String cleanedTotal = tootalp.replaceAll("-$", "");
+                    totalamount.setText(cleanedTotal);
+                }
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");

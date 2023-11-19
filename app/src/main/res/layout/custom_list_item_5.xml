@@ -6,42 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F6F2CD"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
     android:orientation="vertical">
 
 
-
-
-    <TextView
-        android:id="@+id/usernameTextView7"
-        android:layout_width="409dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="1dp"
-        android:background="@color/white"
-        android:padding="8dp"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <TextView
         android:id="@+id/datetxtview"
-        android:layout_width="180dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        android:inputType="date"
         android:text="Date "
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:inputType="date"
-        app:layout_constraintEnd_toStartOf="@+id/statustxtview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtview2" />
 
@@ -50,46 +34,16 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginStart="221dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="116dp"
         android:text="Date Ordered"
         android:textAlignment="center"
         android:textColor="#494545"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtview3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtview3"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="14dp"
-        android:text="Status"
-        android:textAlignment="center"
-        android:textColor="#494545"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtview2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/statustxtview"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:text="status "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/datetxtview"
-        app:layout_constraintTop_toBottomOf="@+id/txtview3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
