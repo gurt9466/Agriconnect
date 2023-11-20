@@ -109,7 +109,7 @@ public class orderstatus_details extends AppCompatActivity {
         });
 
 
-        Toast.makeText(orderstatus_details.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
+
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +190,7 @@ public class orderstatus_details extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
             if (s != null) {
                 if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                //toast.makeText(act_buy_manage.this, s, Toast.LENGTH_SHORT).show();
+
                 String wew = s;
 
                 String str = wew;
@@ -651,7 +651,6 @@ public class orderstatus_details extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
             if (aydi != null) {
                 if (isEmpty.equals("") && !aydi.equals("HTTPSERVER_ERROR")) { }
-                Toast.makeText(orderstatus_details.this, "Data selected", Toast.LENGTH_SHORT).show();
 
                 String AYDI = aydi;
 

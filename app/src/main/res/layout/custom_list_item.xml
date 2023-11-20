@@ -59,9 +59,10 @@
 
     <TextView
         android:id="@+id/usernameTextView5"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="5dp"
         android:padding="8dp"
         android:text="Date Needed: YYYY/MM/DD
 "
@@ -88,9 +89,10 @@
 
     <TextView
         android:id="@+id/usernameTextView6"
-        android:layout_width="32dp"
+        android:layout_width="40dp"
         android:layout_height="31dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="7dp"
         android:padding="8dp"
         android:text="KG"
@@ -99,7 +101,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/usernameTextView5"
         app:layout_constraintStart_toEndOf="@+id/requestedProductQtyTextView"
-        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView"
+        app:layout_constraintVertical_bias="0.12" />
 
     <TextView
         android:id="@+id/requestedProductTextView"
@@ -120,7 +123,7 @@
         android:layout_width="70dp"
         android:layout_height="34dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="5dp"
         android:padding="8dp"
         android:text="Requested Product Qty"
         android:textColor="#666666"
@@ -128,11 +131,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/usernameTextView6"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView4"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTextView3" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/requestedProductDateTextView"
-        android:layout_width="170dp"
+        android:layout_width="120dp"
         android:layout_height="34dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="16dp"
@@ -144,5 +148,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/usernameTextView5"
-        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/requestedProductTextView"
+        app:layout_constraintVertical_bias="0.2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

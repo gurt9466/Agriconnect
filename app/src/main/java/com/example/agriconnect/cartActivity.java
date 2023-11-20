@@ -141,7 +141,6 @@ public class cartActivity extends AppCompatActivity {
         });
 
 
-        Toast.makeText(cartActivity.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
 
 
         btnQuery.setOnClickListener(new View.OnClickListener() {

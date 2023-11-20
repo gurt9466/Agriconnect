@@ -102,7 +102,6 @@ public class edtrequest extends AppCompatActivity {
         });
 
 
-        Toast.makeText(edtrequest.this, "Edit Requests", Toast.LENGTH_SHORT).show();
 
 
                 btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -529,7 +528,7 @@ public class edtrequest extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtrequest.this);
             if (aydi != null) {
                 if (isEmpty.equals("") && !aydi.equals("HTTPSERVER_ERROR")) { }
-                Toast.makeText(edtrequest.this, "Data selected", Toast.LENGTH_SHORT).show();
+
 
                 String AYDI = aydi;
 
@@ -611,7 +610,7 @@ public class edtrequest extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtrequest.this);
             if (aydi != null) {
                 if (isEmpty.equals("") && !del.equals("HTTPSERVER_ERROR")) { }
-                Toast.makeText(edtrequest.this, "Data Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(edtrequest.this, "Product Removed", Toast.LENGTH_SHORT).show();
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
                 alert.setTitle("Error");

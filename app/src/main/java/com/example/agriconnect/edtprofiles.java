@@ -121,7 +121,6 @@ public class edtprofiles extends AppCompatActivity {
         });
 
 
-        Toast.makeText(edtprofiles.this, "Edit Requests", Toast.LENGTH_SHORT).show();
 
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -272,7 +271,7 @@ public class edtprofiles extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtprofiles.this);
             if (s != null) {
                 if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                //toast.makeText(act_buy_manage.this, s, Toast.LENGTH_SHORT).show();
+
                 String wew = s;
 
                 String str = wew;
@@ -952,7 +951,7 @@ public class edtprofiles extends AppCompatActivity {
             android.app.AlertDialog.Builder alert = new AlertDialog.Builder(edtprofiles.this);
             if (aydi != null) {
                 if (isEmpty.equals("") && !aydi.equals("HTTPSERVER_ERROR")) { }
-                Toast.makeText(edtprofiles.this, "Data selected", Toast.LENGTH_SHORT).show();
+
 
                 String AYDI = aydi;
 

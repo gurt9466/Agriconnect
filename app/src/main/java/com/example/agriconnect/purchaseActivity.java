@@ -127,8 +127,6 @@ public class purchaseActivity extends AppCompatActivity {
         });
 
 
-        Toast.makeText(purchaseActivity.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
-
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +264,6 @@ public class purchaseActivity extends AppCompatActivity {
             if (s != null) {
                 if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) {
                 }
-                //toast.makeText(act_buy_manage.this, s, Toast.LENGTH_SHORT).show();
                 String wew = s;
 
                 String str = wew;
@@ -647,7 +644,6 @@ public class purchaseActivity extends AppCompatActivity {
             if (aydi != null) {
                 if (isEmpty.equals("") && !aydi.equals("HTTPSERVER_ERROR")) {
                 }
-                Toast.makeText(purchaseActivity.this, "Data selected", Toast.LENGTH_SHORT).show();
 
                 String AYDI = aydi;
 

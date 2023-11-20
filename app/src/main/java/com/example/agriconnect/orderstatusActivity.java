@@ -86,7 +86,7 @@ public class orderstatusActivity extends AppCompatActivity {
         });
 
 
-        Toast.makeText(orderstatusActivity.this, "My Orders", Toast.LENGTH_SHORT).show();
+
 
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +204,7 @@ public class orderstatusActivity extends AppCompatActivity {
                 android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatusActivity.this);
                 if (s != null) {
                     if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                    //toast.makeText(act_buy_manage.this, s, Toast.LENGTH_SHORT).show();
+
                     String wew = s;
 
                     String str = wew;
