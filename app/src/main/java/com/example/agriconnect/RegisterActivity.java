@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.9/agriconnect/php/register/register.php"; //host ip and phpfile
+                String url = "https://hotela9barnala.net/register/register.php"; //host ip and phpfile
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -84,13 +84,15 @@ public class RegisterActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if(response.equals("success")){
                                     Toast.makeText(getApplicationContext(),"Registration Successful!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+
                                 }
                                 else{txtviewerror.setText(response);
                                     txtviewerror.setVisibility(View.VISIBLE);
+
                                 }
+                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }, new Response.ErrorListener() {
                     @Override

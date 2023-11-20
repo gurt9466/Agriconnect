@@ -40,14 +40,14 @@ public class purchaseActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/product/selectproductname.php";
-    private static String urlHarvestDate = "http://192.168.1.9/Agriconnect/php/product/selectharvestdate.php";
-    private static String urlQuantity = "http://192.168.1.9/Agriconnect/php/product/selectquantity.php";
-    private static String urlPrice = "http://192.168.1.9/Agriconnect/php/product/selectprice.php";
-    private static String urlFarmerID = "http://192.168.1.9/Agriconnect/php/product/selectfarmerid.php";
-    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/product/selectproductid.php";
+    private static String urlHost = "https://hotela9barnala.net/product/selectproductname.php";
+    private static String urlHarvestDate = "https://hotela9barnala.net/product/selectharvestdate.php";
+    private static String urlQuantity = "https://hotela9barnala.net/product/selectquantity.php";
+    private static String urlPrice = "https://hotela9barnala.net/product/selectprice.php";
+    private static String urlFarmerID = "https://hotela9barnala.net/product/selectfarmerid.php";
+    private static String urlHostID = "https://hotela9barnala.net/product/selectproductid.php";
 
-    private  static String urladdress = "http://192.168.1.9/Agriconnect/php/product/selectaddress.php";
+    private  static String urladdress = "https://hotela9barnala.net/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -141,7 +141,7 @@ public class purchaseActivity extends AppCompatActivity {
                 new purchaseActivity.ProductPRICE().execute();
                 new purchaseActivity.farmerID().execute();
                 new purchaseActivity.id().execute();
-                new FetchImageUrlsTask().execute("http://192.168.1.9/agriconnect/php/img/etch_image_urls.php");
+                new FetchImageUrlsTask().execute("https://hotela9barnala.net/img/etch_image_urls.php");
 
 
             }

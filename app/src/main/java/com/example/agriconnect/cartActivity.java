@@ -44,22 +44,22 @@ public class cartActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/cart/selectcartusername.php";
-    private static String urlcartqty = "http://192.168.1.9/Agriconnect/php/cart/selectcartqty.php";
-    private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/cart/selectcartprice.php";
-    private static String urlcartproductid = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductid.php";
-    private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/cart/selectcartproductname.php";
-    private static String urltotalA = "http://192.168.1.9/Agriconnect/php/cart/selecttotalamount.php";
-    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/cart/selectcartid.php";
+    private static String urlHost = "https://hotela9barnala.net/cart/selectcartusername.php";
+    private static String urlcartqty = "https://hotela9barnala.net/cart/selectcartqty.php";
+    private static String urlcartprice = "https://hotela9barnala.net/cart/selectcartprice.php";
+    private static String urlcartproductid = "https://hotela9barnala.net/cart/selectcartproductid.php";
+    private static String urlcartproductname = "https://hotela9barnala.net/cart/selectcartproductname.php";
+    private static String urltotalA = "https://hotela9barnala.net/cart/selecttotalamount.php";
+    private static String urlHostID = "https://hotela9barnala.net/cart/selectcartid.php";
 
-    private  static String urladdress = "http://192.168.1.9/Agriconnect/php/product/selectaddress.php";
+    private  static String urladdress = "https://hotela9barnala.net/product/selectaddress.php";
 
-    private static String uploadcheckout = "http://192.168.1.9/agriconnect/php/product/selectcheckout.php";
-    private static String urlordertype = "http://192.168.1.9/agriconnect/php/cart/selectordertype.php";
+    private static String uploadcheckout = "https://hotela9barnala.net/product/selectcheckout.php";
+    private static String urlordertype = "https://hotela9barnala.net/cart/selectordertype.php";
 
-    private static String urlHostDelete = "http://192.168.1.9/Agriconnect/php/cart/delete.php";
+    private static String urlHostDelete = "https://hotela9barnala.net/cart/delete.php";
 
-    String urlimges = "http://192.168.1.9/agriconnect/php/img/cart_iamge.php";
+    String urlimges = "https://hotela9barnala.net/img/cart_iamge.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";

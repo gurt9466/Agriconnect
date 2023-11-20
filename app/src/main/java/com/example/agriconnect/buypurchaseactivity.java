@@ -53,9 +53,9 @@ public class buypurchaseactivity extends AppCompatActivity {
     public static final String PFID = "PFID";
     public static final String ID = "ID";
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "http://192.168.1.9/agriconnect/php/product/uploadcart.php";
+    private static String urlHost = "https://hotela9barnala.net/product/uploadcart.php";
 
-    private static String urladdress="http://192.168.1.9/agriconnect/php/product/selectaddress.php";
+    private static String urladdress="https://hotela9barnala.net/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -222,7 +222,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
 
                 // Construct the API URL with the product ID
-                String apiUrl = "http://192.168.1.9/agriconnect/php/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "https://hotela9barnala.net/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");

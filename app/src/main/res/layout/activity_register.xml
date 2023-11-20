@@ -50,11 +50,15 @@
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
+      android:layout_marginEnd="45dp"
+      android:layout_marginBottom="15dp"
       android:background="#ECECEC"
       android:ems="10"
-      android:textAlignment="center"
       android:hint="Fisrt Name"
       android:inputType="text"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/edtclname"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -64,11 +68,15 @@
       android:layout_height="49dp"
       android:layout_marginStart="51dp"
       android:layout_marginTop="21dp"
+      android:layout_marginEnd="44dp"
+      android:layout_marginBottom="20dp"
       android:background="#ECECEC"
       android:ems="10"
       android:hint="Enter USERNAME"
       android:inputType="text"
       android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView9"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -78,11 +86,15 @@
       android:layout_height="49dp"
       android:layout_marginStart="51dp"
       android:layout_marginTop="8dp"
+      android:layout_marginEnd="44dp"
+      android:layout_marginBottom="20dp"
       android:background="#ECECEC"
       android:ems="10"
       android:hint="Enter PASSWORD"
       android:inputType="textPassword"
       android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView3"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -93,11 +105,13 @@
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
       android:layout_marginEnd="44dp"
+      android:layout_marginBottom="20dp"
       android:background="#ECECEC"
       android:ems="10"
-      android:textAlignment="center"
       android:hint="Last Name"
       android:inputType="text"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView7"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcfname" />
@@ -108,11 +122,15 @@
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
+      android:layout_marginEnd="45dp"
+      android:layout_marginBottom="21dp"
       android:background="#ECECEC"
       android:ems="10"
+      android:hint="Email"
       android:inputType="text"
       android:textAlignment="center"
-      android:hint="Email"
+      app:layout_constraintBottom_toTopOf="@+id/textView5"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -122,8 +140,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="19dp"
+      android:layout_marginEnd="326dp"
+      android:layout_marginBottom="14dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Email"
+      app:layout_constraintBottom_toTopOf="@+id/edtcemail"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/cdob" />
 
@@ -133,8 +155,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="307dp"
+      android:layout_marginBottom="14dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Address:"
+      app:layout_constraintBottom_toTopOf="@+id/edtcaddressstreet"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcemail" />
 
@@ -144,11 +170,15 @@
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
+      android:layout_marginEnd="45dp"
+      android:layout_marginBottom="15dp"
       android:background="#ECECEC"
       android:ems="10"
+      android:hint="House#, Street"
       android:inputType="text"
       android:textAlignment="center"
-      android:hint="House#, Street"
+      app:layout_constraintBottom_toTopOf="@+id/edtcaddresscity"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -157,12 +187,14 @@
       android:layout_width="149dp"
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
-      android:layout_marginTop="15dp"
+      android:layout_marginBottom="10dp"
       android:background="#ECECEC"
       android:ems="10"
-      android:textAlignment="center"
       android:hint="City"
       android:inputType="text"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView6"
+      app:layout_constraintEnd_toStartOf="@+id/edtcaddressregion"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcaddressstreet" />
 
@@ -170,15 +202,20 @@
       android:id="@+id/edtcaddressregion"
       android:layout_width="149dp"
       android:layout_height="49dp"
-      android:layout_marginTop="15dp"
-      android:layout_marginEnd="50dp"
+      android:layout_marginStart="21dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="44dp"
+      android:layout_marginBottom="16dp"
       android:background="#ECECEC"
       android:ems="10"
-      android:textAlignment="center"
       android:hint="Region"
       android:inputType="text"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView6"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/edtcaddressstreet" />
+      app:layout_constraintStart_toEndOf="@+id/edtcaddresscity"
+      app:layout_constraintTop_toBottomOf="@+id/edtcaddressstreet"
+      app:layout_constraintVertical_bias="1.0" />
 
   <EditText
       android:id="@+id/edtccnumber"
@@ -186,10 +223,14 @@
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
+      android:layout_marginEnd="45dp"
+      android:layout_marginBottom="50dp"
       android:background="#ECECEC"
       android:ems="10"
       android:hint="09XX-XXX-XXXX"
       android:inputType="number"
+      app:layout_constraintBottom_toTopOf="@+id/Cregisterbtn"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -199,9 +240,13 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="40dp"
       android:layout_marginTop="80dp"
-      android:text="Contact Number:"
+      android:layout_marginEnd="245dp"
+      android:layout_marginBottom="14dp"
       android:fontFamily="@font/libre_baskerville"
+      android:text="Contact Number:"
       android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/edtccnumber"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcaddressstreet" />
 
@@ -211,8 +256,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
-      android:text="Date of Birth:"
+      android:layout_marginEnd="270dp"
+      android:layout_marginBottom="5dp"
       android:fontFamily="@font/libre_baskerville"
+      android:text="Date of Birth:"
+      app:layout_constraintBottom_toTopOf="@+id/cdob"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/gender" />
 
@@ -223,11 +272,13 @@
       android:layout_marginStart="51dp"
       android:layout_marginTop="16dp"
       android:layout_marginEnd="44dp"
+      android:layout_marginBottom="4dp"
       android:background="#ECECEC"
       android:ems="10"
       android:hint="YYYY-MM-DD"
       android:inputType="date"
       android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/textView16"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -238,8 +289,12 @@
       android:layout_height="49dp"
       android:layout_marginStart="50dp"
       android:layout_marginTop="15dp"
+      android:layout_marginEnd="45dp"
+      android:layout_marginBottom="21dp"
       android:background="#ECECEC"
       android:orientation="horizontal"
+      app:layout_constraintBottom_toTopOf="@+id/textView8"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -264,8 +319,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="321dp"
+      android:layout_marginBottom="5dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Name:"
+      app:layout_constraintBottom_toTopOf="@+id/edtcfname"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcpasswd" />
 
@@ -275,8 +334,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="297dp"
+      android:layout_marginBottom="5dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Password:"
+      app:layout_constraintBottom_toTopOf="@+id/edtcpasswd"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtcusername" />
 
@@ -286,8 +349,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="295dp"
+      android:layout_marginBottom="5dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Username"
+      app:layout_constraintBottom_toTopOf="@+id/edtcusername"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -297,8 +364,12 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginTop="20dp"
+      android:layout_marginEnd="310dp"
+      android:layout_marginBottom="5dp"
       android:fontFamily="@font/libre_baskerville"
       android:text="Gender:"
+      app:layout_constraintBottom_toTopOf="@+id/gender"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtclname" />
 
@@ -325,6 +396,7 @@
       android:visibility="gone"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
   <Button
       android:id="@+id/Cregisterbtn"
       android:layout_width="165dp"
@@ -338,8 +410,25 @@
 
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.511"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/edtccnumber" />
+
+  <TextView
+      android:id="@+id/textView16"
+      android:layout_width="177dp"
+      android:layout_height="20dp"
+      android:layout_marginStart="117dp"
+      android:layout_marginTop="3dp"
+      android:layout_marginEnd="117dp"
+      android:layout_marginBottom="49dp"
+      android:fontFamily="@font/libre_baskerville"
+      android:text="(example :2023/08/27)"
+      android:textColor="@color/black"
+      app:layout_constraintBottom_toTopOf="@+id/edtcemail"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cdob" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

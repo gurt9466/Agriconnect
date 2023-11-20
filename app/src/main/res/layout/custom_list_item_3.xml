@@ -114,12 +114,14 @@
         android:layout_width="32dp"
         android:layout_height="31dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="118dp"
         android:layout_marginBottom="14dp"
         android:padding="8dp"
         android:text="KG"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pproqtysTextView"
         app:layout_constraintTop_toBottomOf="@+id/productnameTextView" />
 

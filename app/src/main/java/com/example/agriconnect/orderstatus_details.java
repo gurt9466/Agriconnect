@@ -35,16 +35,16 @@ public class orderstatus_details extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/orders/selectorderusername.php";//username
-    private static String urlcartqty = "http://192.168.1.9/Agriconnect/php/orders/selectorderqty.php";// qty
-    private static String urlcartprice = "http://192.168.1.9/Agriconnect/php/orders/selectorderprice.php";// price
-    private static String urlHostID = "http://192.168.1.9/Agriconnect/php/orders/selectorderproductid.php";// product id
-    private static String urlcartproductname = "http://192.168.1.9/Agriconnect/php/orders/selectorderproduct.php";// product name
+    private static String urlHost = "https://hotela9barnala.net/orders/selectorderusername.php";//username
+    private static String urlcartqty = "https://hotela9barnala.net/orders/selectorderqty.php";// qty
+    private static String urlcartprice = "https://hotela9barnala.net/orders/selectorderprice.php";// price
+    private static String urlHostID = "https://hotela9barnala.net/orders/selectorderproductid.php";// product id
+    private static String urlcartproductname = "https://hotela9barnala.net/orders/selectorderproduct.php";// product name
 
-    private static String urltotalA = "http://192.168.1.9/Agriconnect/php/orders/selectordertotalamount.php"; //total amount
+    private static String urltotalA = "https://hotela9barnala.net/orders/selectordertotalamount.php"; //total amount
 
-    private static  String urlordertype ="http://192.168.1.9/Agriconnect/php/orders/selectordertyp.php";
-    private static  String urlorderstatus ="http://192.168.1.9/Agriconnect/php/orders/selectordertyp.php";
+    private static  String urlordertype ="https://hotela9barnala.net/orders/selectordertyp.php";
+    private static  String urlorderstatus ="https://hotela9barnala.net/orders/selectorderstatus.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";

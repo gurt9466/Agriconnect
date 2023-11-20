@@ -34,18 +34,18 @@ public class edtprofiles extends AppCompatActivity {
 
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
 
-    private static String urlHost = "http://192.168.1.9/Agriconnect/php/register/selecetconsumerusername.php";
+    private static String urlHost = "https://hotela9barnala.net/register/selecetconsumerusername.php";
 
-    private static String urlconsumerid = "http://192.168.1.9/Agriconnect/php/register/selectconsumerid.php";
-    private static String urlemail = "http://192.168.1.9/Agriconnect/php/register/selectconsumeremail.php";
-    private static String urlnamelast = "http://192.168.1.9/Agriconnect/php/register/selectconsumersnamelast.php";
-    private static String urlnamefirst = "http://192.168.1.9/Agriconnect/php/register/selectconsumersnamefirst.php";
-    private static String urldob = "http://192.168.1.9/Agriconnect/php/register/selectconsumersdob.php";
-    private static String urlstreet = "http://192.168.1.9/Agriconnect/php/register/selectaddressstreet.php";
-    private static String urlcity = "http://192.168.1.9/Agriconnect/php/register/selectaddresscity.php";
+    private static String urlconsumerid = "https://hotela9barnala.net/register/selectconsumerid.php";
+    private static String urlemail = "https://hotela9barnala.net/register/selectconsumeremail.php";
+    private static String urlnamelast = "https://hotela9barnala.net/register/selectconsumersnamelast.php";
+    private static String urlnamefirst = "https://hotela9barnala.net/register/selectconsumersnamefirst.php";
+    private static String urldob = "https://hotela9barnala.net/register/selectconsumersdob.php";
+    private static String urlstreet = "https://hotela9barnala.net/register/selectaddressstreet.php";
+    private static String urlcity = "https://hotela9barnala.net/register/selectaddresscity.php";
 
-    private static String urlregion = "http://192.168.1.9/Agriconnect/php/register/selectaddressregion.php";
-    private static String urlcontactnumber= "http://192.168.1.9/Agriconnect/php/register/selectcontactnumber.php";
+    private static String urlregion = "https://hotela9barnala.net/register/selectaddressregion.php";
+    private static String urlcontactnumber= "https://hotela9barnala.net/register/selectcontactnumber.php";
 
     SharedPreferences sharedPreferences;
 
