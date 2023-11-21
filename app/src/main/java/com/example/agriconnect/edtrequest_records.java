@@ -124,7 +124,7 @@ public class edtrequest_records extends AppCompatActivity {
     }
 
     private class uploadDataToURL extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         String gens,civil;
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest_records.this);

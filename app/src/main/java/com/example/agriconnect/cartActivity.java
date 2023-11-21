@@ -246,7 +246,7 @@ public class cartActivity extends AppCompatActivity {
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -320,7 +320,7 @@ public class cartActivity extends AppCompatActivity {
 
 
     private class CQUANTITY extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -393,7 +393,7 @@ public class cartActivity extends AppCompatActivity {
         }
     }
     private class CPRICE extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -468,7 +468,7 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private class CPRODUCTID extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -546,7 +546,7 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private class CPRODUCTNAME extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -624,7 +624,7 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private class OrderType extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -703,7 +703,7 @@ public class cartActivity extends AppCompatActivity {
 
 
     private class TotalP extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -772,7 +772,7 @@ public class cartActivity extends AppCompatActivity {
 
 
     private class CHECKOUTF extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         String gens, civil;
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
@@ -839,7 +839,7 @@ public class cartActivity extends AppCompatActivity {
 
 
     private class id extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 
@@ -912,7 +912,7 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private class delete extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
 

@@ -134,7 +134,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "",cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "",cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -209,7 +209,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
 
     private class CQUANTITY extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -283,7 +283,7 @@ public class orderstatus_details extends AppCompatActivity {
         }
     }
     private class CPRICE extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "" ,cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "" ,cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -361,7 +361,7 @@ public class orderstatus_details extends AppCompatActivity {
 
 
     private class CPRODUCTNAME extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "" ,cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "" ,cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -438,7 +438,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
 
     private class OrderType extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -516,7 +516,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
 
     private class Orderstatus extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -594,7 +594,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
 
     private class id extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 
@@ -671,7 +671,7 @@ public class orderstatus_details extends AppCompatActivity {
     }
 
     private class TotalP extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
 

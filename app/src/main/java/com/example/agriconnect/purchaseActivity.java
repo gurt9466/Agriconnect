@@ -209,7 +209,7 @@ public class purchaseActivity extends AppCompatActivity {
 
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 
@@ -281,7 +281,7 @@ public class purchaseActivity extends AppCompatActivity {
         }
     }
     private class HDATE extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 
@@ -356,7 +356,7 @@ public class purchaseActivity extends AppCompatActivity {
     }
 
     private class ProductQty extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 
@@ -432,7 +432,7 @@ public class purchaseActivity extends AppCompatActivity {
     }
 
     private class ProductPRICE extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 
@@ -510,7 +510,7 @@ public class purchaseActivity extends AppCompatActivity {
     }
 
     private class farmerID extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 
@@ -588,7 +588,7 @@ public class purchaseActivity extends AppCompatActivity {
     }
 
     private class id extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(purchaseActivity.this);
 

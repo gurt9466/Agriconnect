@@ -150,7 +150,7 @@ public class orderstatusActivity extends AppCompatActivity {
 
         private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-            String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+            String cPOST = "", cPostSQL = "", cMessage = "Updating";
             int nPostValueIndex;
             ProgressDialog pDialog = new ProgressDialog(orderstatusActivity.this);
 
@@ -223,7 +223,7 @@ public class orderstatusActivity extends AppCompatActivity {
         }
 
         private class ODRDERID extends AsyncTask<String, String, String> {
-            String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+            String cPOST = "", cPostSQL = "", cMessage = "Updating";
             int nPostValueIndex;
             ProgressDialog pDialog = new ProgressDialog(orderstatusActivity.this);
 

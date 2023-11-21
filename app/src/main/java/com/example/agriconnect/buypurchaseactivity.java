@@ -83,8 +83,9 @@ public class buypurchaseactivity extends AppCompatActivity {
         btnclickhere2 = findViewById(R.id.textViewclickhere3);
 
 
-        new conaddress().execute();
+
         new FetchImageUrlsTask().execute();
+        new conaddress().execute();
 
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
@@ -141,7 +142,7 @@ public class buypurchaseactivity extends AppCompatActivity {
     }
 
     private class uploadDataToURL extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         String gens, civil;
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(buypurchaseactivity.this);
@@ -254,7 +255,7 @@ public class buypurchaseactivity extends AppCompatActivity {
     }
 
     private class conaddress extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(buypurchaseactivity.this);
 
@@ -278,7 +279,7 @@ public class buypurchaseactivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = username;
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urladdress, "POST", cv);

@@ -141,7 +141,7 @@ public class editcartactivity extends AppCompatActivity {
     }
 
     private class uploadDataToURL extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cPostSQL2 = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cPostSQL2 = "", cMessage = "Updating";
         String gens, civil;
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(editcartactivity.this);
@@ -250,7 +250,7 @@ public class editcartactivity extends AppCompatActivity {
     }
 
     private class conaddress extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(editcartactivity.this);
 
@@ -274,7 +274,7 @@ public class editcartactivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = (sharedPreferences.getString("username",""));
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urladdress, "POST", cv);

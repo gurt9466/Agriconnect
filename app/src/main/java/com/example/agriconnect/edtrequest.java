@@ -175,7 +175,7 @@ public class edtrequest extends AppCompatActivity {
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
@@ -248,7 +248,7 @@ public class edtrequest extends AppCompatActivity {
     }
 
     private class RPRODUCT extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
@@ -321,7 +321,7 @@ public class edtrequest extends AppCompatActivity {
         }
     }
     private class RQTY extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
@@ -396,7 +396,7 @@ public class edtrequest extends AppCompatActivity {
     }
 
     private class RPDATE extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
@@ -473,7 +473,7 @@ public class edtrequest extends AppCompatActivity {
         }
     }
     private class id extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 
@@ -554,7 +554,7 @@ public class edtrequest extends AppCompatActivity {
         }
     }
     private class delete extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtrequest.this);
 

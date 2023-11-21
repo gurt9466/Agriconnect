@@ -217,7 +217,7 @@ public class edtprofiles extends AppCompatActivity {
     }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
 
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -290,7 +290,7 @@ public class edtprofiles extends AppCompatActivity {
     }
 
     private class EMAIL extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -363,7 +363,7 @@ public class edtprofiles extends AppCompatActivity {
         }
     }
     private class NAMELAST extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -438,7 +438,7 @@ public class edtprofiles extends AppCompatActivity {
     }
 
     private class NAMEFIRST extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -515,7 +515,7 @@ public class edtprofiles extends AppCompatActivity {
         }
     }
     private class DOB extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -591,7 +591,7 @@ public class edtprofiles extends AppCompatActivity {
             }
         }
     } private class ADDRESSSREET extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -667,7 +667,7 @@ public class edtprofiles extends AppCompatActivity {
             }
         }
     } private class ADDRESSCITY extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -743,7 +743,7 @@ public class edtprofiles extends AppCompatActivity {
             }
         }
     } private class ADRESSREGION extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -819,7 +819,7 @@ public class edtprofiles extends AppCompatActivity {
             }
         }
     } private class CONTACTNUMBER extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
@@ -896,7 +896,7 @@ public class edtprofiles extends AppCompatActivity {
         }
     }
     private class id extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
         ProgressDialog pDialog = new ProgressDialog(edtprofiles.this);
 
