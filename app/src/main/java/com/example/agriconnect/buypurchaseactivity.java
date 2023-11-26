@@ -87,7 +87,6 @@ public class buypurchaseactivity extends AppCompatActivity {
         new FetchImageUrlsTask().execute();
         new conaddress().execute();
 
-
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
         username = (sharedPreferences.getString("username", ""));
 
@@ -168,6 +167,7 @@ public class buypurchaseactivity extends AppCompatActivity {
                 cv.put("username", username);
                 cv.put("product_id", Productid);
                 cv.put("product_qty", edtProductQTYY);
+                cv.put("cart_price", price.getText().toString());
 
                 RadioButton checkedBtn = findViewById(OrderOption.getCheckedRadioButtonId());
                 String selectedoption = checkedBtn.getText().toString();
