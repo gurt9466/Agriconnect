@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -303,7 +305,7 @@ public class purchaseActivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = edtitemcode.getText().toString();
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHarvestDate, "POST", cv);
@@ -378,7 +380,7 @@ public class purchaseActivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = edtitemcode.getText().toString();
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlQuantity, "POST", cv);
@@ -454,7 +456,7 @@ public class purchaseActivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = edtitemcode.getText().toString();
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlPrice, "POST", cv);
@@ -531,8 +533,7 @@ public class purchaseActivity extends AppCompatActivity {
             int nSuccess;
             try {
                 ContentValues cv = new ContentValues();
-
-                cItemcode = cPostSQL;
+                cPostSQL = cItemcode;
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHarvestDate, "POST", cv);
@@ -610,7 +611,7 @@ public class purchaseActivity extends AppCompatActivity {
             try {
                 ContentValues cv = new ContentValues();
 
-                cItemcode = cPostSQL;
+                cPostSQL = edtitemcode.getText().toString();
                 cv.put("code", cPostSQL);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHostID, "POST", cv);
@@ -662,12 +663,21 @@ public class purchaseActivity extends AppCompatActivity {
         @Override
         protected List<String> doInBackground(String... urls) {
             String url = urls[0];
+            String gurtValue = edtitemcode.getText().toString();
+
             List<String> imageUrls = new ArrayList<>();
             try {
+                // Log the value of cItemcode
+                Log.d("Debug", "cItemcode value: " + gurtValue);
+
+                // Construct the URL with the string variable
+                String fullUrl = url + "?gurt=" + URLEncoder.encode(gurtValue, "UTF-8");
 
 
-                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+
+                HttpURLConnection conn = (HttpURLConnection) new URL(fullUrl).openConnection();
                 conn.setRequestMethod("GET");
+
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
@@ -675,6 +685,7 @@ public class purchaseActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
+
                 JSONArray jsonArray = new JSONArray(sb.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -690,9 +701,10 @@ public class purchaseActivity extends AppCompatActivity {
         protected void onPostExecute(List<String> imageUrls) {
             CustomListAdapter adapter = new CustomListAdapter(purchaseActivity.this, list_productname, list_dateharvest, list_pqty, list_pprice, list_farmerid, list_ID, imageUrls);
             listView.setAdapter(adapter);
-
         }
     }
+
+
 
     private class CustomListAdapter extends BaseAdapter {
         private Context context;
