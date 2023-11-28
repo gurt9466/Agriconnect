@@ -187,7 +187,7 @@
         android:background="#ECECEC"
         android:ems="10"
         android:hint="Price"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
