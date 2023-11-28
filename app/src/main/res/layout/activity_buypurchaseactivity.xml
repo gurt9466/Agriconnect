@@ -248,7 +248,7 @@
             android:layout_marginStart="88dp"
             android:layout_marginTop="12dp"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:text="Name"
             android:textAlignment="center"
             android:textSize="18dp"
