@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class requestActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ImageView imgeditpost, backimg;
     String requestproductname, requestqty, requestproductdate,username;
+    CalendarView calendar;
+    String valuecalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,17 @@ public class requestActivity extends AppCompatActivity {
         btnpost = findViewById(R.id.Rpostbtn);
         imgeditpost =findViewById(R.id.reditpostimg);
         backimg = findViewById(R.id.logout2);
+        calendar =findViewById(R.id.calendarView);
+
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                // Adjust month to display as two digits
+                String formattedMonth = String.format("%02d", (month + 1));
+                valuecalendar = year + "/" + formattedMonth + "/" + String.format("%02d", dayOfMonth);
+                rpdate.setText(valuecalendar);
+            }
+        });
 
         sharedPreferences = getSharedPreferences("Agriconnect", MODE_PRIVATE);
 
@@ -100,7 +114,7 @@ public class requestActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "https://hotela9barnala.net/request/request_product.php"; //host ip and phpfile
+                String url = "https://agriconnect.me/request/request_product.php"; //host ip and phpfile
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

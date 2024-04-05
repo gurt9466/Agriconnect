@@ -140,6 +140,28 @@ tools:context=".purchaseActivity">
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/txt_expireydate"
+        android:layout_width="55dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="700dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_farmername"
+        android:layout_width="55dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="700dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/txt_requestqty"
         android:layout_width="55dp"
         android:layout_height="16dp"

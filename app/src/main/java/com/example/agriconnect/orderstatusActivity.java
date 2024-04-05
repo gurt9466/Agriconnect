@@ -34,9 +34,9 @@ import java.util.List;
 
 public class orderstatusActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "https://hotela9barnala.net/request/selectdate.php"; // Date of purchase
+    private static String urlHost = "https://agriconnect.me/request/selectdate.php"; // Date of purchase
 
-    private static String urlorderid = "https://hotela9barnala.net/request/selectstatus.php"; // status
+    private static String urlorderid = "https://agriconnect.me/request/selectstatus.php"; // status
     SharedPreferences sharedPreferences;
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";

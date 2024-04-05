@@ -1,6 +1,7 @@
 package com.example.agriconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Color;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,16 +37,22 @@ public class orderstatus_details extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "https://hotela9barnala.net/orders/selectorderusername.php";//username
-    private static String urlcartqty = "https://hotela9barnala.net/orders/selectorderqty.php";// qty
-    private static String urlcartprice = "https://hotela9barnala.net/orders/selectorderprice.php";// price
-    private static String urlHostID = "https://hotela9barnala.net/orders/selectorderproductid.php";// product id
-    private static String urlcartproductname = "https://hotela9barnala.net/orders/selectorderproduct.php";// product name
+    private static String urlHost = "https://agriconnect.me/orders/selectorderusername.php";//username
+    private static String urlcartqty = "https://agriconnect.me/orders/selectorderqty.php";// qty
+    private static String urlcartprice = "https://agriconnect.me/orders/selectorderprice.php";// price
+    private static String urlHostID = "https://agriconnect.me/orders/selectorderproductid.php";// product id
+    private static String urlcartproductname = "https://agriconnect.me/orders/selectorderproduct.php";// product name
 
-    private static String urltotalA = "https://hotela9barnala.net/orders/selectordertotalamount.php"; //total amount
+    private static String urlfarmername3 = "https://agriconnect.me/orders/selectorderfname.php";// product name
 
-    private static  String urlordertype ="https://hotela9barnala.net/orders/selectordertyp.php";
-    private static  String urlorderstatus ="https://hotela9barnala.net/orders/selectorderstatus.php";
+    private static String urltotalA = "https://agriconnect.me/orders/selectordertotalamount.php"; //total amount
+
+    private static  String urlordertype ="https://agriconnect.me/orders/selectordertyp.php";
+    private static  String urlorderstatus ="https://agriconnect.me/orders/selectorderstatus.php";
+
+    private static String urlorderstatus_details = "https://agriconnect.me/orders/orderreceived.php";
+
+    private static String urlorderid = "https://agriconnect.me/orders/orderid.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -60,13 +68,21 @@ public class orderstatus_details extends AppCompatActivity {
     private static TextView totalamount ,sample;
 
     ArrayAdapter<String> adapter_cartusername;
+
+    ArrayAdapter<String> adapter_farmernamestatus;
     ArrayAdapter<String> adapter_cartquantity;
     ArrayAdapter<String> adapter_cartprice;
     ArrayAdapter<String> adapter_cartproductname;
     ArrayAdapter <String> adapter_ID;
     ArrayAdapter <String> adapter_orderstatus;
     ArrayAdapter <String> adapter_ordertype;
+
+    ArrayAdapter <String> adapter_orderid;
     ArrayList<String> list_cartproductname;
+
+    ArrayList<String> list_orderid;
+
+    ArrayList<String> list_farmernamestatus;
     ArrayList<String> list_cartordertype;
     ArrayList <String> list_cartprice;
     ArrayList <String> list_cartorderstatus;
@@ -123,6 +139,8 @@ public class orderstatus_details extends AppCompatActivity {
                 new orderstatus_details.CPRODUCTNAME().execute();// product name
                 new orderstatus_details.OrderType().execute();// product_id
                 new orderstatus_details.Orderstatus().execute();// product_id
+                new orderstatus_details.OrderId().execute();// product_id
+                new orderstatus_details.FARMERNAME().execute();// farmername
                 new orderstatus_details.id().execute();// product_id
                 new orderstatus_details.TotalP().execute();// total price
 
@@ -515,6 +533,84 @@ public class orderstatus_details extends AppCompatActivity {
         }
     }
 
+    private class OrderId extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Updating";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
+
+        public OrderId() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cPostSQL2 = date;
+                cv.put("code", cPostSQL);
+                cv.put("code2", cPostSQL2);
+
+
+                JSONObject json = jParser.makeHTTPRequest(urlorderid, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String cartordERid) {
+            super.onPostExecute(cartordERid);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
+            if (cartordERid != null) {
+                if (isEmpty.equals("") && !cartordERid.equals("HTTPSERVER_ERROR")) { }
+
+
+                String Corderid = cartordERid;
+
+                String str = Corderid;
+                final String idordertypes[] = str.split("-");
+                list_orderid = new ArrayList<String>(Arrays.asList(idordertypes));
+                adapter_orderid = new ArrayAdapter<String>(orderstatus_details.this,
+                        android.R.layout.simple_list_item_1,list_orderid);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
     private class Orderstatus extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Updating";
         int nPostValueIndex;
@@ -593,6 +689,84 @@ public class orderstatus_details extends AppCompatActivity {
         }
     }
 
+    private class FARMERNAME extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cPostSQL2 ="",cMessage = "Updating";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
+
+        public FARMERNAME() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cPostSQL2 = date;
+                cv.put("code", cPostSQL);
+                cv.put("code2", cPostSQL2);
+
+
+                JSONObject json = jParser.makeHTTPRequest(urlfarmername3, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String farmerorderSTATUS) {
+            super.onPostExecute(farmerorderSTATUS);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
+            if (farmerorderSTATUS != null) {
+                if (isEmpty.equals("") && !farmerorderSTATUS.equals("HTTPSERVER_ERROR")) { }
+
+
+                String farmerORderstatus = farmerorderSTATUS;
+
+                String str = farmerORderstatus;
+                final String Corderstatuss[] = str.split("-");
+                list_farmernamestatus = new ArrayList<String>(Arrays.asList(Corderstatuss));
+                adapter_farmernamestatus = new ArrayAdapter<String>(orderstatus_details.this,
+                        android.R.layout.simple_list_item_1,list_farmernamestatus);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
     private class id extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "",cPostSQL2 = "", cMessage = "Updating";
         int nPostValueIndex;
@@ -660,7 +834,7 @@ public class orderstatus_details extends AppCompatActivity {
                 adapter_ID = new ArrayAdapter<String>(orderstatus_details.this,
                         android.R.layout.simple_list_item_1,list_ID);
 
-                orderstatus_details.CustomListAdapter adapter = new orderstatus_details.CustomListAdapter(orderstatus_details.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, list_cartordertype,list_cartorderstatus);
+                orderstatus_details.CustomListAdapter adapter = new orderstatus_details.CustomListAdapter(orderstatus_details.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, list_cartordertype,list_farmernamestatus,list_orderid,list_cartorderstatus);
                 listView.setAdapter(adapter);
             } else {
                 alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
@@ -744,14 +918,17 @@ public class orderstatus_details extends AppCompatActivity {
         private Context context;
 
         private ArrayList<String> cartqty;
+        private ArrayList<String> orderid;
         private ArrayList<String> cartprice;
         private ArrayList<String> cartproductname;
         private ArrayList<String> productid;
         private ArrayList<String> dordertype;
         private ArrayList<String> dorderstatus;
 
+        private ArrayList<String> farname3;
 
-        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> productid,ArrayList<String> dordertype, ArrayList<String> dorderstatus) {
+
+        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> productid,ArrayList<String> dordertype, ArrayList<String> farname3,ArrayList<String> orderid,ArrayList<String> dorderstatus) {
             this.context = context;
             this.cartqty = cartqty;
             this.cartprice = cartprice;
@@ -759,6 +936,8 @@ public class orderstatus_details extends AppCompatActivity {
             this.productid = productid;
             this.dordertype =dordertype;
             this.dorderstatus =dorderstatus;
+            this.farname3 = farname3;
+            this.orderid = orderid;
 
 
         }
@@ -787,22 +966,106 @@ public class orderstatus_details extends AppCompatActivity {
             TextView cartproductnameTextView = listViewItem.findViewById(R.id.productnameTextView);
             TextView cartQtyTextView = listViewItem.findViewById(R.id.pproqtysTextView);
             TextView cartpriceTextView = listViewItem.findViewById(R.id.ProductpsTextView);
-            TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview2);
-           TextView ordertypeTextView = listViewItem.findViewById(R.id.ordertypetxtview);
+            TextView nameoffarmer3 = listViewItem.findViewById(R.id.farmername3);
+            TextView orderids = listViewItem.findViewById(R.id.adyiview2);
+            TextView ordertypeTextView = listViewItem.findViewById(R.id.ordertypetxtview);
             TextView orderstatusTextView = listViewItem.findViewById(R.id.orderstatustxtview);
 
+            Button confirm = listViewItem.findViewById(R.id.button2);
 
+            String currentOrdertId = orderid.get(position);
+
+
+            orderids.setText(orderid.get(position));
             cartproductnameTextView.setText(cartproductname.get(position));
             cartQtyTextView.setText(cartqty.get(position));
             cartpriceTextView.setText(cartprice.get(position));
-            cartaydiTextView.setText(productid.get(position));
+            nameoffarmer3.setText(farname3.get(position));
            ordertypeTextView.setText(dordertype.get(position));
             orderstatusTextView.setText(dorderstatus.get(position));
 
+            confirm.setTag(currentOrdertId);
+
+          confirm.setOnClickListener(new View.OnClickListener() {
+
+              @Override
+              public void onClick(View view) {
+                  String orderId = (String) view.getTag();
+                  new orderstatus_details.ORDERRECEIVED().execute(orderId);
+                  btnQuery.performClick();
+                  confirm.setBackgroundColor(Color.GRAY);
+
+              }
+          });
+
+
+
             return listViewItem;
         }
+
     }
+    private class ORDERRECEIVED extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cPostSQL2,cMessage = "Updating";
+        String gens, civil;
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(orderstatus_details.this);
+
+        public ORDERRECEIVED() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+                String orderID = params[0];
+                cPostSQL2 = date;
+                cv.put("order_id", orderID);
 
 
+                JSONObject json = jParser.makeHTTPRequest(urlorderstatus_details, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pDialog.dismiss();
+            String isEmpty = "";
+            AlertDialog.Builder alert = new AlertDialog.Builder(orderstatus_details.this);
+            if (s != null) {
+                if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) {
+                }
+                Toast.makeText(orderstatus_details.this, s, Toast.LENGTH_SHORT).show();
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
 }

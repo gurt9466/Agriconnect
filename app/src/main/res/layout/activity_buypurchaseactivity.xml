@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="316dp"
-            android:text="Product ID:  "
+            android:text="Farmer Name:  "
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +130,18 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="316dp"
             android:text="ID"
+            android:visibility="gone"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView69"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textViewfarmername"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="312dp"
+            android:text="Farmer name"
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textView69"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -155,7 +167,7 @@
             android:text="product name"
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textView20"
-            app:layout_constraintTop_toBottomOf="@+id/textViewid" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewfarmername" />
 
         <TextView
             android:id="@+id/textViewdeliveryaddress2"
@@ -185,6 +197,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="56dp"
+            android:text="Expiry Date :"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
             android:id="@+id/textViewhdate"
             android:layout_width="200dp"
             android:layout_height="30dp"
@@ -196,11 +220,22 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewpname" />
 
         <TextView
+            android:id="@+id/textViewedate2"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="48dp"
+            android:text="harvest date"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textViewpname" />
+
+        <TextView
             android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="56dp"
             android:text="Available Qty: "
             android:textSize="18dp"
             android:textStyle="bold"
@@ -208,25 +243,25 @@
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <TextView
-            android:id="@+id/textViewqty"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="14dp"
-            android:text="qty"
-            android:textSize="18dp"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
-
-        <TextView
             android:id="@+id/textViewhdate3"
             android:layout_width="33dp"
             android:layout_height="30dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="52dp"
             android:text="KG "
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textViewqty"
+            app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
+
+        <TextView
+            android:id="@+id/textViewqty"
+            android:layout_width="64dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="52dp"
+            android:text="qty"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/textViewhdate" />
 
         <TextView

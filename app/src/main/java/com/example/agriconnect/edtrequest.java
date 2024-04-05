@@ -38,15 +38,15 @@ public class edtrequest extends AppCompatActivity {
     // Product Name, Estimated Price, Date Expected
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
 
-    private static String urlHost = "https://hotela9barnala.net/request/selectUsername.php";
-    private static String urlHostDelete = "https://hotela9barnala.net/request/delete.php";
+    private static String urlHost = "https://agriconnect.me/request/selectUsername.php";
+    private static String urlHostDelete = "https://agriconnect.me/request/delete.php";
 
 
-    private static String urlRequestProductName = "https://hotela9barnala.net/request/selectRequestproductname.php";
-    private static String urlRequestproductqty = "https://hotela9barnala.net/request/selectRequestproductqty.php";
-    private static String urlRequestproductdate = "https://hotela9barnala.net/request/selectRequestproductdate.php";
+    private static String urlRequestProductName = "https://agriconnect.me/request/selectRequestproductname.php";
+    private static String urlRequestproductqty = "https://agriconnect.me/request/selectRequestproductqty.php";
+    private static String urlRequestproductdate = "https://agriconnect.me/request/selectRequestproductdate.php";
 
-    private static String urlHostID = "https://hotela9barnala.net/request/selectid.php";
+    private static String urlHostID = "https://agriconnect.me/request/selectid.php";
     SharedPreferences sharedPreferences;
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";

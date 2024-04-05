@@ -44,22 +44,28 @@ public class cartActivity extends AppCompatActivity {
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
     SharedPreferences sharedPreferences;
 
-    private static String urlHost = "https://hotela9barnala.net/cart/selectcartusername.php";
-    private static String urlcartqty = "https://hotela9barnala.net/cart/selectcartqty.php";
-    private static String urlcartprice = "https://hotela9barnala.net/cart/selectcartprice.php";
-    private static String urlcartproductid = "https://hotela9barnala.net/cart/selectcartproductid.php";
-    private static String urlcartproductname = "https://hotela9barnala.net/cart/selectcartproductname.php";
-    private static String urltotalA = "https://hotela9barnala.net/cart/selecttotalamount.php";
-    private static String urlHostID = "https://hotela9barnala.net/cart/selectcartid.php";
+    private static String urlHost = "https://agriconnect.me/cart/selectcartusername.php";
+    private static String urlcartqty = "https://agriconnect.me/cart/selectcartqty.php";
+    private static String urlcartprice = "https://agriconnect.me/cart/selectcartprice.php";
+    private static String urlcartproductid = "https://agriconnect.me/cart/selectcartproductid.php";
+    private static String urlcartproductname = "https://agriconnect.me/cart/selectcartproductname.php";
+    private static String urltotalA = "https://agriconnect.me/cart/selecttotalamount.php";
+    private static String urlHostID = "https://agriconnect.me/cart/selectcartid.php";
 
-    private  static String urladdress = "https://hotela9barnala.net/product/selectaddress.php";
+    private static String urlHarvestDate = "https://agriconnect.me/product/selectharvestdate.php";
 
-    private static String uploadcheckout = "https://hotela9barnala.net/product/selectcheckout.php";
-    private static String urlordertype = "https://hotela9barnala.net/cart/selectordertype.php";
+    private static String urlEDate = "https://agriconnect.me/product/selectexpirydate.php";
 
-    private static String urlHostDelete = "https://hotela9barnala.net/cart/delete.php";
+    private  static String urladdress = "https://agriconnect.me/product/selectaddress.php";
 
-    String urlimges = "https://hotela9barnala.net/img/cart_iamge.php";
+    private  static String urlfarmername = "https://agriconnect.me/cart/selectcartfarmername.php";
+
+    private static String uploadcheckout = "https://agriconnect.me/product/selectcheckout.php";
+    private static String urlordertype = "https://agriconnect.me/cart/selectordertype.php";
+
+    private static String urlHostDelete = "https://agriconnect.me/cart/delete.php";
+
+    String urlimges = "https://agriconnect.me/img/cart_iamge.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String cItemcode = "";
@@ -69,9 +75,11 @@ public class cartActivity extends AppCompatActivity {
     private static TextView totalamount;
     private static EditText edtitemcode;
     ListView listView;
-    TextView textView,txtDefault_ID, txtDefaultordertype,txtDefaultcartusername, txtDefaultaddress,txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname;
+    TextView textView,txtDefault_ID, txtDefaultordertype,txtDefaultcarthdate,txtDefaultcartedate,txtDefaultcartfarmername,txtDefaultcartusername, txtDefaultaddress,txtDefaultcartquantity, txtDefaultcartprice, txtDefaultcartproductid,txtDefaultcartproductname;
     ArrayAdapter<String> adapter_cartusername;
     ArrayAdapter<String> adapter_ordertype;
+    ArrayAdapter<String> adapter_expireydate;
+    ArrayAdapter<String> adapter_harvestdate;
 
     ArrayAdapter<String> adapter_cartquantity;
     ArrayAdapter<String> adapter_cartprice;
@@ -79,9 +87,16 @@ public class cartActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter_cartproductname;
     ArrayAdapter <String> adapter_ID;
 
+    ArrayAdapter <String> adapter_farmname;
+
 
 
     ArrayList<String> list_cartordertype;
+    ArrayList<String> list_dateexpirey;
+
+    ArrayList<String> list_dateharvest;
+
+    ArrayList<String> list_farmname2;
     ArrayList<String> list_cartproductname;
     ArrayList <String> list_cartproductid;
     ArrayList <String> list_cartprice;
@@ -91,9 +106,9 @@ public class cartActivity extends AppCompatActivity {
 
     ImageView backimgbtn;
 
-    String totalprice,cltemSelected_ordertype,cltemSelected_cartusername,cItemSelected_ID, cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_cartproductname;
+    String totalprice,cltemSelected_ordertype,cltemSelected_cartusername,cItemSelected_ID, cItemSelected_farmername,cltemSelected_cartquantity, cltemSelected_cartprice, cltemSelected_cartproductid,cltemSelected_carthdate,cltemSelected_cartedate,cltemSelected_cartproductname;
     Context context = this;
-    private String Cart_Username, Cart_ordertype,Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname;
+    private String Cart_Username, Cart_ordertype,Cart_FarmerName,Cart_Quantity, Cart_price, Cart_productid,aydi,Cart_porductname,Cart_hdate,Cart_edate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +126,12 @@ public class cartActivity extends AppCompatActivity {
         txtDefault_ID = (TextView) findViewById(R.id.txt_ID);
         txtDefaultcartusername = (TextView) findViewById(R.id.txt_cartusername);
         txtDefaultcartquantity = (TextView) findViewById(R.id.txt_cartqty);
+        txtDefaultcarthdate = (TextView) findViewById(R.id.txt_carthdate);
+        txtDefaultcartedate = (TextView) findViewById(R.id.cartedate);
         txtDefaultcartprice = (TextView) findViewById(R.id.txt_cartprice);
         txtDefaultcartproductid = (TextView) findViewById(R.id.txt_cartproductid);
         txtDefaultcartproductname = (TextView) findViewById(R.id.txt_cartproductname);
+        txtDefaultcartfarmername = (TextView) findViewById(R.id.txt_farmername2);
 
         txtDefaultordertype =(TextView) findViewById(R.id.txt_orderstatus);
         txtDefaultaddress = (TextView) findViewById(R.id.txt_completeaddress2);
@@ -155,6 +173,9 @@ public class cartActivity extends AppCompatActivity {
                 new cartActivity.CPRODUCTID().execute();
                 new cartActivity.CPRODUCTNAME().execute();
                 new cartActivity.OrderType().execute();
+                new cartActivity.FARMERNAME().execute();
+                new cartActivity.HDATE().execute();
+                new cartActivity.EDATE().execute();
                 new cartActivity.id().execute();
                 new cartActivity.TotalP().execute();
                 FetchImageUrlsTask task = new FetchImageUrlsTask(username);
@@ -171,8 +192,11 @@ public class cartActivity extends AppCompatActivity {
                 cltemSelected_cartquantity = adapter_cartquantity.getItem(position);
                 cltemSelected_cartprice = adapter_cartprice.getItem(position);
                 cltemSelected_cartproductid = adapter_cartproductid.getItem(position);
+                cltemSelected_cartedate = adapter_expireydate.getItem(position);
+                cltemSelected_carthdate = adapter_harvestdate.getItem(position);
                 cltemSelected_cartproductname = adapter_cartproductname.getItem(position);
                 cltemSelected_ordertype = adapter_ordertype.getItem(position);
+                cItemSelected_farmername = adapter_farmname.getItem(position);
                 cItemSelected_ID = adapter_ID.getItem(position);
 
 
@@ -188,9 +212,12 @@ public class cartActivity extends AppCompatActivity {
                         txtDefaultcartusername.setText(cltemSelected_cartusername);
                         txtDefaultcartquantity.setText(cltemSelected_cartquantity);
                         txtDefaultcartprice.setText(cltemSelected_cartprice);
+                        txtDefaultcartedate.setText(cltemSelected_cartedate);
+                        txtDefaultcarthdate.setText(cltemSelected_carthdate);
                         txtDefaultcartproductid.setText(cltemSelected_cartproductid);
                         txtDefaultcartproductname.setText(cltemSelected_cartproductname);
                         txtDefaultordertype.setText(cltemSelected_ordertype);
+                        txtDefaultcartfarmername.setText(cItemSelected_farmername);
                         txtDefault_ID.setText(cItemSelected_ID);
 
 
@@ -202,6 +229,9 @@ public class cartActivity extends AppCompatActivity {
                         Cart_productid = txtDefaultcartproductid.getText().toString().trim();
                         Cart_porductname = txtDefaultcartproductname.getText().toString().trim();
                         Cart_ordertype = txtDefaultordertype.getText().toString().trim();
+                        Cart_FarmerName =txtDefaultcartfarmername.getText().toString().trim();
+                        Cart_hdate =txtDefaultcarthdate.getText().toString().trim();
+                        Cart_edate =txtDefaultcartedate.getText().toString().trim();
                         aydi = txtDefault_ID.getText().toString().trim();
 
 
@@ -210,8 +240,11 @@ public class cartActivity extends AppCompatActivity {
                         intent.putExtra(editcartactivity.CARTQUANTITY, Cart_Quantity);
                         intent.putExtra(editcartactivity.CARTPRICE, Cart_price);
                         intent.putExtra(editcartactivity.CARTPRODUCTID, Cart_productid);
+                        intent.putExtra(editcartactivity.CARTHDATE, Cart_hdate);
+                        intent.putExtra(editcartactivity.CARTEDATE, Cart_edate);
                         intent.putExtra(editcartactivity.CARTPRODUCTNAME, Cart_porductname);
                         intent.putExtra(editcartactivity.CARTORDERTYPE, Cart_ordertype);
+                        intent.putExtra(editcartactivity.CARTFARMERNAME, Cart_FarmerName);
                         intent.putExtra(editcartactivity.ID, aydi);
                         startActivity(intent);
                     }
@@ -545,6 +578,156 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
+    private class HDATE extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
+
+        public HDATE() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = edtitemcode.getText().toString();
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlHarvestDate, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String DHARVEST) {
+            super.onPostExecute(DHARVEST);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
+            if (DHARVEST != null) {
+                if (isEmpty.equals("") && !DHARVEST.equals("HTTPSERVER_ERROR")) {
+                }
+
+
+                String dateharvest = DHARVEST;
+
+                String str = dateharvest;
+                final String dateharvests[] = str.split("-");
+                list_dateharvest = new ArrayList<String>(Arrays.asList(dateharvests));
+                adapter_harvestdate = new ArrayAdapter<String>(cartActivity.this,
+                        android.R.layout.simple_list_item_1, list_dateharvest);
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
+    private class EDATE extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
+
+        public EDATE() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = edtitemcode.getText().toString();
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlEDate, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String DEXPIRY) {
+            super.onPostExecute(DEXPIRY);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
+            if (DEXPIRY != null) {
+                if (isEmpty.equals("") && !DEXPIRY.equals("HTTPSERVER_ERROR")) {
+                }
+
+
+                String dateexpirey = DEXPIRY;
+
+                String str = dateexpirey;
+                final String dateexpireys[] = str.split("-");
+                list_dateexpirey = new ArrayList<String>(Arrays.asList(dateexpireys));
+                adapter_expireydate = new ArrayAdapter<String>(cartActivity.this,
+                        android.R.layout.simple_list_item_1, list_dateexpirey);
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
     private class CPRODUCTNAME extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Updating";
         int nPostValueIndex;
@@ -622,6 +805,8 @@ public class cartActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     private class OrderType extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Updating";
@@ -837,6 +1022,84 @@ public class cartActivity extends AppCompatActivity {
         }
     }
 
+    private class FARMERNAME extends AsyncTask<String, String, String> {
+        String cPOST = "", cPostSQL = "", cMessage = "Updating";
+        int nPostValueIndex;
+        ProgressDialog pDialog = new ProgressDialog(cartActivity.this);
+
+        public FARMERNAME() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.setMessage(cMessage);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            int nSuccess;
+            try {
+                ContentValues cv = new ContentValues();
+
+                cPostSQL = (sharedPreferences.getString("username",""));
+                cv.put("code", cPostSQL);
+
+                JSONObject json = jParser.makeHTTPRequest(urlfarmername, "POST", cv);
+                if (json != null) {
+                    nSuccess = json.getInt(TAG_SUCCESS);
+                    if (nSuccess == 1) {
+                        online_dataset = json.getString(TAG_MESSAGE);
+                        return online_dataset;
+                    } else {
+                        return json.getString(TAG_MESSAGE);
+                    }
+                } else {
+                    return "HTTPSERVER_ERROR";
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String Farmname) {
+            super.onPostExecute(Farmname);
+            pDialog.dismiss();
+            String isEmpty = "";
+            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(cartActivity.this);
+            if (Farmname != null) {
+                if (isEmpty.equals("") && !Farmname.equals("HTTPSERVER_ERROR")) {
+                }
+
+
+                String Namefarm = Farmname;
+
+                String str = Namefarm;
+                final String Namefarms[] = str.split("-");
+                list_farmname2 = new ArrayList<String>(Arrays.asList(Namefarms));
+                adapter_farmname = new ArrayAdapter<String>(cartActivity.this,
+                        android.R.layout.simple_list_item_1, list_farmname2);
+
+                //listView.setAdapter(adapter_gender);
+
+
+            } else {
+                alert.setMessage("Query Interrupted... \nPlease Check Internet connection");
+                alert.setTitle("Error");
+                alert.show();
+            }
+        }
+    }
+
 
     private class id extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Updating";
@@ -1026,7 +1289,7 @@ public class cartActivity extends AppCompatActivity {
 
     @Override
         protected void onPostExecute(List<String> imageUrls) {
-            CustomListAdapter adapter = new CustomListAdapter(cartActivity.this, list_cartquantity, list_cartprice, list_cartproductname, list_ID, imageUrls);
+            CustomListAdapter adapter = new CustomListAdapter(cartActivity.this, list_cartquantity, list_cartprice, list_cartproductname, list_farmname2,list_ID, imageUrls);
             listView.setAdapter(adapter);
         }
     }
@@ -1042,13 +1305,16 @@ public class cartActivity extends AppCompatActivity {
         private ArrayList<String> cartaydi;
         private List<String> imageUrls;
 
+        private ArrayList<String> farname2;
 
-        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> cartaydi,List<String> imageUrls) {
+
+        public CustomListAdapter(Context context, ArrayList<String> cartqty, ArrayList<String> cartprice, ArrayList<String> cartproductname, ArrayList<String> farname2,ArrayList<String> cartaydi,List<String> imageUrls) {
             this.context = context;
             this.cartqty = cartqty;
             this.cartprice = cartprice;
             this.cartproductname = cartproductname;
             this.cartaydi = cartaydi;
+            this.farname2 = farname2;
             this.imageUrls = imageUrls; // Initialize image URLs
 
         }
@@ -1077,13 +1343,17 @@ public class cartActivity extends AppCompatActivity {
             TextView cartproductnameTextView = listViewItem.findViewById(R.id.productnameTextView);
             TextView cartQtyTextView = listViewItem.findViewById(R.id.pproqtysTextView);
             TextView cartpriceTextView = listViewItem.findViewById(R.id.ProductpsTextView);
-            TextView cartaydiTextView = listViewItem.findViewById(R.id.adyiview2);
+
+            TextView nameoffarmer2 = listViewItem.findViewById(R.id.farmernameview2);
+
             ImageView imageView = listViewItem.findViewById(R.id.imageView4); // ImageView for the image
 
             cartproductnameTextView.setText(cartproductname.get(position));
             cartQtyTextView.setText(cartqty.get(position));
             cartpriceTextView.setText(cartprice.get(position));
-            cartaydiTextView.setText(cartaydi.get(position));
+
+
+            nameoffarmer2.setText(farname2.get(position));
 
 
             if (imageUrls != null && imageUrls.size() > position) {

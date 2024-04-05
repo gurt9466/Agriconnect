@@ -42,20 +42,23 @@ public class buypurchaseactivity extends AppCompatActivity {
 
     private static TextView btnclickhere2,address;
 
-    private String ppname, ppharvest, pppqty, ppprice, aydi;
+    private String ppname, ppharvest, pppqty, ppprice, aydi,farname,ppexpiry;
 
     private static String cItemcode = "";
 
     public static final String PNAME = "PNAME";
     public static final String PHARVEST = "PHARVEST";
+
+    public static final String PEXPIREY = "PEXPIREY";
     public static final String Quantity = "Quantity";
     public static final String PPRICE = "PPRICE";
+    public static final String PFNAME = "PFNAME";
     public static final String PFID = "PFID";
     public static final String ID = "ID";
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "https://hotela9barnala.net/product/uploadcart.php";
+    private static String urlHost = "https://agriconnect.me/product/uploadcart.php";
 
-    private static String urladdress="https://hotela9barnala.net/product/selectaddress.php";
+    private static String urladdress="https://agriconnect.me/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -69,7 +72,7 @@ public class buypurchaseactivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
 
-    private static TextView pid, pname, hard, qty, price;
+    private static TextView pid, pname, hard, qty, price,farnames,edate;
 
 
     @Override
@@ -94,14 +97,18 @@ public class buypurchaseactivity extends AppCompatActivity {
         pname = (TextView) findViewById(R.id.textViewpname);
         hard = (TextView) findViewById(R.id.textViewhdate);
         qty = (TextView) findViewById(R.id.textViewqty);
+        farnames = (TextView) findViewById(R.id.textViewfarmername);
         price = (TextView) findViewById(R.id.textViewprice);
         address = (TextView) findViewById(R.id.textViewdeliveryaddress2);
+        edate = (TextView) findViewById(R.id.textViewedate2);
 
         Intent i = getIntent();
         ppname = i.getStringExtra(PNAME);
         ppharvest = i.getStringExtra(PHARVEST);
+        ppexpiry = i.getStringExtra(PEXPIREY);
         pppqty = i.getStringExtra(Quantity);
         ppprice = i.getStringExtra(PPRICE);
+        farname =i.getStringExtra(PFNAME);
         aydi = i.getStringExtra(ID);
 
 
@@ -110,8 +117,9 @@ public class buypurchaseactivity extends AppCompatActivity {
         hard.setText(ppharvest);
         qty.setText(pppqty);
         edtqty.setText(pppqty);
+        farnames.setText(farname);
         price.setText(ppprice);
-
+        edate.setText(ppexpiry);
 
 
         btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -123,9 +131,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
                 new uploadDataToURL().execute();
 
-                Intent intent = new Intent(buypurchaseactivity.this, purchaseActivity.class);
-                startActivity(intent);
-                finish();
+
             }
         });
 
@@ -178,9 +184,13 @@ public class buypurchaseactivity extends AppCompatActivity {
                 JSONObject json = jParser.makeHTTPRequest(urlHost, "POST", cv);
                 if (json != null) {
                     nSuccess = json.getInt(TAG_SUCCESS);
+                    Intent intent = new Intent(buypurchaseactivity.this, purchaseActivity.class);
+                    startActivity(intent);
+                    finish();
                     if (nSuccess == 1) {
                         online_dataset = json.getString(TAG_MESSAGE);
                         return online_dataset;
+
                     } else {
                         return json.getString(TAG_MESSAGE);
                     }
@@ -223,7 +233,7 @@ public class buypurchaseactivity extends AppCompatActivity {
 
 
                 // Construct the API URL with the product ID
-                String apiUrl = "https://hotela9barnala.net/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "https://agriconnect.me/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");

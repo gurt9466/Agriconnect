@@ -39,14 +39,19 @@ public class editcartactivity extends AppCompatActivity {
 
     private static TextView  ordertype, address, btnclickhere3;
 
-    private String cartuname, cartqty, cartprice, cartproid, cartproname, cartdateadded, aydi, cartordertype;
+    private String cartuname, cartqty, cartprice, cartproid, cartproname, cartdateadded, aydi, cartordertype,cartfarmername,carthdate,cartedate;
 
     public static final String CARTUSERNAME = "CARTUSERNAME";
     public static final String CARTQUANTITY = "CARTQUANTITY";
     public static final String CARTPRICE = "CARTPRICE";
+
+    public static final String CARTHDATE = "CARTHDATE";
+    public static final String CARTEDATE = "CARTEDATE";
     public static final String CARTPRODUCTID = "CARTPRODUCTID";
     public static final String CARTPRODUCTNAME = "CARTPRODUCTNAME";
     public static final String CARTDATEADDED = "CARTDATEADDED";
+
+    public static final String CARTFARMERNAME = "CARTFARMERNAME";
 
 
     public static final String CARTORDERTYPE = "CARTORDERTYPE";
@@ -56,8 +61,8 @@ public class editcartactivity extends AppCompatActivity {
     ImageView imageview;
 
     private static com.example.agriconnect.JSONParser jParser = new com.example.agriconnect.JSONParser();
-    private static String urlHost = "https://hotela9barnala.net/cart/updatecartqty.php";
-    private static String urladdress = "https://hotela9barnala.net/product/selectaddress.php";
+    private static String urlHost = "https://agriconnect.me/cart/updatecartqty.php";
+    private static String urladdress = "https://agriconnect.me/product/selectaddress.php";
 
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
@@ -67,7 +72,7 @@ public class editcartactivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
 
-    private static TextView pid, pname, hard, qty, price;
+    private static TextView pid, pname, hard, qty, price,farmername,eard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +94,11 @@ public class editcartactivity extends AppCompatActivity {
         pid = (TextView) findViewById(R.id.textViewid);
         pname = (TextView) findViewById(R.id.textViewpname);
         hard = (TextView) findViewById(R.id.textViewhdate);
+        eard = (TextView) findViewById(R.id.textViewedate3);
         qty = (TextView) findViewById(R.id.textViewqty);
         price = (TextView) findViewById(R.id.textViewprice);
         ordertype = (TextView) findViewById(R.id.textViewordetype);
+        farmername = (TextView) findViewById(R.id.textViewfarmername2);
 
 
         Intent i = getIntent();
@@ -102,15 +109,20 @@ public class editcartactivity extends AppCompatActivity {
         cartproname = i.getStringExtra(CARTPRODUCTNAME);
         cartdateadded = i.getStringExtra(CARTDATEADDED);
         cartordertype = i.getStringExtra(CARTORDERTYPE);
+        cartfarmername = i.getStringExtra(CARTFARMERNAME);
+        carthdate = i.getStringExtra(CARTHDATE);
+        cartedate = i.getStringExtra(CARTEDATE);
         aydi = i.getStringExtra(ID);
 
-
+        farmername.setText(cartfarmername);
         pid.setText(aydi);
         pname.setText(cartproname);
         qty.setText(cartqty);
         edtqty.setText(cartqty);
         price.setText(cartprice);
         ordertype.setText(cartordertype);
+        hard.setText(carthdate);
+        eard.setText(cartedate);
 
 
 
@@ -218,7 +230,7 @@ public class editcartactivity extends AppCompatActivity {
 
 
                 // Construct the API URL with the product ID
-                String apiUrl = "https://hotela9barnala.net/img/fetch_specific_img.php?id=" + productId;
+                String apiUrl = "https://agriconnect.me/img/fetch_specific_img.php?id=" + productId;
 
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");

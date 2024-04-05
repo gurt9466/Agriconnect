@@ -1,6 +1,7 @@
 package com.example.agriconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,8 +27,10 @@ import java.util.Map;
 
 public class home extends AppCompatActivity {
     TextView txtfname, txtviewfetchreslt;
-    Button btnrequest, btnpurchase,btnstatus;
-    ImageView btnlogout, btncart,btnprofile,btncontact;
+    CardView btnrequest, btnpurchase,btnstatus;
+    CardView  btncart,btnprofile,btncontact;
+
+    ImageView btnlogout;
 
     SharedPreferences sharedPreferences;
 
@@ -43,9 +46,9 @@ public class home extends AppCompatActivity {
         txtviewfetchreslt = findViewById(R.id.ftechresult);
         btnpurchase =findViewById(R.id.purchase);
         btncart =findViewById(R.id.cart);
-        btnprofile = findViewById(R.id.profileimg);
+        btnprofile = findViewById(R.id.profile2);
         btnstatus = findViewById(R.id.orderstatus);
-        btncontact = findViewById(R.id.contanctbtnimg);
+        btncontact = findViewById(R.id.contanctbtnimg2);
 
 
         if (sharedPreferences.getString("logged", "false").equals("false")) {
@@ -62,7 +65,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "https://hotela9barnala.net/register/logout.php"; //host ip and phpfile
+                String url = "https://agriconnect.me/register/logout.php"; //host ip and phpfile
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
@@ -129,7 +132,7 @@ public class home extends AppCompatActivity {
             }
         });
 
-        btnprofile.setOnClickListener(new View.OnClickListener() {
+      btnprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(home.this, edtprofiles.class);
@@ -137,6 +140,8 @@ public class home extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         btnstatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +152,7 @@ public class home extends AppCompatActivity {
             }
         });
 
-        btncontact.setOnClickListener(new View.OnClickListener() {
+       btncontact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(home.this, contactus.class);
@@ -155,5 +160,7 @@ public class home extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 }

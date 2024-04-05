@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "https://hotela9barnala.net/register/login.php"; //host ip and phpfile
+                String url = "https://agriconnect.me/register/login.php"; //host ip and phpfile
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override

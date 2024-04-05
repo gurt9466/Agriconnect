@@ -240,7 +240,7 @@
         android:id="@+id/editrequestdate"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="#ECECEC"
         android:ems="10"
@@ -250,6 +250,7 @@
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/btnQuery"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
